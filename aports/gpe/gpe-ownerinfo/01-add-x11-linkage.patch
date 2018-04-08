@@ -1,0 +1,15 @@
+Description: Add -lX11 and test with Wl,--no-add-needed.
+Author: Neil Williams <codehelp@debian.org>
+Bug-Debian: http://bugs.debian.org/609645
+
+--- gpe-ownerinfo-0.28.orig/Makefile
++++ gpe-ownerinfo-0.28/Makefile
+@@ -13,7 +13,7 @@ MEMBERS = main
+ 
+ PACKAGE_CPPFLAGS += $(STANDARD_CPPFLAGS) -DPACKAGE=\"$(PACKAGE)\" -DPREFIX=\"$(PREFIX)\" -DPACKAGE_LOCALE_DIR=\"$(PREFIX)/share/locale\"
+ PACKAGE_CFLAGS += $(STANDARD_CFLAGS) $(GPECFLAGS)
+-PACKAGE_LDFLAGS += $(STANDARD_LDFLAGS) $(GPELIBS)
++PACKAGE_LDFLAGS += -Wl,--as-needed -Wl,-zdefs $(STANDARD_LDFLAGS) $(GPELIBS) -lX11
+ 
+ ifeq ($(CVSBUILD),yes)
+ BUILD = ../build
