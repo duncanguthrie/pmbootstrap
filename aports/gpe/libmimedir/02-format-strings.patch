@@ -1,0 +1,37 @@
+Description: Use format strings with g_warning
+ Add explicit string format specifiers to calls to g_warning in
+ mimedir-profile.c.  Fix for these build warnings/errors (#643430):
+ > mimedir-profile.c:583:3: error: format not a string literal and no format arguments [-Werror=format-security]
+ > mimedir-profile.c:593:3: error: format not a string literal and no format arguments [-Werror=format-security]
+ > mimedir-profile.c:602:3: error: format not a string literal and no format arguments [-Werror=format-security]
+Author: Moray Allan <moray@debian.org>
+Last-Update: 2011-10-25
+--- a/mimedir/mimedir-profile.c
++++ b/mimedir/mimedir-profile.c
+@@ -580,7 +580,7 @@
+ 	fd = g_file_open_tmp (NULL, &tmpname, &error);
+ 	if (fd < 0) {
+ 		g_free (tmpname);
+-		g_warning (error->message);
++		g_warning ("%s", error->message);
+ 		g_error_free (error);
+ 		return g_strdup ("");
+ 	}
+@@ -590,7 +590,7 @@
+ 		g_free (tmpname);
+ 		g_io_channel_unref (channel);
+ 		close(fd);
+-		g_warning (error->message);
++		g_warning ("%s", error->message);
+ 		g_error_free (error);
+ 		return g_strdup ("");
+ 	}
+@@ -599,7 +599,7 @@
+ 
+ 	if (!g_file_get_contents (tmpname, &buffer, NULL, &error)) {
+ 		g_free (tmpname);
+-		g_warning (error->message);
++		g_warning ("%s", error->message);
+ 		g_error_free (error);
+ 		return g_strdup ("");
+ 	}

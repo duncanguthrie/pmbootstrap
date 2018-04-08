@@ -1,0 +1,148 @@
+diff -ruN a/config.sub b/config.sub
+--- a/mimedir/mimedir-attribute.c	2007-04-05 17:28:03.000000000 +0100
++++ b/mimedir/mimedir-attribute.c	2018-03-24 02:28:39.868531253 +0000
+@@ -23,7 +23,7 @@
+ #endif
+ 
+ #include <libintl.h>
+-
++#include <stddef.h>
+ #include <string.h>
+ #include <time.h>
+ 
+@@ -817,12 +817,12 @@
+ 	return str;
+ }
+ 
+-static ssize_t
++static size_t
+ get_line (const gchar *string, GString *dst)
+ {
+ 	const gchar *end;
+ 	gboolean empty;
+-	ssize_t pos = 0;
++	size_t pos = 0;
+ 
+  	do {
+  		const gchar *end_n, *end_r;
+@@ -836,9 +836,9 @@
+ 			end = end_n;
+ 
+ 		if (end) {
+-			ssize_t len;
++			size_t len;
+ 
+-			len = (ssize_t) (end - string - pos);
++			len = (size_t) (end - string - pos);
+ 			if (len == 0) {
+ 				empty = TRUE;
+ 			} else {
+@@ -860,10 +860,10 @@
+ 	return pos;
+ }
+ 
+-static ssize_t
++static size_t
+ get_attribute_string (const gchar *string, GString *gstring)
+ {
+-	ssize_t pos;
++	size_t pos;
+ 	gboolean qp;
+ 	gboolean basesixfour;
+ 
+@@ -2727,10 +2727,10 @@
+  *
+  * Return value: number of consumed characters or -1
+  **/
+-ssize_t
++size_t
+ mimedir_attribute_parse (MIMEDirAttribute *attribute, const gchar *string, GError **error)
+ {
+-	ssize_t len;
++	size_t len;
+ 	gboolean success;
+ 
+ 	GString *gstring;
+diff -ruN a/mimedir/mimedir-attribute.h b/mimedir/mimedir-attribute.h
+--- a/mimedir/mimedir-attribute.h	2007-03-31 21:16:48.000000000 +0100
++++ b/mimedir/mimedir-attribute.h	2018-03-24 02:26:36.680082211 +0000
+@@ -22,6 +22,7 @@
+ #define __MIMEDIR_ATTRIBUTE_H__
+ 
+ #include <stdlib.h>
++#include <stddef.h>
+ #include <time.h>
+ 
+ #include <glib.h>
+@@ -163,7 +164,7 @@
+ MIMEDirAttributeType
+ 		 mimedir_attribute_get_attribute_type		(MIMEDirAttribute *attribute);
+ 
+-ssize_t		 mimedir_attribute_parse			(MIMEDirAttribute *attribute, const gchar *string, GError **error);
++size_t		 mimedir_attribute_parse			(MIMEDirAttribute *attribute, const gchar *string, GError **error);
+ gboolean	 mimedir_attribute_write_to_channel		(MIMEDirAttribute *attribute, GIOChannel *channel, GError **error);
+ 
+ #endif /* __MIMEDIR_ATTRIBUTE_H__ */
+diff -ruN a/mimedir/mimedir-profile.c b/mimedir/mimedir-profile.c
+--- a/mimedir/mimedir-profile.c	2007-03-31 21:16:48.000000000 +0100
++++ b/mimedir/mimedir-profile.c	2018-03-24 02:29:08.624635376 +0000
+@@ -344,12 +344,12 @@
+  *
+  * Return value: length of consumed string or -1 on error
+  */
+-ssize_t
++size_t
+ mimedir_profile_parse (MIMEDirProfile *profile, const gchar *string, GError **error)
+ {
+ 	MIMEDirAttribute *attribute = NULL;
+ 	const gchar *name;
+-	ssize_t pos = 0;
++	size_t pos = 0;
+ 	GSList *profile_stack = NULL;
+ 	GSList *item;
+ 
+@@ -384,7 +384,7 @@
+ 	g_object_ref (G_OBJECT (profile));
+ 
+ 	for (;;) {
+-		ssize_t newpos;
++		size_t newpos;
+ 
+ 		/* Read next attribute */
+ 
+diff -ruN a/mimedir/mimedir-profile.h b/mimedir/mimedir-profile.h
+--- a/mimedir/mimedir-profile.h	2007-03-31 21:16:48.000000000 +0100
++++ b/mimedir/mimedir-profile.h	2018-03-24 02:30:03.532833566 +0000
+@@ -75,7 +75,7 @@
+ void			 mimedir_profile_set_charset		(MIMEDirProfile *profile, const gchar *charset);
+ const gchar		*mimedir_profile_get_charset		(MIMEDirProfile *attribute);
+ 
+-ssize_t			 mimedir_profile_parse			(MIMEDirProfile *profile, const gchar *string, GError **error);
++size_t			 mimedir_profile_parse			(MIMEDirProfile *profile, const gchar *string, GError **error);
+ gboolean		 mimedir_profile_write_to_channel	(MIMEDirProfile *profile, GIOChannel *channel, GError **error);
+ gchar			*mimedir_profile_write_to_string	(MIMEDirProfile *profile);
+ 
+diff -ruN a/mimedir/mimedir-vcal.c b/mimedir/mimedir-vcal.c
+--- a/mimedir/mimedir-vcal.c	2007-03-31 21:16:48.000000000 +0100
++++ b/mimedir/mimedir-vcal.c	2018-03-24 02:29:29.416710525 +0000
+@@ -542,7 +542,7 @@
+ 		MIMEDirVCal *vcal;
+ 		MIMEDirProfile *profile;
+ 		const gchar *charset;
+-		ssize_t newpos;
++		size_t newpos;
+ 
+ 		/* Skip white space */
+ 
+diff -ruN a/mimedir/mimedir-vcard.c b/mimedir/mimedir-vcard.c
+--- a/mimedir/mimedir-vcard.c	2007-03-31 21:16:48.000000000 +0100
++++ b/mimedir/mimedir-vcard.c	2018-03-24 02:29:43.696762065 +0000
+@@ -1584,7 +1584,7 @@
+ 		MIMEDirVCard *vcard;
+ 		MIMEDirProfile *profile;
+ 		const gchar *charset;
+-		ssize_t newpos;
++		size_t newpos;
+ 
+ 		/* Skip white space */
+ 
