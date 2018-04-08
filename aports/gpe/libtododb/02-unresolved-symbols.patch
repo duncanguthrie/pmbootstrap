@@ -1,0 +1,15 @@
+Description: Add gpewidget linkage to resolve symbols (Closes: #558926)
+Bug-Debian: http://bugs.debian.org/558926
+Author: Neil Williams <codehelp@debian.org>
+
+--- libtododb-0.11.orig/Makefile.am
++++ libtododb-0.11/Makefile.am
+@@ -4,7 +4,7 @@ lib_LTLIBRARIES = libtododb.la
+ 
+ INCLUDES = @TODODB_CFLAGS@ -DPACKAGE_LOCALE_DIR=\"@datadir@/locale/@PACKAGE_NAME@\"
+ 
+-libtododb_la_LIBADD = @TODODB_LIBS@
++libtododb_la_LIBADD = @TODODB_LIBS@ -lgpewidget
+ 
+ libtododb_la_SOURCES = old-db.c todo-db.c gpe/todo-db.h
+ 
