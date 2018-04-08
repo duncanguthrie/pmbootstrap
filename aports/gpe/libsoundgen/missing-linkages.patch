@@ -1,0 +1,42 @@
+Description: Update patch to quilt.
+Author: Neil Williams <codehelp@debian.org>
+Bug-Debian: http://bugs.debian.org/558923
+
+--- libsoundgen-0.6.orig/Makefile.am
++++ libsoundgen-0.6/Makefile.am
+@@ -4,7 +4,7 @@ AM_CPPFLAGS = @DEPS_CFLAGS@ -DPACKAGE_LO
+               -I$(top_srcdir)/gpe
+ 
+ libsoundgen_la_LIBADD = @DEPS_LIBS@
+-libsoundgen_la_LDFLAGS = -version-info 0:0:0
++libsoundgen_la_LDFLAGS = -Wl,--no-add-needed -lesd -lpthread -lm -version-info 0:0:0
+ 
+ libsoundgen_la_SOURCES = soundgen.c
+ 
+@@ -12,7 +12,7 @@ gpeincludedir = $(includedir)/gpe
+ gpeinclude_HEADERS = gpe/soundgen.h gpe/buzzer.h
+ 
+ # GRC - remove the following lie once we have checked it will cause no problems
+-include_HEADERS = gpe/soundgen.h gpe/buzzer.h
++#include_HEADERS = gpe/soundgen.h gpe/buzzer.h
+ 
+ pkgconfigdir = $(libdir)/pkgconfig
+ pkgconfig_DATA = libsoundgen.pc
+--- libsoundgen-0.6.orig/Makefile.in
++++ libsoundgen-0.6/Makefile.in
+@@ -210,13 +210,13 @@ AM_CPPFLAGS = @DEPS_CFLAGS@ -DPACKAGE_LO
+               -I$(top_srcdir)/gpe
+ 
+ libsoundgen_la_LIBADD = @DEPS_LIBS@
+-libsoundgen_la_LDFLAGS = -version-info 0:0:0
++libsoundgen_la_LDFLAGS = -Wl,--no-add-needed -lesd -lpthread -lm -version-info 0:0:0
+ libsoundgen_la_SOURCES = soundgen.c
+ gpeincludedir = $(includedir)/gpe
+ gpeinclude_HEADERS = gpe/soundgen.h gpe/buzzer.h
+ 
+ # GRC - remove the following lie once we have checked it will cause no problems
+-include_HEADERS = gpe/soundgen.h gpe/buzzer.h
++#include_HEADERS = gpe/soundgen.h gpe/buzzer.h
+ pkgconfigdir = $(libdir)/pkgconfig
+ pkgconfig_DATA = libsoundgen.pc
+ CVSTAG := $(shell echo $(PACKAGE)-$(VERSION) | tr [a-z.] [A-Z_])
