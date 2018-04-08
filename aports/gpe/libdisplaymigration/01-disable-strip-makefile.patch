@@ -1,0 +1,14 @@
+Description: Disable strip in Makefile
+ We don't want the Makefile to strip the binaries, we'll do that later on if
+ wanted.
+--- a/Makefile
++++ b/Makefile
+@@ -36,7 +36,7 @@
+ 
+ install-program: $(SONAME)
+ 	install -d $(DESTDIR)$(PREFIX)/lib
+-	install -s $(SONAME) $(DESTDIR)$(PREFIX)/lib/$(SONAME)
++	install $(SONAME) $(DESTDIR)$(PREFIX)/lib/$(SONAME)
+ 
+ install-devel:
+ 	for i in $(HEADERS); do install -m 644 -D $$i $(DESTDIR)$(PREFIX)/include/$$i; done

@@ -1,0 +1,37 @@
+# Contributor: Duncan Guthrie <dguthrie@posteo.net>
+# Maintainer: Duncan Guthrie <dguthrie@posteo.net>
+pkgname=libdisplaymigration
+pkgver=0.28
+pkgrel=11
+pkgdesc="Display migration support for GTK+"
+url="https://wiki.postmarketos.org/wiki/GPE"
+arch="all"
+license="GPL-2.0-or-later"
+depends="glib gtk+2.0 libgcrypt libx11"
+makedepends="glib-dev gtk+2.0-dev libgcrypt-dev"
+subpackages="$pkgname-dev"
+source="http://http.debian.net/debian/pool/main/libd/${pkgname}/${pkgname}_${pkgver}.orig.tar.gz
+	01-disable-strip-makefile.patch
+	02-ldflags.patch
+	03-linking-fix.patch
+	04-multiarch-lib.patch"
+builddir="$srcdir/$pkgname-$pkgver"
+options="!check"
+dev () {
+        cd "$builddir"
+        mkdir -p "$subpkgdir"/usr/lib
+        make PREFIX="/usr" DESTDIR="$subpkgdir" install-devel
+}
+build () {
+	cd "$builddir"
+	make 
+}
+package() {
+	cd "$builddir"
+	make PREFIX="/usr" DESTDIR="$pkgdir" install
+}
+sha512sums="de05f9d611c01bad6e7b9e799ec8764a135a2b489edb320960c31f9032687ea8506a476b28c1ed1d89c4ca579b67cd924d0abfdbe7a614ca7be771942de2630a  libdisplaymigration_0.28.orig.tar.gz
+528361489989cb0513aba52462031f5a8a34e304d06f3ffd8de2e39c1b661af85a7a2e2a91a0734a34373a5c497ed5d5a98d67a7d4695deca9160a46cb1f4d97  01-disable-strip-makefile.patch
+fa78ee254c26e3bb66ea8d6ab8d1a61ff8fe5248c1eddf9760b53a9a166ce916e64753f917a69ad3d2f7b209d57b35cadc6d494694de6e472721293adbd9eb8c  02-ldflags.patch
+3ece67881ebd6b47cfc074b2097b961ee91807176cd9689c09e86039e002d4907f01d07c1fb5b0b908b12379784eb4bf78b869c185832f516514032083e3bd7c  03-linking-fix.patch
+6392e25fe3b1d72f63b9d7656fb4ee30bcfefc90829670c8aba441150e44f69a6cffec77ac691b19fe542dc944468f6cdcfc7b7020146aca1052322a17855951  04-multiarch-lib.patch"

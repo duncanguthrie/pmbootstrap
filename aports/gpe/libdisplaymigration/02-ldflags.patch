@@ -1,0 +1,13 @@
+Description: Ensure use of LDFLAGS
+ Fix Makefile so that hardening LDFLAGS get used.
+--- libdisplaymigration-0.28.orig/Makefile
++++ libdisplaymigration-0.28/Makefile
+@@ -34,7 +34,7 @@ $(PACKAGE).so: $(SONAME)
+ 	ln -sf $^ $@
+ 
+ $(SONAME): $(OBJS)
+-	$(CC) -nostartfiles -shared -o $@ $^ -Wl,-soname -Wl,$(SONAME) $(LDFLAGS) $(PACKAGE_LDFLAGS)
++	$(CC) -nostartfiles -shared -o $@ $^ -Wl,-soname -Wl,$(SONAME) $(LDFLAGS) $(PACKAGE_LDFLAGS) $(LDFLAGS)
+ 
+ install-program: $(SONAME)
+ 	install -d $(DESTDIR)/$(LIBDIR)

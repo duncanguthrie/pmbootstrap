@@ -1,0 +1,29 @@
+Description: Fix paths for multiarch
+ Install libraries to correct paths for multiarch
+--- a/Makefile
++++ b/Makefile
+@@ -4,6 +4,8 @@
+ CVSBUILD = no
+ VERSION = 0.28
+ 
++LIBDIR = $(PREFIX)/lib/
++
+ LINGUAS = 
+ 
+ MEMBERS = migrate auth crypt
+@@ -35,12 +37,12 @@
+ 	$(CC) -nostartfiles -shared -o $@ $^ -Wl,-soname -Wl,$(SONAME) $(LDFLAGS) $(PACKAGE_LDFLAGS)
+ 
+ install-program: $(SONAME)
+-	install -d $(DESTDIR)$(PREFIX)/lib
+-	install $(SONAME) $(DESTDIR)$(PREFIX)/lib/$(SONAME)
++	install -d $(DESTDIR)/$(LIBDIR)
++	install $(SONAME) $(DESTDIR)/$(LIBDIR)/$(SONAME)
+ 
+ install-devel:
+ 	for i in $(HEADERS); do install -m 644 -D $$i $(DESTDIR)$(PREFIX)/include/$$i; done
+-	ln -s $(SONAME) $(DESTDIR)$(PREFIX)/lib/$(PACKAGE).so
++	ln -s $(SONAME) $(DESTDIR)/$(LIBDIR)/$(PACKAGE).so
+ 
+ clean:
+ 	rm -f $(OBJS) $(SONAME) $(PACKAGE).so $(DEPS)

@@ -1,0 +1,13 @@
+Description: Resolve unresolved symbols in shared libraries (#558879)
+Last-Update: 2012-03-17
+--- a/Makefile
++++ b/Makefile
+@@ -12,7 +12,7 @@
+ 
+ PACKAGE_CFLAGS += $(STANDARD_CFLAGS) $(GTKCFLAGS) -fPIC
+ PACKAGE_CPPFLAGS += -DPREFIX=\"$(PREFIX)\" -DPACKAGE=\"$(PACKAGE)\"
+-PACKAGE_LDFLAGS += $(GTKLIBS) -lgcrypt
++PACKAGE_LDFLAGS += -Wl,--as-needed $(GTKLIBS) -lgcrypt -lX11
+ 
+ HEADERS = libdisplaymigration/displaymigration.h libdisplaymigration/auth.h libdisplaymigration/crypt.h
+ 
