@@ -1,0 +1,30 @@
+From: Helmut Grohne <helmut@subdivi.de>
+Subject: fix wrong uses of AC_CHECK_FILE
+
+AC_CHECK_FILE is meant to exercise the host system, but we have no reasonable
+expectation that headers will be present on a host system nor do we need that.
+It really only matters whether they are present on the build system and we can
+simply test that.
+
+Index: sqlite-2.8.17/configure.ac
+===================================================================
+--- sqlite-2.8.17.orig/configure.ac
++++ sqlite-2.8.17/configure.ac
+@@ -510,13 +510,13 @@
+ fi
+ if test "$found" = "no"; then
+   for dir in /usr /usr/local /usr/local/readline /usr/contrib /mingw; do
+-    AC_CHECK_FILE($dir/include/readline.h, found=yes)
+-    if test "$found" = "yes"; then
++    if test -f "$dir/include/readline.h"; then
++      found=yes
+       TARGET_READLINE_INC="-I$dir/include"
+       break
+     fi
+-    AC_CHECK_FILE($dir/include/readline/readline.h, found=yes)
+-    if test "$found" = "yes"; then
++    if test -f "$dir/include/readline/readline.h"; then
++      found=yes
+       TARGET_READLINE_INC="-I$dir/include/readline"
+       break
+     fi

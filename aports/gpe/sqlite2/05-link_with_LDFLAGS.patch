@@ -1,0 +1,18 @@
+Description: add LDFLAGS to linker
+Author: Laszlo Boszormenyi (GCS) <gcs@debian.org>
+Forwarded: not-needed
+Last-Update: 2016-08-10
+
+---
+
+--- sqlite-2.8.17.orig/Makefile.in
++++ sqlite-2.8.17/Makefile.in
+@@ -38,7 +38,7 @@ RELEASE = @ALLOWRELEASE@
+ 
+ # libtool compile/link/install
+ LTCOMPILE = $(LIBTOOL) --mode=compile $(TCC)
+-LTLINK = $(LIBTOOL) --mode=link $(TCC)
++LTLINK = $(LIBTOOL) --mode=link $(TCC) $(LDFLAGS)
+ LTINSTALL = $(LIBTOOL) --mode=install $(INSTALL)
+ 
+ # Compiler options needed for programs that use the TCL library.
