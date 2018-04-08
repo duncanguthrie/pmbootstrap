@@ -1,0 +1,12 @@
+diff -Nur -x '*.orig' -x '*~' gpe-calendar-0.92/Makefile.am gpe-calendar-0.92.new/Makefile.am
+--- gpe-calendar-0.92/Makefile.am	2009-12-07 15:55:57.000000000 +0000
++++ gpe-calendar-0.92.new/Makefile.am	2009-12-07 16:17:03.000000000 +0000
+@@ -22,7 +22,7 @@
+ 
+ bin_PROGRAMS = gpe-calendar
+ 
+-gpe_calendar_LDADD = $(DEPS_LIBS) $(HILDON_LIBS) libwidgets.la
++gpe_calendar_LDADD = -lgthread-2.0 $(DEPS_LIBS) $(HILDON_LIBS) libwidgets.la
+ 
+ gpe_calendar_SOURCES = main.c						\
+ 		       globals.h util.h					\

@@ -1,0 +1,12 @@
+--- a/configure	2008-08-08 09:26:55.000000000 +0100
++++ b/configure	2018-03-24 03:47:20.296893890 +0000
+@@ -19902,7 +19902,8 @@
+ 
+ DEP_MODULES="gtk+-2.0 >= 2.4 glib-2.0 >= 2.2 libgpewidget >= 0.109 libgpepimc \
+              libgpevtype >= 0.50 libeventdb >= 0.90 esound \
+-	     libxsettings-client libhandoff libsoup-2.2 libsoundgen >= 0.5"
++	     libxsettings-client libhandoff libsoup-2.4 libsoundgen >= 0.5 \
++             gthread-2.0 musl-obstack"
+ 
+ # i8n stuff
+ 

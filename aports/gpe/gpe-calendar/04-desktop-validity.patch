@@ -1,0 +1,26 @@
+Description: Desktop file validity fixes.
+Author: Neil Williams <codehelp@debian.org>
+Bug: http://bugs.linuxtogo.org/show_bug.cgi?id=98
+
+--- gpe-calendar-0.92.orig/gpe-calendar.desktop.in.in
++++ gpe-calendar-0.92/gpe-calendar.desktop.in.in
+@@ -1,14 +1,13 @@
+ [Desktop Entry]
+-Encoding=UTF-8
+ _Name=Calendar
+ _Comment=GPE Calendar
+ Exec=gpe-calendar
+ Terminal=false
+ Type=Application
+-Icon=gpe-calendar.png
+-Categories=Application;PIM;GPE;
++Icon=gpe-calendar
++Categories=Utility;Finance;Office;
+ StartupNotify=true
+-SingleInstance=true
++X-SingleInstance=true
+ X-home-applet-resizable=XY
+ X-home-applet-minwidth=200
+-X-home-applet-minheight=40
+\ No newline at end of file
++X-home-applet-minheight=40

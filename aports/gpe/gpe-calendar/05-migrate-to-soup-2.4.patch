@@ -1,0 +1,58 @@
+--- gpe-calendar-0.91/calendar-update.c	2007-02-16 22:08:20.000000000 +0100
++++ gpe-calendar-0.91.new/calendar-update.c	2009-03-03 19:10:38.000000000 +0100
+@@ -115,7 +115,7 @@ g_io_buffer_get_flags (GIOChannel *chann
+ }
+ 
+ static GIOChannel *
+-g_io_channel_from_buffer (char *buffer, int length)
++g_io_channel_from_buffer (const char *buffer, int length)
+ {
+   static GIOFuncs buffer_channel_funcs =
+     {
+@@ -139,7 +139,7 @@ g_io_channel_from_buffer (char *buffer, 
+   channel->is_seekable = TRUE;
+   channel->is_readable = TRUE;
+ 
+-  b->buffer = buffer;
++  b->buffer = g_strdup (buffer);
+   b->length = length;
+ 
+   return channel;
+@@ -295,7 +295,7 @@ need_retry (struct info *info)
+ }
+ 
+ static void
+-pushed (SoupMessage *msg, gpointer data)
++pushed (SoupSession *session, SoupMessage *msg, gpointer data)
+ {
+   struct info *info = data;
+ 
+@@ -365,7 +365,7 @@ calendar_push_internal (struct info *inf
+ 
+   char *s = cal_export_as_string (info->ec);
+   soup_message_set_request (msg, "text/calendar",
+-			    SOUP_BUFFER_SYSTEM_OWNED, s, strlen (s));
++			    SOUP_MEMORY_TAKE, s, strlen (s));
+ 
+   soup_session_queue_message (session, msg, pushed, info);
+ }
+@@ -386,7 +386,7 @@ calendar_push (EventCalendar *ec)
+ }
+ 
+ static void
+-pulled (SoupMessage *msg, gpointer data)
++pulled (SoupSession *session, SoupMessage *msg, gpointer data)
+ {
+   struct info *info = data;
+ 
+@@ -403,8 +403,8 @@ pulled (SoupMessage *msg, gpointer data)
+     }
+   else
+     {
+-      GIOChannel *channel = g_io_channel_from_buffer (msg->response.body,
+-						      msg->response.length);
++      GIOChannel *channel = g_io_channel_from_buffer (msg->response_body->data,
++						      msg->response_body->length);
+       GError *error = NULL;
+       int res = cal_import_from_channel (info->ec, channel, &error);
+       g_io_channel_unref (channel);
