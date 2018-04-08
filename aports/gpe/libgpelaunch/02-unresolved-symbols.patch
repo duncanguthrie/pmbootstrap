@@ -1,0 +1,16 @@
+Description: Add -lX11 to resolve X11 symbols
+ .
+Author: Neil Williams <codehelp@debian.org>
+Bug-Debian: http://bugs.debian.org/558890
+
+--- libgpelaunch-0.14.orig/Makefile.am
++++ libgpelaunch-0.14/Makefile.am
+@@ -5,7 +5,7 @@ libgpelaunch_PROGRAMS = launch-failure
+ 
+ INCLUDES = @LAUNCHER_CFLAGS@ @LAUNCHER_GTK_CFLAGS@ -DPACKAGE_LOCALE_DIR=\"@datadir@/locale/@PACKAGE_NAME@\" -DSN_API_NOT_YET_FROZEN -DLIBEXECDIR=\"$(libexecdir)\"
+ 
+-libgpelaunch_la_LIBADD = @LAUNCHER_LIBS@
++libgpelaunch_la_LIBADD = @LAUNCHER_LIBS@ -lX11
+ libgpelaunch_la_SOURCES = launch.c gpe/launch.h desktop_file.c gpe/desktop_file.h
+ 
+ launch_failure_LDADD = @LAUNCHER_LIBS@ @LAUNCHER_GTK_LIBS@
