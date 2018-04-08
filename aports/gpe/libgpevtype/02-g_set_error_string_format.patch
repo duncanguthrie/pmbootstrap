@@ -1,0 +1,53 @@
+Description: specify a string format with g_set_error
+ libgpevtype (0.50-6) unstable; urgency=low
+ .
+   * Add explicit string format specifiers to calls to
+     g_set_error in vcal.c and vtodo.c (Closes: #643426)
+Author: Neil Williams <codehelp@debian.org>
+Bug-Debian: http://bugs.debian.org/643426
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: <vendor|upstream|other>, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: http://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: <no|not-needed|url proving that it has been forwarded>
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: <YYYY-MM-DD>
+
+--- libgpevtype-0.50.orig/vtodo.c
++++ libgpevtype-0.50/vtodo.c
+@@ -218,7 +218,7 @@ todo_import_from_vtodo (MIMEDirVTodo *to
+ 
+   if (db == NULL)
+     {
+-      g_set_error (error, ERROR_DOMAIN (), 0, err);
++      g_set_error (error, ERROR_DOMAIN (), 0, "%s", err);
+       free (err);
+       return FALSE;
+     }
+@@ -226,7 +226,7 @@ todo_import_from_vtodo (MIMEDirVTodo *to
+   if (sqlite_exec (db, "insert into todo_urn values (NULL)",
+ 		   NULL, NULL, &err) != SQLITE_OK)
+     {
+-      g_set_error (error, ERROR_DOMAIN (), 0, err);
++      g_set_error (error, ERROR_DOMAIN (), 0, "%s", err);
+       free (err);
+       sqlite_close (db);
+       return FALSE;
+--- libgpevtype-0.50.orig/vcal.c
++++ libgpevtype-0.50/vcal.c
+@@ -85,7 +85,7 @@ cal_import_from_vmimedir (EventCalendar
+ 
+   if (err_str)
+     {
+-      g_set_error (error, ERROR_DOMAIN (), 0, err_str);
++      g_set_error (error, ERROR_DOMAIN (), 0, "%s", err_str);
+       g_free (err_str);
+       return FALSE;
+     }
+

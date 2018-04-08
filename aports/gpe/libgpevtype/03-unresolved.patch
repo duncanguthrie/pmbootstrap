@@ -1,0 +1,18 @@
+Description:   * Add GObject linkage to resolve symbols (Closes: #558896)
+Author: Neil Williams <codehelp@debian.org>
+
+---
+
+--- libgpevtype-0.50.orig/Makefile.am
++++ libgpevtype-0.50/Makefile.am
+@@ -5,8 +5,8 @@ lib_LTLIBRARIES = libgpevtype.la
+ AM_CPPFLAGS = $(VTYPE_CFLAGS) \
+ 	-DPACKAGE_LOCALE_DIR=\"@datadir@/locale/@PACKAGE_NAME@\"
+ 
+-libgpevtype_la_LIBADD = @VTYPE_LIBS@
+-libgpevtype_la_LDFLAGS = -version-info 1:0:0
++libgpevtype_la_LIBADD = @VTYPE_LIBS@ -lgobject-2.0 -lgthread-2.0 -lrt
++libgpevtype_la_LDFLAGS = -version-info 1:0:0 -pthread
+ 
+ libgpevtype_la_SOURCES = priv.h tag-db.c vcal.c vcard.c vevent.c vtodo.c 
+ 
