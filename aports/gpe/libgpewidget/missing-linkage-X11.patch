@@ -1,0 +1,46 @@
+Description: Extend the previous fix for 555182 to include
+ patch to infoprint.
+Author: Neil Williams <codehelp@debian.org>
+Bug-Debian: http://bugs.debian.org/555182
+---
+
+--- libgpewidget-0.117.orig/Makefile.in
++++ libgpewidget-0.117/Makefile.in
+@@ -304,7 +304,7 @@ libgpewidget_la_SOURCES = gtkdatecombo.c
+                           color-slider.c colordialog.c link-warning.h \
+                           colorrenderer.c
+ 
+-libgpewidget_la_LDFLAGS = @GPEWIDGET_LIBS@ @HILDON_LIBS@ -version-info 1:0:0
++libgpewidget_la_LDFLAGS = Wl,--no-add-needed -lX11 @GPEWIDGET_LIBS@ @HILDON_LIBS@ -version-info 1:0:0
+ gpeincludedir = $(includedir)/gpe
+ gpeinclude_HEADERS = gpe/init.h gpe/errorbox.h gpe/smallbox.h gpe/pixmaps.h gpe/gtkdatecombo.h \
+                      gpe/dirbrowser.h gpe/stylus.h gpe/picturebutton.h gpe/spacing.h \
+@@ -321,7 +321,7 @@ pixmapdir = $(datadir)/libgpewidget
+ pixmap_DATA = pixmaps/clock.png pixmaps/clock24.png pixmaps/day-night-wheel.png
+ infoprint_DEPENDENCIES = libgpewidget.la
+ infoprint_SOURCES = infoprint-main.c
+-infoprint_LDADD = -lgpewidget
++infoprint_LDADD = -lgpewidget -lX11
+ EXTRA_DIST = $(pixmap_DATA) \
+              intltool-extract.in \
+              intltool-merge.in \
+--- libgpewidget-0.117.orig/Makefile.am
++++ libgpewidget-0.117/Makefile.am
+@@ -30,7 +30,7 @@ libgpewidget_la_SOURCES = gtkdatecombo.c
+                           color-slider.c colordialog.c link-warning.h \
+                           colorrenderer.c
+                           
+-libgpewidget_la_LDFLAGS = @GPEWIDGET_LIBS@ @HILDON_LIBS@ -version-info 1:0:0
++libgpewidget_la_LDFLAGS = Wl,--no-add-needed -lX11 @GPEWIDGET_LIBS@ @HILDON_LIBS@ -version-info 1:0:0
+ 
+ gpeincludedir = $(includedir)/gpe
+ gpeinclude_HEADERS = gpe/init.h gpe/errorbox.h gpe/smallbox.h gpe/pixmaps.h gpe/gtkdatecombo.h \
+@@ -52,7 +52,7 @@ pixmap_DATA = pixmaps/clock.png pixmaps/
+ bin_PROGRAMS = infoprint
+ infoprint_DEPENDENCIES = libgpewidget.la
+ infoprint_SOURCES = infoprint-main.c
+-infoprint_LDADD = -lgpewidget
++infoprint_LDADD = -lgpewidget -lX11
+ 
+ EXTRA_DIST = $(pixmap_DATA) \
+              intltool-extract.in \

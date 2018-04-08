@@ -1,0 +1,41 @@
+# Contributor: Duncan Guthrie <dguthrie@posteo.net>
+# Maintainer: Duncan Guthrie <dguthrie@posteo.net>
+pkgname=libgpewidget
+pkgver=0.117
+pkgrel=0
+pkgdesc="GPE Palmtop Environment widget library"
+url="https://wiki.postmarketos.org/wiki/GPE"
+arch="all"
+license="LGPL-2.0"
+depends="cairo fontconfig freetype gdk-pixbuf glib gtk+2.0 pango libx11"
+makedepends="intltool glib-dev gtk+2.0-dev"
+source="http://http.debian.net/debian/pool/main/libg/${pkgname}/${pkgname}_${pkgver}.orig.tar.bz2
+	config-sub.patch
+	missing-linkage-X11.patch
+	strip-individual-glib-header.patch"
+builddir="${srcdir}/${pkgname}-${pkgver}"
+options="!check"
+subpackages="${pkgname}-dev ${pkgname}-doc ${pkgname}-lang"
+
+build () {
+	cd "$builddir"
+	./configure \
+		--build=$CBUILD \
+		--host=$CHOST \
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--mandir=/usr/share/man \
+		--localstatedir=/var
+	make
+}
+
+package() {
+	cd "$builddir"
+	make DESTDIR="$pkgdir" install
+}
+
+
+sha512sums="f2e9ec64ad90ee028fe2fc7358336ee98b78e2ad07fb12fe1ecc3be00dddeb49cfd8204569e808426c0420d59e174cb0b59a53f57ace2637fe3d13012a23217f  libgpewidget_0.117.orig.tar.bz2
+09035cae7a10a657a58ad8d46d59d02031b2f03a2e6c65555c88d465aa6e6566923b95f5c715be74fc6ff9caaf99cfb89f5ae6a027dff4e90d88994c4fe256b0  config-sub.patch
+151a8377d78c9a0707ec9a802b2981873927ad40d79c35809419b4b59bd785f5cd10baadbeac58fd452f340e7e839e6a1cf4795f7b2c95556916f4485b2d46de  missing-linkage-X11.patch
+1dd75366f9cb00925036e3bcc73087f9e1bbc3133231dbb8a6b3c98f39f6c892c8bcc2d7e21bb33cb72a0fc52e41e5e66ae0ed452519a8e51296fcf68be07b3f  strip-individual-glib-header.patch"

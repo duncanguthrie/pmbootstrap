@@ -1,0 +1,18 @@
+Description: 
+ libgpewidget (0.117-6) unstable; urgency=low
+ .
+   * Patch gpehelp.c to include top level glib.h instead of individual
+     header which is no longer supported. (Closes: #665569)
+Author: Neil Williams <codehelp@debian.org>
+Bug-Debian: http://bugs.debian.org/665569
+
+--- libgpewidget-0.117.orig/gpehelp.c
++++ libgpewidget-0.117/gpehelp.c
+@@ -33,7 +33,6 @@
+ #include <gdk-pixbuf/gdk-pixbuf.h>
+ #include <gdk/gdk.h>
+ #include <glib.h>
+-#include <glib/gkeyfile.h>
+ 
+ 
+ /* helper function definitions*/
