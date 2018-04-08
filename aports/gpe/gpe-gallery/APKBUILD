@@ -1,0 +1,26 @@
+# Contributor: Duncan Guthrie <dguthrie@posteo.net>
+# Maintainer: Duncan Guthrie <dguthrie@posteo.net>
+pkgname=gpe-gallery
+pkgver=0.97
+pkgrel=4
+pkgdesc="Image gallery application for the GPE Palmtop Environment"
+url="https://wiki.postmarketos.org/wiki/GPE"
+arch="all"
+license="GPL-2.0 LGPL-2.0"
+depends="gdk-pixbuf glib gtk+2.0 pango
+	gpe-icons libgpewidget"
+makedepends="glib-dev gtk+2.0-dev
+	libgpewidget-dev"
+source="http://http.debian.net/debian/pool/main/g/${pkgname}/${pkgname}_${pkgver}.orig.tar.gz"
+builddir="$srcdir/$pkgname-$pkgver"
+options="!check"
+
+build () {
+	cd "$builddir"
+	make
+}
+package() {
+	cd "$builddir"
+	make PREFIX="/usr" DESTDIR="$pkgdir" install
+}
+sha512sums="a123232d14f79720b90e037c0e659c4af0b5fd795f02bdeea64500700c0f853dbd8016b0566c06e79f00b6f2516aca7a8e21f8293185f5dff869096f815f6ec8  gpe-gallery_0.97.orig.tar.gz"
