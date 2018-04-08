@@ -1,0 +1,173 @@
+Description: <short summary of the patch>
+ TODO: Put a short summary on the line above and replace this paragraph
+ with a longer explanation of this change. Complete the meta-information
+ with other relevant fields (see below for details). To make it easier, the
+ information below has been extracted from the changelog. Adjust it or drop
+ it.
+ .
+ libeventdb (0.90-5) unstable; urgency=low
+ .
+   * Specify string formats for SIGNAL_ERROR macro
+     (Closes: #643421)
+Author: Neil Williams <codehelp@debian.org>
+Bug-Debian: http://bugs.debian.org/643421
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: <vendor|upstream|other>, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: http://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: <no|not-needed|url proving that it has been forwarded>
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: <YYYY-MM-DD>
+
+--- libeventdb-0.90.orig/sqlite.c
++++ libeventdb-0.90/sqlite.c
+@@ -426,7 +426,7 @@ do_events_enumerate (EventDB *edb,
+   obstack_free (&query, NULL);
+   if (err_str)
+     {
+-      SIGNAL_ERROR (edb, error, err_str);
++      SIGNAL_ERROR (edb, error, "%s", err_str);
+       sqlite_freemem (err_str);
+     }
+ }
+@@ -441,7 +441,7 @@ do_set_default_calendar (EventDB *edb, E
+ 	"insert or replace into default_calendar values (%d);",
+ 	NULL, NULL, &err, ec->uid)))
+     {
+-      SIGNAL_ERROR (edb, error, err);
++      SIGNAL_ERROR (edb, error, "%s", err);
+       sqlite_freemem (err);
+     }
+ }
+@@ -462,7 +462,7 @@ do_eventid_to_uid (EventDB *edb, const c
+ 				  callback, NULL, &err, eventid));
+   if (err)
+     {
+-      SIGNAL_ERROR (edb, error, err);
++      SIGNAL_ERROR (edb, error, "%s", err);
+       sqlite_freemem (err);
+       return 0;
+     }
+@@ -497,7 +497,7 @@ do_event_new (EventSource *ev, GError **
+   sqlite_exec (SQLITE_DB (ev->edb)->sqliteh, "rollback transaction",
+ 	       NULL, NULL, NULL);
+  error_pretransaction:
+-  SIGNAL_ERROR (ev->edb, error, err);
++  SIGNAL_ERROR (ev->edb, error, "%s", err);
+   sqlite_freemem (err);
+   return FALSE;
+ }
+@@ -578,7 +578,7 @@ do_event_load_details (EventSource *ev,
+ 			   "              'category', 'sequence')",
+ 			   callback, ev, &err, ev->uid)))
+     {
+-      SIGNAL_ERROR (ev->edb, error, err);
++      SIGNAL_ERROR (ev->edb, error, "%s", err);
+       sqlite_freemem (err);
+       return;
+     }
+@@ -693,7 +693,7 @@ error:
+ 	       NULL, NULL, NULL);
+ 
+   g_assert (err);
+-  SIGNAL_ERROR (ev->edb, error, err);
++  SIGNAL_ERROR (ev->edb, error, "%s", err);
+   sqlite_freemem (err);
+ 
+   return FALSE;
+@@ -716,7 +716,7 @@ do_event_remove (EventSource *ev, GError
+     {
+       sqlite_exec (SQLITE_DB (ev->edb)->sqliteh, "rollback transaction;",
+ 		   NULL, NULL, NULL);
+-      SIGNAL_ERROR (ev->edb, error, err);
++      SIGNAL_ERROR (ev->edb, error, "%s", err);
+       sqlite_freemem (err);
+     }
+ }
+@@ -820,7 +820,7 @@ do_list_unacknowledged_alarms (EventDB *
+     {
+       abort = 1;
+ 
+-      SIGNAL_ERROR (edb, error, err);
++      SIGNAL_ERROR (edb, error, "%s", err);
+       sqlite_freemem (err);
+ 
+       g_slist_free (list);
+@@ -864,7 +864,7 @@ do_event_mark_unacknowledged (EventSourc
+ 					ev->uid, ev->event.start));
+   if (err)
+     {
+-      SIGNAL_ERROR (ev->edb, error, str);
++      SIGNAL_ERROR (ev->edb, error, "%s", str);
+       sqlite_freemem (str);
+     }
+ }
+@@ -899,7 +899,7 @@ do_acknowledge_alarms_through (EventDB *
+       NULL, NULL, &str, t));
+   if (err)
+     {
+-      SIGNAL_ERROR (edb, error, str);
++      SIGNAL_ERROR (edb, error, "%s", str);
+       sqlite_freemem (str);
+     }
+ }
+@@ -924,7 +924,7 @@ do_event_calendar_new (EventCalendar *ec
+ 	ec->last_pull, ec->last_push,
+ 	ec->last_modified)))
+     {
+-      SIGNAL_ERROR (ec->edb, error, err);
++      SIGNAL_ERROR (ec->edb, error, "%s", err);
+       sqlite_freemem (err);
+       return;
+     }
+@@ -983,7 +983,7 @@ do_event_calendar_delete (EventCalendar
+     {
+       sqlite_exec (SQLITE_DB (ec->edb)->sqliteh, "rollback transaction;",
+ 		   NULL, NULL, NULL);
+-      SIGNAL_ERROR (ec->edb, error, err);
++      SIGNAL_ERROR (ec->edb, error, "%s", err);
+       sqlite_freemem (err);
+     }
+ }
+@@ -1046,7 +1046,7 @@ do_event_calendar_list_events (EventCale
+     }
+   if (err)
+     {
+-      SIGNAL_ERROR (ec->edb, error, err);
++      SIGNAL_ERROR (ec->edb, error, "%s", err);
+       g_slist_free (list);
+       return NULL;
+     }
+@@ -1084,7 +1084,7 @@ do_event_calendar_list_deleted (EventCal
+ 			 callback, NULL, &err, ec->uid));
+   if (err)
+     {
+-      SIGNAL_ERROR (ec->edb, error, err);
++      SIGNAL_ERROR (ec->edb, error, "%s", err);
+       sqlite_freemem (err);
+       g_slist_free (list);
+       return NULL;
+@@ -1103,7 +1103,7 @@ do_event_calendar_flush_deleted (EventCa
+ 			 NULL, NULL, &err, ec->uid));
+   if (err)
+     {
+-      SIGNAL_ERROR (ec->edb, error, err);
++      SIGNAL_ERROR (ec->edb, error, "%s", err);
+       sqlite_freemem (err);
+     }
+ }
+@@ -1635,7 +1635,7 @@ event_db_new (const char *fname, GError
+  error_before_transaction:
+   if (err)
+     {
+-      SIGNAL_ERROR (edb, error, err);
++      SIGNAL_ERROR (edb, error, "%s", err);
+       free (err);
+     }
+ 

@@ -1,0 +1,78 @@
+Description: Original patches from 1.0 source format
+ libeventdb (0.90-4) unstable; urgency=low
+ .
+ * Use g_assert directly, not via another macro.  Closes: #471607.
+Author: Moray Allan <moray@debian.org>
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: <vendor|upstream|other>, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: http://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: <no|not-needed|url proving that it has been forwarded>
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: <YYYY-MM-DD>
+
+--- libeventdb-0.90.orig/event-db.c
++++ libeventdb-0.90/event-db.c
+@@ -580,7 +580,7 @@ event_load (EventDB *edb, guint uid, GEr
+ {
+   EventSource *ev;
+ 
+-  ev = EVENT_SOURCE (g_hash_table_lookup (edb->events, (gpointer) uid));
++  ev = EVENT_SOURCE (g_hash_table_lookup (edb->events, GINT_TO_POINTER(uid)));
+   if (ev)
+     /* Already loaded, just add a reference and return it.  */
+     {
+@@ -646,11 +646,15 @@ event_db_list_for_period_internal (Event
+ 
+   int callback (EventSource *ev)
+     {
+-      LIVE (ev);
++      g_assert(! EVENT (ev)->dead);
++      /* LIVE (ev); */
++      printf("foo\n");
+ 
+       if (only_untimed && ! ev->untimed)
+ 	goto out;
+ 
++      printf("bar\n");
++
+       GSList *l = event_list (ev, period_start, period_end, 0, alarms, &e);
+       if (e)
+ 	g_assert (! l);
+--- libeventdb-0.90.orig/sqlite.c
++++ libeventdb-0.90/sqlite.c
+@@ -403,7 +403,7 @@ do_events_enumerate (EventDB *edb,
+ 
+       int uid = atoi (argv[0]);
+ 
+-      ev = EVENT_SOURCE (g_hash_table_lookup (edb->events, (gpointer) uid));
++      ev = EVENT_SOURCE (g_hash_table_lookup (edb->events, GINT_TO_POINTER(uid)));
+       if (ev)
+ 	/* Already loaded, just add a reference and return it.  */
+ 	g_object_ref (ev);
+@@ -563,7 +563,7 @@ do_event_load_details (EventSource *ev,
+ 	    ev->sequence = atoi (argv[1]);
+ 	  else if (!strcmp (argv[0], "category"))
+ 	    ev->categories = g_slist_prepend (ev->categories,
+-					      (gpointer)atoi (argv[1]));
++					      GINT_TO_POINTER(atoi (argv[1])));
+ 	}
+       return 0;
+     }
+--- libeventdb-0.90.orig/event.c
++++ libeventdb-0.90/event.c
+@@ -1257,7 +1257,7 @@ event_add_category (Event *event, int ca
+       return;
+     }
+ 
+-  ev->categories = g_slist_prepend (ev->categories, (gpointer) category);
++  ev->categories = g_slist_prepend (ev->categories, GINT_TO_POINTER(category));
+ 
+   STAMP (ev, error);
+ }
