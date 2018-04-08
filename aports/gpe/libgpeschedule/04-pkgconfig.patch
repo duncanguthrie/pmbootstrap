@@ -1,0 +1,12 @@
+Description: Publish the renamed library to pkgconfig
+Author: Neil Williams <codehelp@debian.org>
+
+--- libgpeschedule-0.17.orig/libschedule.pc.in
++++ libgpeschedule-0.17/libschedule.pc.in
+@@ -7,5 +7,5 @@ Name: libschedule
+ Description: GPE event scheduling library
+ Version: @VERSION@
+ Requires: glib-2.0 sqlite
+-Libs: -L${libdir} -lschedule
++Libs: -L${libdir} -lgpeschedule
+ Cflags: -I${includedir}

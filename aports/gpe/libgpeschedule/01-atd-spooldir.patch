@@ -1,0 +1,14 @@
+Description: Standardise the value for ATD_BASE
+Author: Neil Williams <codehelp@debian.org>
+
+--- libgpeschedule-0.17.orig/atd.c
++++ libgpeschedule-0.17/atd.c
+@@ -23,7 +23,7 @@
+ 
+ #include "gpe/schedule.h"
+ 
+-#define ATD_BASE "/var/spool/at"
++#define ATD_BASE "/var/spool/cron/atjobs"
+ 
+ #define TRIGGER ATD_BASE "/trigger"
+ 

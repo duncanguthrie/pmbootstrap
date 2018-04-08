@@ -1,0 +1,35 @@
+Description: Rename the generic libschedule to something
+ more specific to GPE, libgpeschedule.
+Author: Neil Williams <codehelp@debian.org>
+
+--- libgpeschedule-0.17.orig/Makefile.am
++++ libgpeschedule-0.17/Makefile.am
+@@ -1,21 +1,24 @@
+ SUBDIRS = doc
+ 
+-lib_LTLIBRARIES = libschedule.la
++lib_LTLIBRARIES = libgpeschedule.la
+ 
+ if HAVEAT
+ DEPS_CFLAGS += -DHAVE_AT
+ endif
+ 
++libgpeschedule.pc: Makefile libschedule.pc
++	mv libschedule.pc libgpeschedule.pc
++
+ INCLUDES = @SCHEDULE_CFLAGS@ $(DEPS_CFLAGS)  -DPACKAGE_LOCALE_DIR=\"@datadir@/locale/@PACKAGE_NAME@\"
+ 
+-libschedule_la_LIBADD = @SCHEDULE_LIBS@
++libgpeschedule_la_LIBADD = @SCHEDULE_LIBS@
+ 
+-libschedule_la_SOURCES = atd.c gpe/schedule.h
++libgpeschedule_la_SOURCES = atd.c gpe/schedule.h
+ 
+ gpeincludedir = $(includedir)/gpe
+ gpeinclude_HEADERS = gpe/schedule.h
+ 
+ pkgconfigdir = $(libdir)/pkgconfig
+-pkgconfig_DATA = libschedule.pc
++pkgconfig_DATA = libgpeschedule.pc
+ 
+ include gpe-dist.am
