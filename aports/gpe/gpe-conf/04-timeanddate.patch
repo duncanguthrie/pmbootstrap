@@ -1,0 +1,11 @@
+--- a/modules/timeanddate.c	2007-06-11 09:34:14.000000000 +0100
++++ b/modules/timeanddate.c	2018-03-20 15:55:00.995006507 +0000
+@@ -682,7 +682,7 @@
+ 		tm.tm_min=m;
+ 		tm.tm_sec=s;
+ 		tm.tm_isdst = -1;
+-		t = timelocal (&tm);
++		t = localtime (&tm);
+ 		par = g_strdup_printf ("%ld", t);
+ 		suid_exec("STIM", par);  
+ 		g_free(par);

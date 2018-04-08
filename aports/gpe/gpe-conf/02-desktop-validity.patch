@@ -1,0 +1,261 @@
+Description: desktop-file-validate changes
+
+--- gpe-conf-0.2.8.orig/desktop/gpe-conf-login-setup.desktop.in
++++ gpe-conf-0.2.8/desktop/gpe-conf-login-setup.desktop.in
+@@ -1,11 +1,10 @@
+ [Desktop Entry]
+-Encoding=UTF-8
+ _Name=Login Setup
+ _Comment=Login Setup
+ Exec=gpe-conf login-setup
+ Terminal=false
+ Type=Application
+-Icon=gpe-config-login-setup.png
+-Categories=Application;SystemSettings;GPE;
++Icon=gpe-config-login-setup
++Categories=Settings;DesktopSettings;
+ StartupNotify=true
+ X-SingleInstance=true
+--- gpe-conf-0.2.8.orig/desktop/gpe-conf-keys.desktop.in
++++ gpe-conf-0.2.8/desktop/gpe-conf-keys.desktop.in
+@@ -1,11 +1,10 @@
+ [Desktop Entry]
+-Encoding=UTF-8
+ _Name=Keys and Buttons
+ _Comment=Keyboard and Button Setup
+ Exec=gpe-conf keys
+ Terminal=false
+ Type=Application
+-Icon=gpe-config-kbd.png
+-Categories=Application;SystemSettings;GPE;
++Icon=gpe-config-kbd
++Categories=Settings;DesktopSettings;
+ StartupNotify=true
+ X-SingleInstance=true
+--- gpe-conf-0.2.8.orig/desktop/gpe-conf-theme.desktop.in
++++ gpe-conf-0.2.8/desktop/gpe-conf-theme.desktop.in
+@@ -1,11 +1,10 @@
+ [Desktop Entry]
+-Encoding=UTF-8
+ _Name=Look and Feel
+ _Comment=Global Appearance Setup
+ Exec=gpe-conf theme
+ Terminal=false
+ Type=Application
+-Icon=gpe-config-theme.png
+-Categories=Application;SystemSettings;GPE;
++Icon=gpe-config-theme
++Categories=Settings;DesktopSettings;
+ StartupNotify=true
+ X-SingleInstance=true
+--- gpe-conf-0.2.8.orig/desktop/gpe-conf-users.desktop.in
++++ gpe-conf-0.2.8/desktop/gpe-conf-users.desktop.in
+@@ -1,11 +1,10 @@
+ [Desktop Entry]
+-Encoding=UTF-8
+ _Name=User Manager
+ _Comment=Manage local users
+ Exec=gpe-conf users
+ Terminal=false
+ Type=Application
+-Icon=gpe-config-users.png
+-Categories=Application;SystemSettings;GPE;
++Icon=gpe-config-users
++Categories=Settings;DesktopSettings;
+ X-StartupNotify=true
+-SingleInstance=true
++X-SingleInstance=true
+--- gpe-conf-0.2.8.orig/desktop/gpe-conf.desktop.in
++++ gpe-conf-0.2.8/desktop/gpe-conf.desktop.in
+@@ -1,11 +1,10 @@
+ [Desktop Entry]
+-Encoding=UTF-8
+ _Name=Control Panel
+ _Comment=Control Panel
+ Exec=gpe-appmgr -g Settings -D /usr/share/applications/gpe-conf.desktop
+ Terminal=false
+ Type=Application
+-Icon=gpe-config.png
+-Categories=Application;GPE;
++Icon=gpe-config
++Categories=Settings;DesktopSettings;
+ StartupNotify=true
+ X-SingleInstance=true
+--- gpe-conf-0.2.8.orig/desktop/gpe-conf-usb.desktop.in
++++ gpe-conf-0.2.8/desktop/gpe-conf-usb.desktop.in
+@@ -1,11 +1,10 @@
+ [Desktop Entry]
+-Encoding=UTF-8
+ _Name=USB Settings
+ _Comment=Change USB settings
+ Exec=gpe-conf usb
+ Terminal=false
+ Type=Application
+-Icon=pccard-usb.png
+-Categories=Application;SystemSettings;GPE;
++Icon=pccard-usb
++Categories=Settings;DesktopSettings;
+ X-StartupNotify=true
+-SingleInstance=true
++X-SingleInstance=true
+--- gpe-conf-0.2.8.orig/desktop/gpe-conf-cardinfo.desktop.in
++++ gpe-conf-0.2.8/desktop/gpe-conf-cardinfo.desktop.in
+@@ -1,11 +1,10 @@
+ [Desktop Entry]
+-Encoding=UTF-8
+ _Name=PC/CF Cards
+ _Comment=PC/CF Cards info and config
+ Exec=gpe-conf cardinfo
+ Terminal=false
+ Type=Application
+-Icon=gpe-config-cardinfo.png
+-Categories=Application;SystemSettings;GPE;
++Icon=gpe-config-cardinfo
++Categories=Settings;DesktopSettings;
+ StartupNotify=true
+ X-SingleInstance=true
+--- gpe-conf-0.2.8.orig/desktop/gpe-conf-sysinfo.desktop.in
++++ gpe-conf-0.2.8/desktop/gpe-conf-sysinfo.desktop.in
+@@ -1,11 +1,10 @@
+ [Desktop Entry]
+-Encoding=UTF-8
+ _Name=System Info
+ _Comment=System Information
+ Exec=gpe-info
+ Terminal=false
+ Type=Application
+-Icon=gpe-config-sysinfo.png
+-Categories=Utility;GPE;
++Icon=gpe-config-sysinfo
++Categories=Settings;DesktopSettings;
+ StartupNotify=true
+ X-SingleInstance=true
+--- gpe-conf-0.2.8.orig/desktop/gpe-conf-ownerinfo.desktop.in
++++ gpe-conf-0.2.8/desktop/gpe-conf-ownerinfo.desktop.in
+@@ -1,11 +1,10 @@
+ [Desktop Entry]
+-Encoding=UTF-8
+ _Name=Owner Information
+ _Comment=Set Owner Information
+ Exec=gpe-conf ownerinfo
+ Terminal=false
+ Type=Application
+-Icon=gpe-config-ownerinfo.png
+-Categories=Application;SystemSettings;GPE;
++Icon=gpe-config-ownerinfo
++Categories=Settings;DesktopSettings;
+ StartupNotify=true
+ X-SingleInstance=true
+--- gpe-conf-0.2.8.orig/desktop/gpe-conf-admin.desktop.in
++++ gpe-conf-0.2.8/desktop/gpe-conf-admin.desktop.in
+@@ -1,11 +1,10 @@
+ [Desktop Entry]
+-Encoding=UTF-8
+ _Name=User Access
+ _Comment=User access administration
+ Exec=gpe-conf admin
+ Terminal=false
+ Type=Application
+-Icon=gpe-config-admin.png
+-Categories=Application;SystemSettings;GPE;
++Icon=gpe-config-admin
++Categories=Settings;DesktopSettings;
+ X-StartupNotify=true
+-SingleInstance=true
++X-SingleInstance=true
+--- gpe-conf-0.2.8.orig/desktop/gpe-conf-serial.desktop.in
++++ gpe-conf-0.2.8/desktop/gpe-conf-serial.desktop.in
+@@ -1,11 +1,10 @@
+ [Desktop Entry]
+-Encoding=UTF-8
+ _Name=Serial Ports
+ _Comment=Serial Port Settings
+ Exec=gpe-conf serial
+ Terminal=false
+ Type=Application
+-Icon=gpe-config-serial.png
+-Categories=Application;SystemSettings;GPE;
++Icon=gpe-config-serial
++Categories=Settings;DesktopSettings;
+ StartupNotify=true
+ X-SingleInstance=true
+--- gpe-conf-0.2.8.orig/desktop/gpe-conf-time.desktop.in
++++ gpe-conf-0.2.8/desktop/gpe-conf-time.desktop.in
+@@ -1,11 +1,10 @@
+ [Desktop Entry]
+-Encoding=UTF-8
+ _Name=Date/Time Setup
+ _Comment=Setup Date and Time
+ Exec=gpe-conf time
+ Terminal=false
+ Type=Application
+-Icon=gpe-config-time.png
+-Categories=Application;SystemSettings;GPE;
++Icon=gpe-config-time
++Categories=Settings;DesktopSettings;
+ StartupNotify=true
+ X-SingleInstance=true
+--- gpe-conf-0.2.8.orig/desktop/gpe-conf-sleep.desktop.in
++++ gpe-conf-0.2.8/desktop/gpe-conf-sleep.desktop.in
+@@ -1,11 +1,10 @@
+ [Desktop Entry]
+-Encoding=UTF-8
+ _Name=Sleep Config
+ _Comment=Sleep Configuration
+ Exec=gpe-conf sleep
+ Terminal=false
+ Type=Application
+-Icon=gpe-config-sleep.png
+-Categories=Application;SystemSettings;GPE;
++Icon=gpe-config-sleep
++Categories=Settings;DesktopSettings;
+ StartupNotify=true
+ X-SingleInstance=true
+--- gpe-conf-0.2.8.orig/desktop/gpe-conf-sound.desktop.in
++++ gpe-conf-0.2.8/desktop/gpe-conf-sound.desktop.in
+@@ -1,11 +1,10 @@
+ [Desktop Entry]
+-Encoding=UTF-8
+ _Name=Sound Settings
+ _Comment=Sound defaults and setup
+ Exec=gpe-conf sound
+ Terminal=false
+ Type=Application
+-Icon=gpe-config-sound.png
+-Categories=Application;SystemSettings;GPE;
++Icon=gpe-config-sound
++Categories=Settings;DesktopSettings;
+ StartupNotify=true
+ X-SingleInstance=true
+--- gpe-conf-0.2.8.orig/desktop/gpe-conf-network.desktop.in
++++ gpe-conf-0.2.8/desktop/gpe-conf-network.desktop.in
+@@ -1,11 +1,10 @@
+ [Desktop Entry]
+-Encoding=UTF-8
+ _Name=Network Setup
+ _Comment=Network Setup
+ Exec=gpe-conf network
+ Terminal=false
+ Type=Application
+-Icon=gpe-config-network.png
+-Categories=Application;SystemSettings;GPE;
++Icon=gpe-config-network
++Categories=Settings;DesktopSettings;
+ StartupNotify=true
+ X-SingleInstance=true
+--- gpe-conf-0.2.8.orig/desktop/gpe-conf-screen.desktop.in
++++ gpe-conf-0.2.8/desktop/gpe-conf-screen.desktop.in
+@@ -1,11 +1,10 @@
+ [Desktop Entry]
+-Encoding=UTF-8
+ _Name=Screen Setup
+ _Comment=Screen Setup
+ Exec=gpe-conf screen
+ Terminal=false
+ Type=Application
+-Icon=gpe-config-screen.png
+-Categories=Application;SystemSettings;GPE;
++Icon=gpe-config-screen
++Categories=Settings;DesktopSettings;
+ StartupNotify=true
+ X-SingleInstance=true

@@ -1,0 +1,42 @@
+Description: Fix FTBFS with -Wformat-security
+Author: Alessio Treglia <alessio@debian.org>
+Bug-Debian: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=657624
+Forwarded: no
+---
+ modules/cardinfo.c |    1 +
+ modules/serial.c   |    2 +-
+ suid.c             |    2 +-
+ 3 files changed, 3 insertions(+), 2 deletions(-)
+
+--- gpe-conf-0.2.9.orig/suid.c
++++ gpe-conf-0.2.9/suid.c
+@@ -94,7 +94,7 @@ update_system_hostname (const gchar * sy
+ 		return;
+ 	}
+ 
+-	fprintf (fnew, system_hostname);
++	fprintf (fnew, "%s", system_hostname);
+ 
+ 	fclose (fnew);
+ }
+--- gpe-conf-0.2.9.orig/modules/serial.c
++++ gpe-conf-0.2.9/modules/serial.c
+@@ -390,7 +390,7 @@ Serial_Build_Objects (void)
+ 	FIRST_SERIAL = get_first_serial_port ();
+ 
+ 	portlist[0][1] = FIRST_SERIAL;
+-	sprintf (cur_port, FIRST_SERIAL);
++	sprintf (cur_port, "%s", FIRST_SERIAL);
+ 	
+ 	gpsd_installed = !access (GPSD_STARTUP_SCRIPT, F_OK);
+ 	getty_installed = !access ("/sbin/getty", F_OK);
+--- gpe-conf-0.2.9.orig/modules/cardinfo.c
++++ gpe-conf-0.2.9/modules/cardinfo.c
+@@ -164,6 +164,7 @@ save_config (char *config, int socket)
+ 	cfg = g_strsplit (config, "\n", 4);	// idstr,version,manfid,binding
+ 	cur_bind = malloc (strlen (st[socket].card.str) - 5);	// current driver binding
+ 	snprintf (cur_bind, strlen (st[socket].card.str) - 6,
++		  "%s",
+ 		  st[socket].card.str + 3);
+ 	
+ 	/* determine config file type */
