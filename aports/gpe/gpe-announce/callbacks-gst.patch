@@ -1,0 +1,11 @@
+--- a/callbacks.c	2007-08-02 10:43:13.000000000 +0100
++++ b/callbacks.c	2018-03-22 00:41:07.553209875 +0000
+@@ -23,7 +23,7 @@
+ #include <fcntl.h>
+ #include <gtk/gtk.h>
+ 
+-#include <gst/gst.h>
++#include <gstreamer-1.0/gst/gst.h>
+ #include <dlfcn.h>
+ 
+ #include "announce.h"

@@ -1,0 +1,26 @@
+# Contributor: Duncan Guthrie <dguthrie@posteo.net>
+# Maintainer: Duncan Guthrie <dguthrie@posteo.net>
+pkgname=gpe-announce
+pkgver=0.14
+pkgrel=2
+pkgdesc="Alarm support for GPE Palmtop Environment"
+url="https://wiki.postmarketos.org/wiki/GPE"
+arch="all"
+license="GPL-2.0-or-later"
+depends="at atk cairo fontconfig freetype gdk-pixbuf glib gtk+2.0 pango sqlite  
+	gpe-icons libgpeschedule libgpewidget libsoundgen esound "
+makedepends="gtk+2.0-dev gstreamer0.10-dev glib-dev sqlite-dev 
+	esound-dev libgpeschedule-dev libsoundgen-dev libgpewidget-dev"
+source="http://http.debian.net/debian/pool/main/g/${pkgname}/${pkgname}_${pkgver}.orig.tar.gz"
+builddir="${srcdir}/${pkgname}-${pkgver}"
+options="!check"
+
+build () {
+	cd "$builddir"
+	make
+}
+package() {
+	cd "$builddir"
+	make PREFIX="/usr" DESTDIR="${pkgdir}" install
+}
+sha512sums="53157950a78b406993d3b989925911bff1172650727eac836e94f852fe78ee6a7f18e9dbc5f99ee075cdccc2b76b51803148cbd87a7f8c870a3089ce74fbf006  gpe-announce_0.14.orig.tar.gz"
