@@ -1,0 +1,14 @@
+--- a/configure.ac	2008-08-13 22:28:16.000000000 +0100
++++ b/configure.ac	2018-03-24 18:19:51.127558906 +0000
+@@ -11,7 +11,10 @@
+ AC_PROG_INSTALL
+ 
+ 
+-DEP_MODULES="gtk+-2.0 >= 2.6 glib-2.0 >= 2.2 libgpewidget libgpepimc libgpevtype libcontactsdb sqlite mimedir-1.0"
++DEP_MODULES="gtk+-2.0 >= 2.6 glib-2.0 >= 2.2 libeventdb libgpewidget libgpepimc libgpevtype libcontactsdb musl-obstack sqlite mimedir-1.0"
++DEPS_CFLAGS+="musl-obstack"
++DEPS_LIBS+="musl-obstack"
++DEPS_LDFLAGS+="musl-obstack"
+ 
+ # i8n stuff
+ AH_TEMPLATE([GETTEXT_PACKAGE], [Package name for gettext])

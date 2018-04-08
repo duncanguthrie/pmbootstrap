@@ -1,0 +1,36 @@
+# Contributor: Duncan Guthrie <dguthrie@posteo.net>
+# Maintainer: Duncan Guthrie <dguthrie@posteo.net>
+pkgname=gpe-contacts
+pkgver=0.49
+pkgrel=2
+pkgdesc="Contacts program for the GPE Palmtop Environment"
+url="https://wiki.postmarketos.org/wiki/GPE"
+arch="all"
+license="GPL-2.0 LGPL-2.0"
+depends="atk cairo dbus fontconfig freetype gdk-pixbuf gtk+2.0 musl-obstack pango sqlite
+	gpe-icons libcontactsdb libeventdb libgpepimc libgpevtype libgpewidget libmimedir"
+makedepends="intltool gtk+2.0-dev libxml2-dev sqlite-dev dbus-glib-dev musl-obstack-dev
+	libgpewidget-dev libdisplaymigration-dev libgpepimc-dev libgpevtype-dev libmimedir-dev libcontactsdb-dev"
+source="http://http.debian.net/debian/pool/main/g/${pkgname}/${pkgname}_${pkgver}.orig.tar.bz2
+	01-obstack.patch"
+builddir="$srcdir/$pkgname-$pkgver"
+options="!check"
+
+build () {
+	cd "$builddir"
+	./configure \
+		--build=$CBUILD \
+		--host=$CHOST \
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--mandir=/usr/share/man \
+		--localstatedir=/var
+	LDFLAGS="$LDFLAGS -lobstack" make
+}
+package() {
+	cd "$builddir"
+	make DESTDIR="$pkgdir" install
+}
+
+sha512sums="8c5969d40ba3d741abf2713027442a08c1d7903976002d3f481ffb1e7ee21174617f0a3522c100d60f595e184b0ede5be8e4b6ace789404bfa1806abafa8b1ed  gpe-contacts_0.49.orig.tar.bz2
+2fa27420ac3ca49811d932f10fe22cfdf8b5416ff91e8541d7b2ba4dbf6094ee3da3303507b566dd94b0d9432d2748ac5c9290b7e2ecdde224fc05ed88249d1e  01-obstack.patch"
