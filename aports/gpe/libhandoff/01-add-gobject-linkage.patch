@@ -1,0 +1,28 @@
+Description: Add missing linkage to gobject-2.0
+Author: Neil Williams <codehelp@debian.org>
+
+---
+Bug-Debian: http://bugs.debian.org/558897
+
+--- libhandoff-0.1.orig/Makefile.in
++++ libhandoff-0.1/Makefile.in
+@@ -207,7 +207,7 @@ target_alias = @target_alias@
+ lib_LTLIBRARIES = libhandoff.la
+ AM_CPPFLAGS = @DEPS_CFLAGS@ -DPACKAGE_LOCALE_DIR=\"@datadir@/locale/@PACKAGE_NAME@\"
+ libhandoff_la_LIBADD = @DEPS_LIBS@
+-libhandoff_la_LDFLAGS = -version-info 0:0:0
++libhandoff_la_LDFLAGS = -Wl,--no-add-needed -lgobject-2.0 -version-info 0:0:0
+ libhandoff_la_SOURCES = handoff.c handoff.h
+ include_HEADERS = handoff.h
+ pkgconfigdir = $(libdir)/pkgconfig
+--- libhandoff-0.1.orig/Makefile.am
++++ libhandoff-0.1/Makefile.am
+@@ -3,7 +3,7 @@ lib_LTLIBRARIES = libhandoff.la
+ AM_CPPFLAGS = @DEPS_CFLAGS@ -DPACKAGE_LOCALE_DIR=\"@datadir@/locale/@PACKAGE_NAME@\"
+ 
+ libhandoff_la_LIBADD = @DEPS_LIBS@
+-libhandoff_la_LDFLAGS = -version-info 0:0:0
++libhandoff_la_LDFLAGS = -Wl,--no-add-needed -lgobject-2.0 -version-info 0:0:0
+ 
+ libhandoff_la_SOURCES = handoff.c handoff.h
+ 
