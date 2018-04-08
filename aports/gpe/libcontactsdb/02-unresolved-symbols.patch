@@ -1,0 +1,28 @@
+Description: Add gpewidget linkage to resolve gpe_error* symbols
+ (Closes: #558878)
+ .
+Author: Neil Williams <codehelp@debian.org>
+Bug-Debian: http://bugs.debian.org/558878
+
+--- libcontactsdb-0.5.orig/Makefile.in
++++ libcontactsdb-0.5/Makefile.in
+@@ -216,7 +221,7 @@ SUBDIRS = doc
+ lib_LTLIBRARIES = libcontactsdb.la
+ INCLUDES = @CONTACTSDB_CFLAGS@
+ LDADD = @CONTACTSDB_LIBS@
+-libcontactsdb_la_LIBADD = @CONTACTSDB_LIBS@
++libcontactsdb_la_LIBADD = @CONTACTSDB_LIBS@ -lgpewidget
+ libcontactsdb_la_SOURCES = contacts-db.c gpe/contacts-db.h old-db.c
+ gpeincludedir = $(includedir)/gpe
+ gpeinclude_HEADERS = gpe/contacts-db.h
+--- libcontactsdb-0.5.orig/Makefile.am
++++ libcontactsdb-0.5/Makefile.am
+@@ -10,7 +10,7 @@ lib_LTLIBRARIES = libcontactsdb.la
+ INCLUDES = @CONTACTSDB_CFLAGS@
+ LDADD = @CONTACTSDB_LIBS@
+ 
+-libcontactsdb_la_LIBADD = @CONTACTSDB_LIBS@
++libcontactsdb_la_LIBADD = @CONTACTSDB_LIBS@ -lgpewidget
+ libcontactsdb_la_SOURCES = contacts-db.c gpe/contacts-db.h old-db.c
+ 
+ gpeincludedir = $(includedir)/gpe

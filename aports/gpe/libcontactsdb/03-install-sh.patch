@@ -1,0 +1,11 @@
+--- a/install-sh	2005-10-25 07:14:29.000000000 +0100
++++ b/install-sh	2018-03-24 17:51:34.963664059 +0000
+@@ -179,7 +179,7 @@
+       mkdircmd=:
+       chmodcmd=
+     else
+-      mkdircmd=$mkdirprog
++      mkdircmd="$mkdirprog -p"
+     fi
+   else
+     # Waiting for this to be detected by the "$cpprog $src $dsttmp" command
