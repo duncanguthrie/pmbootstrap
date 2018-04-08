@@ -1,0 +1,15 @@
+Debian #220058
+
+Index: esound-0.2.40/esddsp.in
+===================================================================
+--- esound-0.2.40.orig/esddsp.in	2008-11-15 01:50:52.000000000 +0100
++++ esound-0.2.40/esddsp.in	2008-11-15 01:51:50.000000000 +0100
+@@ -106,7 +106,7 @@
+ prefix=@prefix@
+ exec_prefix=@exec_prefix@
+ 
+-LD_PRELOAD="libesddsp.so.@ESD_MAJOR_VERSION@ libesd.so.@ESD_MAJOR_VERSION@ $LD_PRELOAD"
++LD_PRELOAD="@libdir@/esound/libesddsp.so.@ESD_MAJOR_VERSION@ libesd.so.@ESD_MAJOR_VERSION@ $LD_PRELOAD"
+ export LD_PRELOAD
+ 
+ # invoke the program with the args given

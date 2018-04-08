@@ -1,0 +1,17 @@
+Debian #516608
+Gentoo #248821
+GNOME #562360
+
+Index: esound-0.2.41/clients.c
+===================================================================
+--- esound-0.2.41.orig/clients.c	2009-03-23 18:34:36.671378034 +0100
++++ esound-0.2.41/clients.c	2009-03-23 18:34:42.419374986 +0100
+@@ -175,6 +175,8 @@ int get_new_clients( int listen )
+ 	    ESDBG_TRACE( 
+ 	    if (esd_use_tcpip) {
+ 
++		unsigned long addr;
++
+ 		port = ntohs( incoming.sin_port );
+ 		addr = ntohl( incoming.sin_addr.s_addr );
+ 

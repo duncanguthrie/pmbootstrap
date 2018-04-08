@@ -1,0 +1,12 @@
+Index: esound-0.2.41/esdmgr.c
+===================================================================
+--- esound-0.2.41.orig/esdmgr.c	2010-10-30 15:05:05.094160502 +0200
++++ esound-0.2.41/esdmgr.c	2010-10-30 15:05:44.858165759 +0200
+@@ -128,6 +128,7 @@ esd_info_t *esd_get_all_info( int esd )
+ 
+     /* allocate the entire info structure, and set defaults to NULL */
+     esd_info_t *info = (esd_info_t *) malloc( sizeof(esd_info_t) );
++    info->server = NULL;
+     info->player_list = NULL;
+     info->sample_list = NULL;
+ 

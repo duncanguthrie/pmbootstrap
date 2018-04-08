@@ -1,0 +1,28 @@
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=610560
+Bug-Debian: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=564606
+Author: Samuel Thibault <sthibault@debian.org>
+
+GNU/Hurd build fix
+
+--- esound-0.2.41/configure.ac	2008-11-18 20:35:33.000000000 +0000
++++ esound-0.2.41/configure.ac	2010-01-10 16:03:55.000000000 +0000
+@@ -180,7 +180,7 @@
+ 
+ AC_MSG_CHECKING([if your platform supports esddsp])
+ case "$host_os" in
+-  linux* | freebsd* | kfreebsd*-gnu | bsdi4* )
++  linux* | freebsd* | kfreebsd*-gnu | bsdi4* | gnu* )
+     dsp_ok=yes
+     ;;
+ esac
+--- esound-0.2.41/esddsp.c.orig	2010-01-10 16:19:04.000000000 +0000
++++ esound-0.2.41/esddsp.c	2010-01-10 16:20:53.000000000 +0000
+@@ -68,7 +68,7 @@
+ #define REAL_LIBC ((void *) -1L)
+ #endif
+ 
+-#if defined(__FreeBSD__) || defined(__FreeBSD_kernel__) || defined(__bsdi__)
++#if defined(__FreeBSD__) || defined(__FreeBSD_kernel__) || defined(__bsdi__) || defined(__GNU__)
+ typedef unsigned long request_t;
+ #else
+ typedef int request_t;
