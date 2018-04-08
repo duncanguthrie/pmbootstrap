@@ -1,0 +1,13 @@
+--- a/Makefile	2005-03-04 07:15:31.000000000 +0000
++++ b/Makefile	2018-03-22 16:19:59.942734208 +0000
+@@ -7,8 +7,8 @@
+ PACKAGE_CFLAGS += $(STANDARD_CFLAGS) $(GPECFLAGS) -I../libgpelaunch -I../libxsettings-client -I../libxsettings
+ PACKAGE_LDFLAGS += $(STANDARD_LDFLAGS) $(GPELIBS) -L../libgpelaunch/.libs -lgpelaunch -Wl,-rpath-link,../libxsettings -L../libxsettings-client -lXsettings-client
+ 
+-PACKAGE_CFLAGS += $(shell pkg-config --cflags cairo)
+-PACKAGE_LDFLAGS += $(shell pkg-config --libs cairo)
++PACKAGE_CFLAGS += $(shell pkg-config --cflags cairo x11)
++PACKAGE_LDFLAGS += $(shell pkg-config --libs cairo x11 )
+ 
+ DESTDIR=
+ PREFIX=/usr

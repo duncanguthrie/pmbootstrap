@@ -1,0 +1,31 @@
+# Contributor: Duncan Guthrie <dguthrie@posteo.net>
+# Maintainer: Duncan Guthrie <dguthrie@posteo.net>
+pkgname=gpe-appmgr
+pkgver=2.8
+pkgrel=3
+pkgdesc="Application manager for the GPE Palmtop Environment"
+url="https://wiki.postmarketos.org/wiki/GPE"
+arch="all"
+license="GPL-2.0-or-later"
+depends="atk cairo fontconfig freetype gdk-pixbuf glib gtk+2.0 pango libx11
+	gpe-conf libgpelaunch libgpewidget libxsettings-client"
+makedepends="cairo-dev
+	libgpewidget-dev libgpelaunch-dev libxsettings-dev libxsettings-client"
+source="http://http.debian.net/debian/pool/main/g/${pkgname}/${pkgname}_${pkgver}.orig.tar.gz
+	00-no-render-h.patch
+	01-cairo-fixes.patch
+	02-link-libx11.patch"
+builddir="$srcdir/$pkgname-$pkgver"
+build () {
+	cd "$builddir"
+	make
+}
+package() {
+	cd "$builddir"
+	make PREFIX="/usr" DESTDIR="$pkgdir" install
+}
+
+sha512sums="879de3573d4ac0dd7815e93ca7df05601a5218547c1366f39cb11d9c2803866582b4f348d68edb1e8607d78db079e5bac3d28d409d0afe2824f40b4ecb8b72bd  gpe-appmgr_2.8.orig.tar.gz
+2fc3ece5c4f73b85762aa592771d5698218161b71b3a40618df947601aa488e106e7f0cbc3cebc8eaa7f7de4c7a8338db7a9394e050f7775f85955be17d54750  00-no-render-h.patch
+5890ad2baaf39cd5939fc2f5bffb05377fab27bc0189b91c56c8933907bfc4cb0a10cbe7737ceade86618d277b6931ace3f2e498258bad4363d688b457b183bd  01-cairo-fixes.patch
+6a5fa316e6ba2ae8888c045112f5c9e7516094951ec5169ded569514377d39258c3fad80ae7270928bb830a5575c454d3d21526d8cf309e1711cc0accfc6c24e  02-link-libx11.patch"
