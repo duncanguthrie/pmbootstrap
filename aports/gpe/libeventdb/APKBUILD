@@ -7,8 +7,8 @@ pkgdesc="Library that provides access to GPE calendar data"
 url="https://wiki.postmarketos.org/wiki/GPE"
 arch="all"
 license="GPL 2.0"
-depends="glib sqlite musl-obstack"
-makedepends="sqlite-dev libgpewidget-dev musl-obstack-dev"
+depends="glib sqlite2 musl-obstack"
+makedepends="sqlite2-dev libgpewidget-dev musl-obstack-dev"
 subpackages="$pkgname-dev"
 source="http://http.debian.net/debian/pool/main/libe/${pkgname}/${pkgname}_${pkgver}.orig.tar.gz
 	01-config-sub.patch
