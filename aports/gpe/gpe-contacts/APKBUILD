@@ -7,10 +7,10 @@ pkgdesc="Contacts program for the GPE Palmtop Environment"
 url="https://wiki.postmarketos.org/wiki/GPE"
 arch="all"
 license="GPL-2.0 LGPL-2.0"
-depends="atk cairo dbus fontconfig freetype gdk-pixbuf gtk+2.0 musl-obstack pango sqlite
-	gpe-icons libcontactsdb libeventdb libgpepimc libgpevtype libgpewidget libmimedir"
-makedepends="intltool gtk+2.0-dev libxml2-dev sqlite-dev dbus-glib-dev musl-obstack-dev
-	libgpewidget-dev libdisplaymigration-dev libgpepimc-dev libgpevtype-dev libmimedir-dev libcontactsdb-dev"
+depends="atk cairo dbus fontconfig freetype gdk-pixbuf gtk+2.0 musl-obstack pango
+	gpe-icons libcontactsdb libeventdb libgpepimc libgpevtype libgpewidget libmimedir sqlite2"
+makedepends="intltool gtk+2.0-dev libxml2-dev dbus-glib-dev musl-obstack-dev
+	libgpewidget-dev libdisplaymigration-dev libgpepimc-dev libgpevtype-dev libmimedir-dev libcontactsdb-dev sqlite2-dev"
 source="http://http.debian.net/debian/pool/main/g/${pkgname}/${pkgname}_${pkgver}.orig.tar.bz2
 	01-obstack.patch"
 builddir="$srcdir/$pkgname-$pkgver"
