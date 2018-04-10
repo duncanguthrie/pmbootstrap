@@ -7,14 +7,15 @@ pkgdesc="Library that provides access to gpe-todo's database"
 url="https://wiki.postmarketos.org/wiki/GPE"
 arch="all"
 license="GPL 2.0"
-depends="glib sqlite  
-	libgpepimc libgpewidget"
-makedepends="glib-dev sqlite-dev
-	libgpepimc-dev libgpewidget-dev"
+depends="glib
+	libgpepimc libgpewidget sqlite2"
+makedepends="glib-dev
+	libgpepimc-dev libgpewidget-dev sqlite2-dev"
 subpackages="$pkgname-dev"
 source="http://http.debian.net/debian/pool/main/libt/${pkgname}/${pkgname}_${pkgver}.orig.tar.bz2
 	01-config-sub.patch
-	02-unresolved-symbols.patch"
+	02-unresolved-symbols.patch
+	03-install-sh.patch"
 builddir="${srcdir}/${pkgname}-${pkgver}"
 options="!check"
 build () {
@@ -34,4 +35,5 @@ package() {
 }
 sha512sums="6ae39ad1f59ebf6e91bf33c0023567f3c4d5ba667e456f2720810ebfdfa36018b5dc60fadf3b5d20baadf1539abb4cd45feaa4faba0518141e7ece9e1c0fcd9b  libtododb_0.11.orig.tar.bz2
 9802fc26255caa18f49fd9d6e96497e20a8bfc6fcb5dbc8013136b1efebb5077185ea736dd149224ca8fcd9418be3b901f4200ccd9db19b45dd01005af196536  01-config-sub.patch
-aa8151ca3310c9a96bfa3b9bab0c716611e6f4b8cc82d2805055844308852bd684d62e27f163b3a3c78efee8ca3ad5cff57d6de6460cb21833d8aa9acea46a19  02-unresolved-symbols.patch"
+aa8151ca3310c9a96bfa3b9bab0c716611e6f4b8cc82d2805055844308852bd684d62e27f163b3a3c78efee8ca3ad5cff57d6de6460cb21833d8aa9acea46a19  02-unresolved-symbols.patch
+51761b65e4886dc4c8584554e37448a87ed2cbf37e7be03686b62bd338d608c1ef1f5a58e705c64ba395b0ac07956e6998fd3ec1237770747b8ab835bd311cd2  03-install-sh.patch"
