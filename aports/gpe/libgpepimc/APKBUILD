@@ -7,9 +7,9 @@ pkgdesc="Category management for GPE applications"
 url="https://wiki.postmarketos.org/wiki/GPE"
 arch="all"
 license="LGPL 2.0-or-later"
-depends="atk cairo fontconfig freetype gdk-pixbuf glib gtk+2.0 pango sqlite
+depends="atk cairo fontconfig freetype gdk-pixbuf glib gtk+2.0 pango sqlite2
 	libgpewidget"
-makedepends="glib-dev intltool sqlite-dev
+makedepends="glib-dev intltool sqlite2-dev
 	libgpewidget-dev"
 subpackages="$pkgname-dev"
 source="http://http.debian.net/debian/pool/main/libg/${pkgname}/${pkgname}_${pkgver}.orig.tar.gz
