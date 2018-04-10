@@ -7,10 +7,10 @@ pkgdesc="Data interchange library for GPE"
 url="https://wiki.postmarketos.org/wiki/GPE"
 arch="all"
 license="GPL 2.0-or-later"
-depends="glib sqlite  
-	libeventdb libmimedir libtododb"
-makedepends="gtk-doc glib-dev sqlite-dev
-	libeventdb-dev libmimedir-dev libgpewidget-dev libtododb-dev"
+depends="glib
+	libeventdb libmimedir libtododb sqlite2"
+makedepends="gtk-doc glib-dev
+	libeventdb-dev libmimedir-dev libgpewidget-dev libtododb-dev sqlite2-dev"
 subpackages="$pkgname-dev"
 source="http://http.debian.net/debian/pool/main/libg/${pkgname}/${pkgname}_${pkgver}.orig.tar.bz2
 	01-config-sub.patch
