@@ -7,10 +7,10 @@ pkgdesc="Alarm support for GPE Palmtop Environment"
 url="https://wiki.postmarketos.org/wiki/GPE"
 arch="all"
 license="GPL-2.0-or-later"
-depends="at atk cairo fontconfig freetype gdk-pixbuf glib gtk+2.0 pango sqlite  
-	gpe-icons libgpeschedule libgpewidget libsoundgen esound "
-makedepends="gtk+2.0-dev gstreamer0.10-dev glib-dev sqlite-dev 
-	esound-dev libgpeschedule-dev libsoundgen-dev libgpewidget-dev"
+depends="at atk cairo fontconfig freetype gdk-pixbuf glib gtk+2.0 pango
+	gpe-icons libgpeschedule libgpewidget libsoundgen esound sqlite2"
+makedepends="gtk+2.0-dev gstreamer0.10-dev glib-dev 
+	esound-dev libgpeschedule-dev libsoundgen-dev libgpewidget-dev sqlite2-dev"
 source="http://http.debian.net/debian/pool/main/g/${pkgname}/${pkgname}_${pkgver}.orig.tar.gz"
 builddir="${srcdir}/${pkgname}-${pkgver}"
 options="!check"
