@@ -7,10 +7,10 @@ pkgdesc="Calendar application for the GPE Palmtop Environment"
 url="https://wiki.postmarketos.org/wiki/GPE"
 arch="all"
 license="GPL-2.0 LGPL-2.0"
-depends="atk cairo dbus dbus-glib fontconfig freetype gdk-pixbuf glib gtk+2.0 pango libsoup sqlite libx11 
-	gpe-icons esound libeventdb libgpevtype libgpewidget libhandoff libmimedir libsoundgen libxsettings-client"
-makedepends="intltool perl-xml-parser dbus-glib-dev glib-dev gtk+2.0-dev libsoup-dev musl-obstack-dev sqlite-dev
-	esound-dev libeventdb-dev libgpepimc-dev libgpeschedule-dev libgpevtype-dev libgpewidget-dev libhandoff-dev libsoundgen-dev libxsettings-client libxsettings-dev"
+depends="atk cairo dbus dbus-glib fontconfig freetype gdk-pixbuf glib gtk+2.0 pango libsoup libx11 
+	gpe-icons esound libeventdb libgpevtype libgpewidget libhandoff libmimedir libsoundgen libxsettings-client sqlite2"
+makedepends="intltool perl-xml-parser dbus-glib-dev glib-dev gtk+2.0-dev libsoup-dev musl-obstack-dev
+	esound-dev libeventdb-dev libgpepimc-dev libgpeschedule-dev libgpevtype-dev libgpewidget-dev libhandoff-dev libsoundgen-dev libxsettings-client libxsettings-dev sqlite2-dev"
 source="http://http.debian.net/debian/pool/main/g/${pkgname}/${pkgname}_${pkgver}.orig.tar.bz2
 	01-add-lgthread-linkage.patch  
 	02-config-sub.patch            
