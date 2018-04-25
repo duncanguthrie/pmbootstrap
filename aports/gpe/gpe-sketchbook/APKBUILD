@@ -1,5 +1,5 @@
-# Contributor:
-# Maintainer:
+# Contributor: Duncan Guthrie <dguthrie@posteo.net>
+# Maintainer: Duncan Guthrie <dguthrie@posteo.net>
 pkgname=gpe-sketchbook
 pkgver=0.2.9
 pkgrel=0
@@ -7,7 +7,7 @@ pkgdesc="Sketchbook program for GPE"
 url="https://wiki.postmarketos.org/wiki/GPE"
 arch="all"
 license="GPL-2.0-or-later"
-depends="gpe-icons"
+depends="gpe-icons libgpewidget"
 makedepends="libgpewidget-dev sqlite2-dev linux-headers"
 source="$pkgname-$pkgver.tar::http://palmtop.org/gpe-archive/$pkgname-$pkgver.tar.gz"
 builddir="$srcdir/$pkgname-$pkgver"
