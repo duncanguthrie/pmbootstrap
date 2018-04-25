@@ -1,0 +1,27 @@
+# Contributor: Duncan Guthrie <dguthrie@posteo.net>
+# Maintainer: Duncan Guthrie <dguthrie@posteo.net>
+pkgname=gpe-julia
+pkgver=0.0.6
+pkgrel=0
+pkgdesc="Julia set manipulation game for GPE"
+url="https://wiki.postmarketos.org/wiki/GPE"
+arch="all"
+license="GPL-2.0"
+depends="gpe-icons libgpewidget"
+makedepends="libgpewidget-dev"
+source="$pkgname-$pkgver.tar::http://palmtop.org/gpe-archive/$pkgname-$pkgver.tar.gz
+	01-no-gpe-render-h.patch"
+builddir="$srcdir/$pkgname-$pkgver"
+options="!check"
+build() {
+	cd "$builddir"
+	make PREFIX=/usr/ all
+}
+
+package() {
+	cd "$builddir"
+	make PREFIX=/usr/ DESTDIR=$pkgdir install-program
+}
+
+sha512sums="526297f0627e0ab17ab6251c9174f0a394290a67d998c34c2356129f53069987c5aac954cca31e128847d0bd344548dbbb5e6a0a0c64db780f67a0ebcf2695df  gpe-julia-0.0.6.tar
+5ad8780788d4df6e48a187b2199c18a8f558e5ce957b924bc2b0d6b6dd4cc5b8b43d79bce0e70c8dcf7344ddbd45a4c98c86b710c313be02bf2a438ac4ce556b  01-no-gpe-render-h.patch"

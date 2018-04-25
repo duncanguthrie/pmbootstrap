@@ -1,0 +1,10 @@
+--- a/main.c	2004-04-18 19:40:44.000000000 +0100
++++ b/main.c	2018-04-26 00:42:33.184638667 +0100
+@@ -19,7 +19,6 @@
+ #include <gpe/init.h>
+ #include <gpe/picturebutton.h>
+ #include <gpe/pixmaps.h>
+-#include <gpe/render.h>
+ #include <gpe/errorbox.h>
+ 
+ static struct gpe_icon my_icons[] = {
