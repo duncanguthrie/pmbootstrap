@@ -1,0 +1,26 @@
+# Contributor:
+# Maintainer:
+pkgname=gpe-sketchbook
+pkgver=0.2.9
+pkgrel=0
+pkgdesc="Sketchbook program for GPE"
+url="https://wiki.postmarketos.org/wiki/GPE"
+arch="all"
+license="GPL-2.0-or-later"
+depends="gpe-icons"
+makedepends="libgpewidget-dev sqlite2-dev linux-headers"
+source="$pkgname-$pkgver.tar::http://palmtop.org/gpe-archive/$pkgname-$pkgver.tar.gz"
+builddir="$srcdir/$pkgname-$pkgver"
+options="!check"
+build() {
+	cd "$builddir"
+        make CVSBUILD=no PREFIX=/usr/
+	make CVSBUILD=no all-desktop
+}
+
+package() {
+	cd "$builddir"
+	make CVSBUILD=no PREFIX=/usr/ DESTDIR=$pkgdir install-program
+}
+
+sha512sums="f741e214e170698e159906bddf50cab7c4be3e14b1302d3c45820d9104bd6b8b43710d066d23632a26885fa443e6ad637147caaa187e7498e78356df79b5d249  gpe-sketchbook-0.2.9.tar"
