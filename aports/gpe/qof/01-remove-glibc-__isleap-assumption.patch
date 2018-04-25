@@ -1,0 +1,21 @@
+--- a/qof/qofdate.c	2018-04-25 23:28:21.136559161 +0100
++++ b/qof/qofdate.c	2018-04-25 23:49:15.888450104 +0100
+@@ -35,6 +35,9 @@
+ #define DIV(a, b) ((a) / (b) - ((a) % (b) < 0))
+ #define LEAPS_THRU_END_OF(y) (DIV (y, 4) - DIV (y, 100) + DIV (y, 400))
+ 
++#define is_leap_year(y) \
++    ((y) % 4 == 0 && ((y) % 100 != 0 || (y) % 400 == 0))
++
+ static GHashTable *DateFormatTable = NULL;
+ static gboolean QofDateInit = FALSE;
+ static QofLogModule log_module = QOF_MOD_DATE;
+@@ -827,7 +830,7 @@
+ 	if (qd->qd_wday < 0)
+ 		qd->qd_wday += 7;
+ 	y = 1970;
+-	while (days < 0 || days >= (__isleap (y) ? 366 : 365))
++	while (days < 0 || days >= (is_leap_year (y) ? 366 : 365))
+ 	{
+ 		/* Guess a corrected year, assuming 365 days per year.  */
+ 		yg = y + days / 365 - (days % 365 < 0);

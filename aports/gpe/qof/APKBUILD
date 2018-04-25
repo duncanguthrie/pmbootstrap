@@ -1,0 +1,39 @@
+# Contributor: Duncan Guthrie <dguthrie@posteo.net>
+# Maintainer: Duncan Guthrie <dguthrie@posteo.net>
+pkgname=qof
+pkgver=0.8.6
+pkgrel=0
+pkgdesc="The Query object framework (QOF) provides a set of C language utilities for performing generic structured complex queries"
+url="http://qof.alioth.debian.org"
+arch="all"
+license="GPL-2.0-or-later"
+depends="glib sqlite2"
+makedepends="libxslt glib-dev libxml2-dev doxygen sqlite2-dev musl-dev"
+subpackages="$pkgname-dev $pkgname-doc $pkgname-lang"
+source="http://http.debian.net/debian/pool/main/q/${pkgname}/${pkgname}_${pkgver}.orig.tar.gz
+	01-remove-glibc-__isleap-assumption.patch"
+builddir="$srcdir/$pkgname-$pkgver"
+prepare() {
+	default_prepare
+	update_config_sub
+}
+options="!check"
+build() {
+	cd "$builddir"
+	./configure \
+		--build=$CBUILD \
+		--host=$CHOST \
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--mandir=/usr/share/man \
+		--localstatedir=/var \
+		--disable-error-on-warning
+	make -j1
+}
+package() {
+	cd "$builddir"
+	make DESTDIR=$pkgdir install
+}
+
+sha512sums="1658f128777b4d9ec1db07d2271c19c4848757b5900f46550a0780228b07fcebcedf753bd975defafc74d81d0b31684c8d0ee08c6eea825bac1ce64c18b53479  qof_0.8.6.orig.tar.gz
+c843cb93c8b5d49a2da6cbe51442044bf3f4b694650b5d0d805f77250287512bea4595a53a63778fc1e74821328d5bc1bd3ac784e721a386dac8c260c55b10f0  01-remove-glibc-__isleap-assumption.patch"
