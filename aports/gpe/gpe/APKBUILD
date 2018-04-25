@@ -2,18 +2,16 @@
 # Contributor: Duncan Guthrie <dguthrie@posteo.net>
 pkgname=gpe
 pkgver=0.2.9
-pkgrel=1.1
+pkgrel=0
 url="https://wiki.postmarketos.org/wiki/GPE"
 pkgdesc="Base GPE Palmtop Environment metapackage"
 depends="gpe-announce gpe-calendar gpe-edit gpe-gallery gpe-icons"
 arch="noarch"
 license="GPL-2.0-or-later LGPL-2.0-or-later"
 options="!check"
-
 build() {
 	return 0
 }
-
 package() {
 	mkdir -p "$pkgdir"
 }

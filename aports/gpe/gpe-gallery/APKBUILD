@@ -2,7 +2,7 @@
 # Maintainer: Duncan Guthrie <dguthrie@posteo.net>
 pkgname=gpe-gallery
 pkgver=0.97
-pkgrel=4
+pkgrel=0
 pkgdesc="Image gallery application for the GPE Palmtop Environment"
 url="https://wiki.postmarketos.org/wiki/GPE"
 arch="all"
@@ -14,8 +14,7 @@ makedepends="glib-dev gtk+2.0-dev
 source="http://http.debian.net/debian/pool/main/g/${pkgname}/${pkgname}_${pkgver}.orig.tar.gz"
 builddir="$srcdir/$pkgname-$pkgver"
 options="!check"
-
-build () {
+build() {
 	cd "$builddir"
 	make
 }

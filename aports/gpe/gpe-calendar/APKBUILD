@@ -2,7 +2,7 @@
 # Maintainer: Duncan Guthrie <dguthrie@posteo.net>
 pkgname=gpe-calendar
 pkgver=0.92
-pkgrel=4
+pkgrel=0
 pkgdesc="Calendar application for the GPE Palmtop Environment"
 url="https://wiki.postmarketos.org/wiki/GPE"
 arch="all"
@@ -10,17 +10,19 @@ license="GPL-2.0 LGPL-2.0"
 depends="atk cairo dbus dbus-glib fontconfig freetype gdk-pixbuf glib gtk+2.0 pango libsoup libx11 
 	gpe-icons esound libeventdb libgpevtype libgpewidget libhandoff libmimedir libsoundgen libxsettings-client sqlite2"
 makedepends="intltool perl-xml-parser dbus-glib-dev glib-dev gtk+2.0-dev libsoup-dev musl-obstack-dev
-	esound-dev libeventdb-dev libgpepimc-dev libgpeschedule-dev libgpevtype-dev libgpewidget-dev libhandoff-dev libsoundgen-dev libxsettings-client libxsettings-dev sqlite2-dev"
+	esound-dev libeventdb-dev libgpepimc-dev libgpeschedule-dev libgpevtype-dev libgpewidget-dev libhandoff-dev libsoundgen-dev libxsettings-client-dev libxsettings-dev sqlite2-dev"
 source="http://http.debian.net/debian/pool/main/g/${pkgname}/${pkgname}_${pkgver}.orig.tar.bz2
 	01-add-lgthread-linkage.patch  
-	02-config-sub.patch            
-	03-configure.patch
-	04-desktop-validity.patch
-	05-migrate-to-soup-2.4.patch"
+	02-configure.patch
+	03-desktop-validity.patch
+	04-migrate-to-soup-2.4.patch"
 builddir="$srcdir/$pkgname-$pkgver"
 options="!check"
-
-build () {
+prepare() {
+	default_prepare
+	update_config_sub
+}
+build() {
 	cd "$builddir"
 	./configure \
 		--build=$CBUILD \
@@ -36,10 +38,8 @@ package() {
 	cd "$builddir"
 	make DESTDIR="$pkgdir" install
 }
-
 sha512sums="b7b643363deb4e7673424f94386e68510fb5ebd81d9668cb882d64170a1f1fdfa5e5840abe5fa34bade4bc71d12c10321b440a4b98636e9b7db8ac013bfb036c  gpe-calendar_0.92.orig.tar.bz2
 f0e9c7d2294d5e40f330c96607801dcc442b868810a78df76df7c381b3b10aa04a7261a233ecc02534c04643aef40dd8c40299e7273fa9e4cd5a9f686d921ac7  01-add-lgthread-linkage.patch
-36e69f840a9014ef83bbfc01b3678c6d06e58bf7dae33e0a713d3f9da5cb76b6b6eadf6627c5639a7eb45fe8a03f741fcee7a1c1c997e9fe00fef8db660c731b  02-config-sub.patch
-3ee4c3c1f9c91f2a2b152bc46ed0ac53082d004b831dffa64242b8487c2305e2982df38dc2fd146472e0c96c856fec71f3a3068dc7e5c5b358bc8bfb6c4d6a34  03-configure.patch
-cd14895ba047ebede004f58b93c568629913b2f745862f130c4185543da591a94c7d3c4657a8196df18129e7acf99c6e02d7c24630bafd6de6df0e183a2411ce  04-desktop-validity.patch
-83a207f238ee2ac352f3848fc2893577911e827bf45dd7dc148f9148dbdab9ebfe3c2e4e4efe817c00b08b5124835ee973886c7167a710ef580d942b5155c573  05-migrate-to-soup-2.4.patch"
+3ee4c3c1f9c91f2a2b152bc46ed0ac53082d004b831dffa64242b8487c2305e2982df38dc2fd146472e0c96c856fec71f3a3068dc7e5c5b358bc8bfb6c4d6a34  02-configure.patch
+cd14895ba047ebede004f58b93c568629913b2f745862f130c4185543da591a94c7d3c4657a8196df18129e7acf99c6e02d7c24630bafd6de6df0e183a2411ce  03-desktop-validity.patch
+83a207f238ee2ac352f3848fc2893577911e827bf45dd7dc148f9148dbdab9ebfe3c2e4e4efe817c00b08b5124835ee973886c7167a710ef580d942b5155c573  04-migrate-to-soup-2.4.patch"

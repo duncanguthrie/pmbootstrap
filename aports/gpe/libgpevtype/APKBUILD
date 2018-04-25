@@ -2,7 +2,7 @@
 # Maintainer: Duncan Guthrie <dguthrie@posteo.net>
 pkgname=libgpevtype
 pkgver=0.50
-pkgrel=6
+pkgrel=0
 pkgdesc="Data interchange library for GPE"
 url="https://wiki.postmarketos.org/wiki/GPE"
 arch="all"
@@ -13,12 +13,15 @@ makedepends="gtk-doc glib-dev
 	libeventdb-dev libmimedir-dev libgpewidget-dev libtododb-dev sqlite2-dev"
 subpackages="$pkgname-dev"
 source="http://http.debian.net/debian/pool/main/libg/${pkgname}/${pkgname}_${pkgver}.orig.tar.bz2
-	01-config-sub.patch
-	02-g_set_error_string_format.patch
-	03-unresolved.patch"
+	01-g_set_error_string_format.patch
+	02-unresolved.patch"
 builddir="${srcdir}/${pkgname}-${pkgver}"
 options="!check"
-build () {
+prepare() {
+	default_prepare
+	update_config_sub
+}
+build() {
 	cd "$builddir"
 	./configure \
 		--build=$CBUILD \
@@ -34,6 +37,5 @@ package() {
 	make DESTDIR="$pkgdir" install
 }
 sha512sums="96a9a506b19a1ba2c8816d8c4552dadff759727c0119fc0bb0a55be00bc191e3eca8f0b9eb19068e4969358626805e4614f84549fa80411550fca2052c4b2625  libgpevtype_0.50.orig.tar.bz2
-01e6fa19d5020bf19238b5c4cda1ab5341172c6952af224c7b9bf593343c2e1cfe594b0985c7c78f398fef81b62cb21f39a4bee085e87beebc87b42b77e9bfed  01-config-sub.patch
-2e727b6ac44d2a5c8320ff3eb29b884b49f29c984b58fcd8957d87ea761941307b436fd82da82f1610a69635ecc0a42c2b4c92285edae2e168a76e531adacff4  02-g_set_error_string_format.patch
-2fdc02e021412e5a66f262d8ae2820c052db770945a6c4b9e5014ca4be8dd7e50408e707d6dfe0fe6993a5b6627fcda6a69ca292f3c1cf853b3a8910f53052fc  03-unresolved.patch"
+2e727b6ac44d2a5c8320ff3eb29b884b49f29c984b58fcd8957d87ea761941307b436fd82da82f1610a69635ecc0a42c2b4c92285edae2e168a76e531adacff4  01-g_set_error_string_format.patch
+2fdc02e021412e5a66f262d8ae2820c052db770945a6c4b9e5014ca4be8dd7e50408e707d6dfe0fe6993a5b6627fcda6a69ca292f3c1cf853b3a8910f53052fc  02-unresolved.patch"

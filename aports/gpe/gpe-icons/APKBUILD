@@ -2,7 +2,7 @@
 # Maintainer: Duncan Guthrie <dguthrie@posteo.net>
 pkgname=gpe-icons
 pkgver=0.25
-pkgrel=1
+pkgrel=0
 pkgdesc="Default icon theme for the GPE Palmtop Environment."
 url="https://wiki.postmarketos.org/wiki/GPE"
 arch="noarch"
@@ -10,10 +10,8 @@ license="GPL-2.0 LGPL-2.0"
 source="http://http.debian.net/debian/pool/main/g/${pkgname}/${pkgname}_${pkgver}.orig.tar.gz"
 builddir="${srcdir}/${pkgname}-${pkgver}"
 options="!check"
-
 package() {
 	cd "$builddir"
 	make PREFIX=/usr DESTDIR="$pkgdir" install-program
 }
-
 sha512sums="afe88c553bb85818fed7ca05fc5b727a13e76bbd590c135c92adcdcd328f04a02f3bc872696fd79c2765de6967c54817ad840d1c6857c37b44dd298fbe99bbc7  gpe-icons_0.25.orig.tar.gz"

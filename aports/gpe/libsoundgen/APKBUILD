@@ -2,7 +2,7 @@
 # Maintainer: Duncan Guthrie <dguthrie@posteo.net>
 pkgname=libsoundgen
 pkgver=0.6
-pkgrel=4
+pkgrel=0
 pkgdesc="GPE Palmtop Environment sound generator library"
 url="https://wiki.postmarketos.org/wiki/GPE"
 arch="all"
@@ -11,12 +11,15 @@ depends="esound glib"
 makedepends="esound-dev glib-dev intltool"
 subpackages="$pkgname-dev"
 source="http://http.debian.net/debian/pool/main/libs/${pkgname}/${pkgname}_${pkgver}.orig.tar.bz2
-	config-sub.patch
-	install-sh.patch
-	missing-linkages.patch"
+	01-install-sh.patch
+	02-missing-linkages.patch"
 options="!check"	
 builddir="${srcdir}/${pkgname}-${pkgver}"
-build () {
+prepare() {
+	default_prepare
+	update_config_sub
+}
+build() {
 	cd "$builddir"
 	./configure \
 		--build=$CBUILD \
@@ -32,6 +35,5 @@ package() {
 	make DESTDIR="$pkgdir" install
 }
 sha512sums="46b1f015c18558a131815fa07ffb2a8632da145ef79fa295b0d5277ce7b970a0fad9687bc564802c6c1691a90fa141e553f6419582bb38b4ad3641c668189812  libsoundgen_0.6.orig.tar.bz2
-f32d08ba371e709a1fa41019da528ff6334a5caaf06a0396c58d15e23da3dd6819ea795c6f0fd4e38b947c2117acb0ec08dbd4c69cedf85b4f1e749cc79c856f  config-sub.patch
-f5fb0bec9d60d5e87bdbf11642dc4370096867847d068b47f03a451585cfc7872b23645aaefe3f9eca5ee5dea62ec3ddd19d810b79a03f5c83dc9c83e6f293b6  install-sh.patch
-8f002aa73769356612f5708be801bfd048c628a40b1b1e9a2d3b97c886e6b9b6c6cd13d975d7822456a1f384bba723fe6d2923220eceee9fd0c0830c8848e600  missing-linkages.patch"
+f5fb0bec9d60d5e87bdbf11642dc4370096867847d068b47f03a451585cfc7872b23645aaefe3f9eca5ee5dea62ec3ddd19d810b79a03f5c83dc9c83e6f293b6  01-install-sh.patch
+8f002aa73769356612f5708be801bfd048c628a40b1b1e9a2d3b97c886e6b9b6c6cd13d975d7822456a1f384bba723fe6d2923220eceee9fd0c0830c8848e600  02-missing-linkages.patch"

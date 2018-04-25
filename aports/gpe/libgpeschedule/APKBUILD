@@ -2,7 +2,7 @@
 # Maintainer: Duncan Guthrie <dguthrie@posteo.net>
 pkgname=libgpeschedule
 pkgver=0.17
-pkgrel=4
+pkgrel=0
 pkgdesc="Scheduling library for GPE Palmtop Environment"
 url="https://wiki.postmarketos.org/wiki/GPE"
 arch="all"
@@ -12,14 +12,15 @@ makedepends="glib-dev libgpewidget-dev sqlite2-dev"
 subpackages="${pkgname}-dev"
 source="http://http.debian.net/debian/pool/main/libg/${pkgname}/${pkgname}_${pkgver}.orig.tar.bz2
 	01-atd-spooldir.patch
-	02-config-sub.patch
-	03-install-sh.patch
-	04-pkgconfig.patch
-	05-rename-library.patch"
-
+	02-install-sh.patch
+	03-pkgconfig.patch
+	04-rename-library.patch"
 builddir="${srcdir}/libschedule-${pkgver}"
-
-build () {
+prepare() {
+	default_prepare
+	update_config_sub
+}
+build() {
 	cd "$builddir"
 	./configure \
 		--build=$CBUILD \
@@ -36,7 +37,6 @@ package() {
 }
 sha512sums="d7dad3850789f9f34ea1475fe0ec1e2f2d11984a203687a3fb49c40dc6fe56c0170c60416fc9e140bc53fb32473ca2673d88d1d34a22307b9f2177c01d69c712  libgpeschedule_0.17.orig.tar.bz2
 0b9ba903efa9520a8c789e133da0e335b9dd3efd0eb3951c6f48535e720d3e334adb5b399473a183830b48e69c8446a8fb3985c17967eb42067a2823b427ea05  01-atd-spooldir.patch
-0d6695454c3d3e332478b122d6d832f0ed8cc4c1043121c5897a63b243fec1b369540969e44aa10a1402f813ca86ee1ba20d12952c662e7a55f69629b7c30f3a  02-config-sub.patch
-9407a6a2edd9dffb7491a799333f9976ac0544b8c5572c2dacf486ef890b2f471e7e40a8c588d8a9c3ba56ae6099da0e8d138bfefd36d90bf88dc13709239444  03-install-sh.patch
-f6beed5d43fddaeea459b40a603980a95585da1aa24877978211fa010eaf128be7c3f6b766b3c99ea1c4263821c758e18231f2f6680d5442dd09d321ed537ce0  04-pkgconfig.patch
-6e738e28196821f78211fca25eaa89f4496828a3a50fcc5ef22a0fc7fb7cd6f733c641436b083253448c7a95d4d9505b63e37627a2ed48f795821183aa37b99c  05-rename-library.patch"
+9407a6a2edd9dffb7491a799333f9976ac0544b8c5572c2dacf486ef890b2f471e7e40a8c588d8a9c3ba56ae6099da0e8d138bfefd36d90bf88dc13709239444  02-install-sh.patch
+f6beed5d43fddaeea459b40a603980a95585da1aa24877978211fa010eaf128be7c3f6b766b3c99ea1c4263821c758e18231f2f6680d5442dd09d321ed537ce0  03-pkgconfig.patch
+6e738e28196821f78211fca25eaa89f4496828a3a50fcc5ef22a0fc7fb7cd6f733c641436b083253448c7a95d4d9505b63e37627a2ed48f795821183aa37b99c  04-rename-library.patch"

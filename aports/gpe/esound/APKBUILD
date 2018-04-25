@@ -2,7 +2,7 @@
 # Maintainer: Duncan Guthrie <dguthrie@posteo.net>
 pkgname=esound
 pkgver=0.2.41
-pkgrel=11
+pkgrel=0
 pkgdesc="Legacy sound server for GNOME and Enlightenment"
 url="http://ftp.gnome.org/pub/gnome/sources/esound/0.2/"
 arch="all"
@@ -10,7 +10,6 @@ license="GPL-2.0"
 depends="audiofile alsa-lib"
 makedepends="alsa-lib-dev audiofile-dev"
 source="${url}/${pkgname}-${pkgver}.tar.gz
-	config-sub.patch
 	01_relocate_libesddsp.patch
 	02_missing_var.patch
 	03_hurd.patch
@@ -22,8 +21,11 @@ source="${url}/${pkgname}-${pkgver}.tar.gz
 builddir="${srcdir}/${pkgname}-${pkgver}"
 options="!check"
 subpackages="${pkgname}-dev ${pkgname}-doc"
-
-build () {
+prepare() {
+	default_prepare
+	update_config_sub
+}
+build() {
 	cd "$builddir"
 	./configure \
 		--build=$CBUILD \
@@ -38,9 +40,7 @@ package() {
 	cd "$builddir"
 	make DESTDIR="$pkgdir" install
 }
-
 sha512sums="1104bd88d8fefcdb4d6092f75c6455cd1af1a5b4e1e2a3b036832e77bca77af840f1eedb6f7eb0de448ec1fdabebbce09320b4e3b2cf42e5e488c496ec327f70  esound-0.2.41.tar.gz
-ede5ad15fef6e352e8348c17d218b400070a6254dbe06545061b5101f2ce6e462b00c2f6fa3190f4229a7199c4aa6cf7af33764aa513e8e38330d5f95a4a3d2b  config-sub.patch
 041ce1edbc80379adf5e3fba3d07b7699ffe63ee470899125671357020dc990dec94b0b1ce207c74f7986ab1812474add06315068ccfa242696401770146dd7f  01_relocate_libesddsp.patch
 13c01a4a262cb4f27692e5b9cc652986e44e7ab19d4d77edd054f8936b78461c2149cd122564534701daa176339eb444be136f61a4aa355906f65026669e46d7  02_missing_var.patch
 c333c83d64f3f560f8ecb4589245b4d654cdf15b2aa54f768323824e89e80804f82a47380b1f77b3b348429779aae95c3b6442e317d6c833ffe1e3c9fa0aef86  03_hurd.patch

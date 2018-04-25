@@ -2,7 +2,7 @@
 # Maintainer: Duncan Guthrie <dguthrie@posteo.net>
 pkgname=audiofile
 pkgver=0.3.6
-pkgrel=4
+pkgrel=0
 pkgdesc="Library for reading and writing audio files found in many common formats"
 url="https://audiofile.68k.org/"
 arch="all"
@@ -10,7 +10,6 @@ license="GPL-2.0-or-later LGPL-2.1-or-later BSD-3-Clause"
 depends="libunwind flac"
 makedepends="alsa-lib-dev linux-headers flac-dev"
 source="${url}/${pkgname}-${pkgver}.tar.gz
-	config-sub.patch
 	01_gcc6.patch
 	02_hurd.patch
 	03_CVE-2015-7747.patch
@@ -21,12 +20,15 @@ source="${url}/${pkgname}-${pkgver}.tar.gz
 	08_Fix-signature-of-multiplyCheckOverflow.-It-returns-a-b.patch
 	09_Actually-fail-when-error-occurs-in-parseFormat.patch
 	10_Check-for-division-by-zero-in-BlockCodec-runPull.patch"
-
 subpackages="${pkgname}-dev ${pkgname}-doc"
 builddir="${srcdir}/${pkgname}-${pkgver}"
 options="!check"
 
-build () {
+prepare() {
+	default_prepare
+	update_config_sub
+}
+build() {
 	cd "$builddir"
 	./configure \
 		--build=$CBUILD \
@@ -43,7 +45,6 @@ package() {
 }
 
 sha512sums="f9a1182d93e405c21eba79c5cc40962347bff13f1b3b732d9a396e3d1675297515188bd6eb43033aaa00e9bde74ff4628c1614462456529cabba464f03c1d5fa  audiofile-0.3.6.tar.gz
-057eaedcadbd131078edd6c448cc41f3b461429251f8602bfb83434197e84feb112285aff6e0296b7652b47fef6e7b8010e0e72940cf3953adc217d2f5e5a436  config-sub.patch
 ae11735970eaddb664251614743cb46ae029b4073f4f8ea7cd4570d50c0f4b7f7b426399901b011d1ea799bb99d4ac648e76be97f13a51e32d7a63f97b38a89f  01_gcc6.patch
 76ce5a29beaa394f3a24e7db7c40864f26119857e78087b6780853d06d4f44e80656c418b2c99d95224d29b69c23c51c54a4c8edac5dbaa4038a9d6c1ef7be06  02_hurd.patch
 7673ab3fafdb0dac514a42622f53ea17aa56836c76413e5680c475537e195c53df21f26da1bd4e7941df2dc8b33a471ab52d539dabffbaef8bc95ee59951e7fe  03_CVE-2015-7747.patch

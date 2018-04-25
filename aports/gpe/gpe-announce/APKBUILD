@@ -2,7 +2,7 @@
 # Maintainer: Duncan Guthrie <dguthrie@posteo.net>
 pkgname=gpe-announce
 pkgver=0.14
-pkgrel=2
+pkgrel=0
 pkgdesc="Alarm support for GPE Palmtop Environment"
 url="https://wiki.postmarketos.org/wiki/GPE"
 arch="all"
@@ -14,8 +14,7 @@ makedepends="gtk+2.0-dev gstreamer0.10-dev glib-dev
 source="http://http.debian.net/debian/pool/main/g/${pkgname}/${pkgname}_${pkgver}.orig.tar.gz"
 builddir="${srcdir}/${pkgname}-${pkgver}"
 options="!check"
-
-build () {
+build() {
 	cd "$builddir"
 	make
 }

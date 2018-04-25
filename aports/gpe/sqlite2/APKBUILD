@@ -1,19 +1,16 @@
-# Contributor:
-# Maintainer:
+# Contributor: Duncan Guthrie <dguthrie@posteo.net>
+# Maintainer: Duncan Guthrie <dguthrie@posteo.net>
 _pn=sqlite
 pkgname=sqlite2
 pkgver=2.8.17
-pkgrel=14
+pkgrel=0
 pkgdesc="An embeddable SQL Database Engine version 2 (legacy)"
 url="https://www.sqlite.org"
 arch="all"
 license="custom"
-depends=""
 makedepends="readline-dev tcl-dev"
-install=""
 subpackages="$pkgname-dev"
 source="http://http.debian.net/debian/pool/main/s/${_pn}/${_pn}_${pkgver}.orig.tar.gz
-	00-config-sub.patch
 	01-fix-CVE-2007-1888.patch
 	02-lemon-snprintf.patch
 	03-add-fprintf-format-argument.patch
@@ -21,8 +18,11 @@ source="http://http.debian.net/debian/pool/main/s/${_pn}/${_pn}_${pkgver}.orig.t
 	05-link_with_LDFLAGS.patch
 	06-cross.patch"
 builddir="${srcdir}/${_pn}-${pkgver}"
-
-build () {
+prepare() {
+	default_prepare
+	update_config_sub
+}
+build() {
 	cd "$builddir"
 	./configure \
 		--build=$CBUILD \
@@ -37,9 +37,7 @@ package() {
 	cd "$builddir"
 	make DESTDIR="$pkgdir" install
 }
-
 sha512sums="93c98e59635349ca66aa7503ad6ac59a81abc49d885c7b14c1fe3d6ccb05f8ecf9639e5a3598af7f2feca4b88c6b643fd93a8a5000ee18d8bf1854bfb9f9a69a  sqlite_2.8.17.orig.tar.gz
-1a111ab1bb070548ca71fc301ef037adf5f01b23337dcf4ebdbc7dbcbf573d7bf184d6f985dd05aab44cdb359f689283d2fb7c27af862ab7690f65e8d9dca4ab  00-config-sub.patch
 6b38d3c0238c3935035e2dde5e8339b386fb0583fe1340ce8a0e0a84e000c9f9bb14f5fb5f5b3f5b1e01cda580326938b047339483783d065ddc08072efc0603  01-fix-CVE-2007-1888.patch
 10cd51aa9688bd90ce025584aec8845509f0f8b47b3e26a8318286097d7ba94f2142fe107fc361a975935fa3c8d719c63415d07c0001a1399373a24382fed67a  02-lemon-snprintf.patch
 9c677d0721624309364803379872d59248204a461abcb3ed914177f2814016594bc7e57a333460396bbcbdf4d12a07838a0dde6703e0bc6eb3799c4912c7579a  03-add-fprintf-format-argument.patch

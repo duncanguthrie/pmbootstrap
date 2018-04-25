@@ -2,7 +2,7 @@
 # Maintainer: Duncan Guthrie <dguthrie@posteo.net>
 pkgname=gpe-ownerinfo
 pkgver=0.28
-pkgrel=3
+pkgrel=0
 pkgdesc="GPE Palmtop Environment owner details"
 url="https://wiki.postmarketos.org/wiki/GPE"
 arch="all"
@@ -16,13 +16,12 @@ source="http://http.debian.net/debian/pool/main/g/${pkgname}/${pkgname}_${pkgver
 builddir="$srcdir/$pkgname-$pkgver"
 options="!check"
 subpackages="$pkgname-dev $pkgname-lang"
-
-dev () {
+dev() {
         cd "$builddir"
         mkdir -p "$subpkgdir"/usr/lib
         make PREFIX="/usr" DESTDIR="$subpkgdir" install-devel
 }
-build () {
+build() {
 	cd "$builddir"
 	make
 }

@@ -12,11 +12,14 @@ depends="atk cairo fontconfig freetype gdk-pixbuf glib gtk+2.0 pango sqlite2
 makedepends="glib-dev intltool sqlite2-dev
 	libgpewidget-dev"
 subpackages="$pkgname-dev"
-source="http://http.debian.net/debian/pool/main/libg/${pkgname}/${pkgname}_${pkgver}.orig.tar.gz
-	01-config-sub.patch"
+source="http://http.debian.net/debian/pool/main/libg/${pkgname}/${pkgname}_${pkgver}.orig.tar.gz"
 builddir="${srcdir}/${pkgname}-${pkgver}.orig"
 options="!check"
-build () {
+prepare() {
+	default_prepare
+	update_config_sub
+}
+build() {
 	cd "$builddir"
 	./configure \
 		--build=$CBUILD \
@@ -31,5 +34,4 @@ package() {
 	cd "$builddir"
 	make DESTDIR="$pkgdir" install
 }
-sha512sums="f148d994fbb818861ee0ad79a301454bff8ce8619415a6aab1e25eb48fca2f4cccc4f3f88d733c3c2173a66e94cde9b93c237af96c40d1188b733248d5c5d896  libgpepimc_0.9.orig.tar.gz
-3b84e07eaacff2a86d47b731df583c914070a00c0ed43da8a18ff5551066086e385ddeecd92b8f7cb4dec2e5eca3f4904dbc74bb67136e6784bd4fcca8f2488b  01-config-sub.patch"
+sha512sums="f148d994fbb818861ee0ad79a301454bff8ce8619415a6aab1e25eb48fca2f4cccc4f3f88d733c3c2173a66e94cde9b93c237af96c40d1188b733248d5c5d896  libgpepimc_0.9.orig.tar.gz"
