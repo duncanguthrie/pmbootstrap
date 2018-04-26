@@ -32,8 +32,8 @@ package() {
 doc() {
 	cd "$builddir"
 	make PREFIX=/usr/ DESTDIR=$subpkgdir install-data
-	rm -r $pkgdir/usr/share/qwo
-	rm -r $pkgdir/usr/share/applications
+	rm -r $subpkgdir/usr/share/qwo
+	rm -r $subpkgdir/usr/share/applications
 }
 
 sha512sums="86cd66b4c08f054451fd046af53b807c951f2656119da820d091517f8a883baf57a987a789f5f12d48255119a94c62b702dbd161272ea5ac782b1bc7c712175f  qwo-0.5.tar.gz"
