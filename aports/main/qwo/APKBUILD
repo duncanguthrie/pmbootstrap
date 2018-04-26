@@ -1,0 +1,39 @@
+# Contributor: Duncan Guthrie <dguthrie@posteo.net>
+# Maintainer: Duncan Guthrie <dguthrie@posteo.net>
+pkgname=qwo
+pkgver=0.5
+pkgrel=0
+pkgdesc="Implementation of Quikwriting, an efficient way to input text for handheld devices"
+url="https://nongnu.org/qwo"
+arch="all"
+license="GPL-2.0-or-later"
+depends="imlib2 libx11 libxext libxtst"
+makedepends="autoconf automake imlib2-dev libconfig-dev libxtst-dev help2man"
+source="https://download.savannah.nongnu.org/releases/$pkgname/$pkgname-$pkgver.tar.gz"
+subpackages="$pkgname-doc"
+builddir="$srcdir/$pkgname-$pkgver"
+options="!check"
+build() {
+	cd "$builddir"
+	./autogen.sh
+	./configure \
+		--build=$CBUILD \
+		--host=$CHOST \
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--mandir=/usr/share/
+	make all
+}
+package() {
+	cd "$builddir"
+	make PREFIX=/usr/ DESTDIR=$pkgdir install
+	rm -r $pkgdir/usr/share/man1
+}
+doc() {
+	cd "$builddir"
+	make PREFIX=/usr/ DESTDIR=$subpkgdir install-data
+	rm -r $pkgdir/usr/share/qwo
+	rm -r $pkgdir/usr/share/applications
+}
+
+sha512sums="86cd66b4c08f054451fd046af53b807c951f2656119da820d091517f8a883baf57a987a789f5f12d48255119a94c62b702dbd161272ea5ac782b1bc7c712175f  qwo-0.5.tar.gz"
