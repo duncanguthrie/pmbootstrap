@@ -1,0 +1,25 @@
+Description: Add -lX11 and -Wl,--as-needed -Wl,-zdefs.
+ Also incorporate previous change to Makefile for no-strip.
+Author: Neil Williams <codehelp@debian.org>
+Bug-Debian: http://bugs.debian.org/554733
+
+--- gpe-taskmanager-0.20.orig/Makefile
++++ gpe-taskmanager-0.20/Makefile
+@@ -11,7 +11,7 @@ MEMBERS = gpe-taskmanager
+ 
+ PACKAGE_CPPFLAGS += $(STANDARD_CPPFLAGS)
+ PACKAGE_CFLAGS += $(STANDARD_CFLAGS) $(GPECFLAGS)
+-PACKAGE_LDFLAGS += $(STANDARD_LDFLAGS) $(GPELIBS) -lgpelaunch
++PACKAGE_LDFLAGS += -Wl,--as-needed -Wl,-zdefs $(STANDARD_LDFLAGS) $(GPELIBS) -lgpelaunch -lX11
+ 
+ .SUFFIXES: .d
+ 
+@@ -32,7 +32,7 @@ $(PACKAGE): $(OBJS)
+ 
+ install-program: all all-desktop
+ 	install -d $(DESTDIR)$(PREFIX)/bin
+-	install -s $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
++	install $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
+ 	install -d $(DESTDIR)$(PREFIX)/share/pixmaps
+ 	install -m 644 $(PACKAGE).png $(DESTDIR)$(PREFIX)/share/pixmaps/$(PACKAGE).png
+ 	install -d $(DESTDIR)$(PREFIX)/share/applications

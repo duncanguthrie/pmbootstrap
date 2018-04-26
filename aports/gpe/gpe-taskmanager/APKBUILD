@@ -1,0 +1,32 @@
+# Contributor: Duncan Guthrie <dguthrie@posteo.net>
+# Maintainer: Duncan Guthrie <dguthrie@posteo.net>
+pkgname=gpe-taskmanager
+pkgver=0.20
+pkgrel=0
+pkgdesc="Screenshot application for the GPE Palmtop Environment"
+url="https://wiki.postmarketos.org/wiki/GPE"
+arch="all"
+license="GPL-2.0"
+depends="gpe-icons gdk-pixbuf glib libgpelaunch libgpewidget gtk+2.0 libx11"
+makedepends="intltool libgpewidget-dev libgpelaunch-dev"
+source="http://http.debian.net/debian/pool/main/g/${pkgname}/${pkgname}_${pkgver}.orig.tar.gz
+	01-desktop-validity.patch  
+	02-german-utf8.patch  
+	03-Makefile.patch  
+	04-use-pointer.patch"
+builddir="$srcdir/$pkgname-$pkgver"
+options="!check"
+subpackages="$pkgname-lang"
+build() {
+	cd "$builddir"
+	make PREFIX=/usr/
+}
+package() {
+	cd "$builddir"
+	make PREFIX=/usr/ DESTDIR="$pkgdir" install
+}
+sha512sums="5fb692decfa8888c9b4470fa688e8ea04690536825dfd26532234ac7f5842528e4f018cc5af6f4ec7151dc9afcd3ce93a1604705c13a74aab3b7e6777ad301f4  gpe-taskmanager_0.20.orig.tar.gz
+142e5de90ae04fe42a6851596e008ec1b3cc251e6bd10153c8f5ae7fbd54df3b46f92ef5dcbb81dfcf95e506d553f9d65c1bf28709ac3b8be9af8863887c7ef8  01-desktop-validity.patch
+567aad531d9409f902c2a824a992b522e9d805802e4ca9acb6873e6d9de596d314881a946d6d41eaa1051b78feec311ae423a9b7d207a6344fb6827151942737  02-german-utf8.patch
+ca0f3c7b315175626186e96212bb47bcc4bbd1aede5228b7b354c1c99b79bbe49e78361ab33457fdbc79e1e2cf2bbf2dc085cea09ededbb12295057d102a4b5e  03-Makefile.patch
+e6fa29eb83a5bda9eed164c361d65431ac3d1b50851e3ae0a817b20d3550dc924b9170841cf7e00fb72411debf0209c4020262666066d69bdf837d3f8717ebcd  04-use-pointer.patch"

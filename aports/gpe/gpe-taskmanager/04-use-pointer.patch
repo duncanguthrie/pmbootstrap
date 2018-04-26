@@ -1,0 +1,15 @@
+Description: Update existing patch for quilt.
+ Fix for 64-bit architectures by storing Window in a G_TYPE_POINTER
+ rather than a G_TYPE_INT
+
+--- gpe-taskmanager-0.20.orig/gpe-taskmanager.c
++++ gpe-taskmanager-0.20/gpe-taskmanager.c
+@@ -343,7 +343,7 @@ task_manager (void)
+   GtkCellRenderer *renderer;
+   GtkTreeViewColumn *column;
+ 
+-  list_store = gtk_list_store_new (3, G_TYPE_STRING, G_TYPE_INT, G_TYPE_OBJECT);
++  list_store = gtk_list_store_new (3, G_TYPE_STRING, G_TYPE_POINTER, G_TYPE_OBJECT);
+   list_view = gtk_tree_view_new_with_model (GTK_TREE_MODEL (list_store));
+   gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (list_view), FALSE);
+ 

@@ -1,0 +1,13 @@
+Description: Fix validity of desktop file
+ Update existing patch for quilt.
+
+--- gpe-taskmanager-0.20.orig/gpe-taskmanager.desktop.in
++++ gpe-taskmanager-0.20/gpe-taskmanager.desktop.in
+@@ -6,6 +6,5 @@ Exec=gpe-taskmanager
+ Terminal=false
+ Type=Application
+ Icon=gpe-taskmanager.png
+-Categories=Utility;GPE;
++Categories=System;Utility
+ StartupNotify=true
+-SingleInstance=true

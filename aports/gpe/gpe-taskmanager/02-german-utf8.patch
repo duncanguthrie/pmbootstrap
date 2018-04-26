@@ -1,0 +1,14 @@
+Description: utf-8 fix for de.po
+ Update existing patch for quilt.
+
+--- gpe-taskmanager-0.20.orig/po/de.po
++++ gpe-taskmanager-0.20/po/de.po
+@@ -16,7 +16,7 @@ msgstr ""
+ 
+ #: gpe-taskmanager.c:226
+ msgid "No program is selected"
+-msgstr "Kein Programm ausgewÅ‰hlt"
++msgstr "Kein Programm ausgew‰hlt"
+ 
+ #: gpe-taskmanager.c:246
+ msgid "Icon"
