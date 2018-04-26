@@ -1,0 +1,23 @@
+# Contributor: Duncan Guthrie <dguthrie@posteo.net>
+# Maintainer: Duncan Guthrie <dguthrie@posteo.net>
+pkgname=gpe-question
+pkgver=0.04
+pkgrel=0
+pkgdesc="GPE interface for asking questions from shell scripts"
+url="https://wiki.postmarketos.org/wiki/GPE"
+arch="all"
+license="GPL-2.0-or-later"
+depends="gpe-icons atk cairo fontconfig freetype gdk-pixbuf glib libgpewidget gtk+2.0 pango"
+makedepends="glib-dev libgpewidget-dev gtk+2.0-dev"
+source="http://http.debian.net/debian/pool/main/g/${pkgname}/${pkgname}_${pkgver}.orig.tar.gz"
+builddir="${srcdir}/${pkgname}-${pkgver}"
+options="!check"
+build() {
+	cd "$builddir"
+	make
+}
+package() {
+	cd "$builddir"
+	make PREFIX="/usr" DESTDIR="${pkgdir}" install
+}
+sha512sums="7da001ec1af8cefbab3995e9a98b16e5743a353026bdfb507ccecc1bcafc8a86f3abbbac58f20ce382b728091f08a928bfe703badc1ffc10cd60d412c79e4994  gpe-question_0.04.orig.tar.gz"
