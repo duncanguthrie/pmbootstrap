@@ -1,0 +1,27 @@
+# Contributor: Duncan Guthrie <dguthrie@posteo.net>
+# Maintainer: Duncan Guthrie <dguthrie@posteo.net>
+pkgname=simplecaching
+pkgver=0.0.4_git20090601
+pkgrel=0
+_commit=4cb7277c7da19efcde35440fe5d4048e37596adb
+pkgdesc="A simple geocaching tool for Linux"
+url="https://github.com/webhamster/simplecaching"
+arch="noarch"
+license="GPL"
+depends="python2 py-gtk gpsd"
+makedepends=""
+source="$pkgname-$_commit.tar.gz::$url/archive/$_commit.tar.gz"
+builddir="$srcdir/$pkgname-$_commit"
+options="!check"
+build() {
+	cd "$builddir"
+	sed -i 's/simplecaching.py/simplecaching/' ./usr/share/applications/simplecaching.desktop
+}
+package() {
+	cd "$builddir"
+	install -D ./usr/bin/simplecaching.py $pkgdir/usr/bin/simplecaching
+	install -D ./usr/share/pixmaps/simplecaching.png $pkgdir/usr/share/pixmaps/simplecaching.png
+	install -D ./usr/share/applications/simplecaching.desktop $pkgdir/usr/share/applications/simplecaching.desktop
+}
+
+sha512sums="cb7e00fdd30dda9621c3827b82367fccfc8517f24371f6f81eac2ad5dffdfdb169cfc843a9e1946112ff3568233817ec48b2b725b8573bad31418b2dc1f56e3a  simplecaching-4cb7277c7da19efcde35440fe5d4048e37596adb.tar.gz"
