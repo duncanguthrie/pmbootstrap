@@ -1,0 +1,14 @@
+Description: Migrate existing patch to quilt.
+Author: Neil Williams <codehelp@debian.org>
+
+--- gpe-screenshot-0.4.orig/gpe-screenshot.desktop.in
++++ gpe-screenshot-0.4/gpe-screenshot.desktop.in
+@@ -4,6 +4,6 @@ Comment=Save a screenshot or upload it t
+ Exec=gpe-screenshot
+ Terminal=0                                       
+ Type=Application
+-Icon=gpe-screenshot.png
+-Categories=Action
++Icon=gpe-screenshot.xpm
++Categories=Graphics;2DGraphics;
+ StartupNotify=False

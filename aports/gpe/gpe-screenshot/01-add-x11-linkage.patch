@@ -1,0 +1,26 @@
+Description: Move to source format 3 and quilt support for X11 linkage.
+Author: Neil Williams <codehelp@debian.org>
+Bug-Debian: http://bugs.debian.org/609548
+
+--- gpe-screenshot-0.4.orig/src/Makefile.in
++++ gpe-screenshot-0.4/src/Makefile.in
+@@ -140,7 +140,7 @@ INTLTOOL_XML_NOMERGE_RULE = @INTLTOOL_XM
+ INTLTOOL_XML_RULE = @INTLTOOL_XML_RULE@
+ LDFLAGS = @LDFLAGS@
+ LIBOBJS = @LIBOBJS@
+-LIBS = $(GTK_LIBS) $(GLADE_LIBS) $(XSHAPE_LIBS)
++LIBS = -Wl,--as-needed -Wl,-zdefs $(GTK_LIBS) $(GLADE_LIBS) $(XSHAPE_LIBS) -lX11
+ LTLIBOBJS = @LTLIBOBJS@
+ MAINT = @MAINT@
+ MAINTAINER_MODE_FALSE = @MAINTAINER_MODE_FALSE@
+--- gpe-screenshot-0.4.orig/src/Makefile.am
++++ gpe-screenshot-0.4/src/Makefile.am
+@@ -5,7 +5,7 @@ INCLUDES = -DPKGDATADIR=\"$(pkgdatadir)\
+ 	   $(GTK_CFLAGS) \
+ 	   $(GLADE_CFLAGS)
+ 
+-LIBS = $(GTK_LIBS) $(GLADE_LIBS) $(XSHAPE_LIBS)
++LIBS = -Wl,--as-needed -Wl,-zdefs $(GTK_LIBS) $(GLADE_LIBS) $(XSHAPE_LIBS) -lX11
+ 
+ bin_PROGRAMS = gpe-screenshot
+ gpe_screenshot_SOURCES = scr-i18n.h \
