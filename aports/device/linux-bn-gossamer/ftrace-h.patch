@@ -1,0 +1,25 @@
+--- a/arch/arm/include/asm/ftrace.h	2018-04-30 11:38:36.773192525 +0100
++++ b/arch/arm/include/asm/ftrace.h	2018-04-30 11:53:23.292749323 +0100
+@@ -45,7 +45,7 @@
+ 
+ #else
+ 
+-extern inline void *return_address(unsigned int level)
++static inline void *return_address(unsigned int level)
+ {
+ 	return NULL;
+ }
+--- a/arch/arm/kernel/return_address.c	2018-04-30 11:38:36.781192547 +0100
++++ b/arch/arm/kernel/return_address.c	2018-04-30 11:54:15.829903076 +0100
+@@ -62,11 +62,6 @@
+ #warning "TODO: return_address should use unwind tables"
+ #endif
+ 
+-void *return_address(unsigned int level)
+-{
+-	return NULL;
+-}
+-
+ #endif /* if defined(CONFIG_FRAME_POINTER) && !defined(CONFIG_ARM_UNWIND) / else */
+ 
+ EXPORT_SYMBOL_GPL(return_address);

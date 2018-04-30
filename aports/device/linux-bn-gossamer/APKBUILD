@@ -1,5 +1,5 @@
 pkgname="linux-bn-gossamer"
-pkgver=3.0
+pkgver=3.0.8
 pkgrel=0
 _commit=38bcc855a76f955f189b765aa0ffe02fef95dc50
 pkgdesc="Nook Simple Touch kernel fork"
@@ -16,15 +16,18 @@ HOSTCC="${HOSTCC#${CROSS_COMPILE}}"
 # Source
 _repository="android_kernel_bn_zoom2"
 _commit="38bcc855a76f955f189b765aa0ffe02fef95dc50"
-_config="omap3621_gossamer_evt1c_defconfig"
+_config="config-bn-gossamer.armhf"
 # For some reason, android_kernel_bn_zoom2 is the name of the repository. But the actual board's codename is 'gossamer'.
 source="
-	$pkgname-$_commit.tar.gz::https://github.com/kfazz/$_repository/archive/${_commit}.tar.gz"
+	$pkgname-$_commit.tar.gz::https://github.com/kfazz/$_repository/archive/${_commit}.tar.gz
+	$_config
+	compiler-gcc6.h
+	ftrace-h.patch
+	proc-v7.S.patch"
 builddir="$srcdir/${_repository}-${_commit}"
 prepare() {
 	default_prepare
 
-	# gcc6 support
 	cp -v "$srcdir/compiler-gcc6.h" "$builddir/include/linux/"
 
 	# Remove -Werror from all makefiles
@@ -49,7 +52,7 @@ menuconfig() {
 
 build() {
 	unset LDFLAGS
-	make ARCH="$_carch" CC="${CC:-gcc}" \
+	make -j1 ARCH="$_carch" CC="${CC:-gcc}" \
 		KBUILD_BUILD_VERSION="$((pkgrel + 1 ))-postmarketOS"
 }
 
@@ -72,4 +75,8 @@ package() {
 		return 1
 	fi
 }
-sha512sums="df2396be054d9eb0cc20e6eed78de7026ef32530c1d0aef80461ad4bef1bd1bfef78741af2fcbc431d0d76b3bbb7187c555b67a38dfae5c3e7f629e41df7ecfc  linux-bn-gossamer-38bcc855a76f955f189b765aa0ffe02fef95dc50.tar.gz"
+sha512sums="df2396be054d9eb0cc20e6eed78de7026ef32530c1d0aef80461ad4bef1bd1bfef78741af2fcbc431d0d76b3bbb7187c555b67a38dfae5c3e7f629e41df7ecfc  linux-bn-gossamer-38bcc855a76f955f189b765aa0ffe02fef95dc50.tar.gz
+48fd42d2f768ee683692a425a18c9dda0c9fbda3f3e6081dc011fcc4d0e35a3a09b6323ce14d1137eee5d72419d602469ddc34d815b6f264c6569cf833a86f9b  config-bn-gossamer.armhf
+d80980e9474c82ba0ef1a6903b434d8bd1b092c40367ba543e72d2c119301c8b2d05265740e4104ca1ac5d15f6c4aa49e8776cb44264a9a28dc551e0d1850dcc  compiler-gcc6.h
+6a96e0bb3ed41353db64a3cfd5adbbe0ab71cd471d6f0b1a18af1ac568a2dd85520106b90b8ae49931c6a6834b0eec03b75d478db32afcfb72e8474c016e76e8  ftrace-h.patch
+fcae2c14f38790ae0487cac36db1e8723d55d64da982238330391886b89a26d665db1c9e72d9428c3423d8a229e1b3cc87a744646aaa051eb5ff8247a8154a2a  proc-v7.S.patch"

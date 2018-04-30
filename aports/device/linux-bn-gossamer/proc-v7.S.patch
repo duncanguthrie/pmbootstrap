@@ -1,0 +1,10 @@
+--- a/arch/arm/mm/proc-v7.S	2018-04-30 11:38:36.910192904 +0100
++++ b/arch/arm/mm/proc-v7.S	2018-04-30 17:55:28.472100474 +0100
+@@ -176,6 +176,7 @@
+ cpu_v7_name:
+ 	.ascii	"ARMv7 Processor"
+ 	.align
++	.arch_extension sec
+ 
+ 	/*
+ 	 * Memory region attributes with SCTLR.TRE=1
