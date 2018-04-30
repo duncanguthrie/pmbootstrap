@@ -22,8 +22,10 @@ source="
 	$pkgname-$_commit.tar.gz::https://github.com/kfazz/$_repository/archive/${_commit}.tar.gz
 	$_config
 	compiler-gcc6.h
-	ftrace-h.patch
-	proc-v7.S.patch"
+	proc-v7.S.patch
+	fix-gcc6-compile.patch
+	fix-breakage-android-paranoid-network.patch
+	wl127x-rfkill.patch"
 builddir="$srcdir/${_repository}-${_commit}"
 prepare() {
 	default_prepare
@@ -52,7 +54,7 @@ menuconfig() {
 
 build() {
 	unset LDFLAGS
-	make -j1 ARCH="$_carch" CC="${CC:-gcc}" \
+	make ARCH="$_carch" CC="${CC:-gcc}" \
 		KBUILD_BUILD_VERSION="$((pkgrel + 1 ))-postmarketOS"
 }
 
@@ -76,7 +78,9 @@ package() {
 	fi
 }
 sha512sums="df2396be054d9eb0cc20e6eed78de7026ef32530c1d0aef80461ad4bef1bd1bfef78741af2fcbc431d0d76b3bbb7187c555b67a38dfae5c3e7f629e41df7ecfc  linux-bn-gossamer-38bcc855a76f955f189b765aa0ffe02fef95dc50.tar.gz
-48fd42d2f768ee683692a425a18c9dda0c9fbda3f3e6081dc011fcc4d0e35a3a09b6323ce14d1137eee5d72419d602469ddc34d815b6f264c6569cf833a86f9b  config-bn-gossamer.armhf
+b19e9dd960e101bd0560d3569674b5d0a58247d20833a940e2369f6bb994b8e9a4715e57b0493c2c3f0c71b0604b33a92fb7cdcd1fcff901c9b72dee05fa0439  config-bn-gossamer.armhf
 d80980e9474c82ba0ef1a6903b434d8bd1b092c40367ba543e72d2c119301c8b2d05265740e4104ca1ac5d15f6c4aa49e8776cb44264a9a28dc551e0d1850dcc  compiler-gcc6.h
-6a96e0bb3ed41353db64a3cfd5adbbe0ab71cd471d6f0b1a18af1ac568a2dd85520106b90b8ae49931c6a6834b0eec03b75d478db32afcfb72e8474c016e76e8  ftrace-h.patch
-fcae2c14f38790ae0487cac36db1e8723d55d64da982238330391886b89a26d665db1c9e72d9428c3423d8a229e1b3cc87a744646aaa051eb5ff8247a8154a2a  proc-v7.S.patch"
+fcae2c14f38790ae0487cac36db1e8723d55d64da982238330391886b89a26d665db1c9e72d9428c3423d8a229e1b3cc87a744646aaa051eb5ff8247a8154a2a  proc-v7.S.patch
+b92754565c5bb3264f619f1645887d6d112ae8eb055b1cef5f1aac8b659dfbbb3c28eb66089ad019a15121a21a2bc12dc58a9b12b84e35c01ff5f393d8d42003  fix-gcc6-compile.patch
+798602fe505ef1973e84e12a5780ecc4486f887c47d52569da6f37f05c9a8bc4c608803b74896a8435e4ba8fb054ea953c32e5a41eba560306bb47fb8bc5b220  fix-breakage-android-paranoid-network.patch
+f6dc519981fcf7fec91c623806f0e0ca5289c01513b17d06978b002657498c819f70a68d8ce8c54165a9738c70ebc2a9e476576984dd1a2fbbcc8875c2755bbe  wl127x-rfkill.patch"
