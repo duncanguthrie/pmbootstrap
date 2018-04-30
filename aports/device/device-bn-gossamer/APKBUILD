@@ -1,0 +1,20 @@
+# Reference: <https://postmarketos.org/devicepkg>
+pkgname="device-bn-gossamer"
+pkgdesc="Nook Simple Touch"
+pkgver=0.1
+pkgrel=0
+url="https://postmarketos.org"
+license="MIT"
+arch="noarch"
+options="!check"
+depends="postmarketos-base linux-bn-gossamer mesa-dri-swrast"
+makedepends="devicepkg-dev"
+source="deviceinfo"
+build() {
+	devicepkg_build $startdir $pkgname
+}
+
+package() {
+	devicepkg_package $startdir $pkgname
+}
+sha512sums="d7565c6c7c49e6a2cfb1082be2a4de3f52eef77a54dc213df2d0534f1f9b96d460168bce1afdeb8474306017aa2c6cca6bfef05c3166d2db18b4527850de053b  deviceinfo"
