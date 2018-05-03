@@ -9,7 +9,7 @@ _flavor="bn-gossamer"
 url="https://kernel.org"
 license="GPL2"
 options="!strip !check !tracedeps"
-makedepends="perl sed installkernel bash gmp-dev bc linux-headers elfutils-dev"
+makedepends="perl sed installkernel bash gmp-dev bc linux-headers elfutils-dev uboot-tools"
 HOSTCC="${CC:-gcc}"
 HOSTCC="${HOSTCC#${CROSS_COMPILE}}"
 
