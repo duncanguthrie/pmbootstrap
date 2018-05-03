@@ -1,0 +1,27 @@
+# Contributor: Duncan Guthrie <dguthrie@posteo.net>
+# Maintainer: Duncan Guthrie <dguthrie@posteo.net>
+pkgname=gpe-confd
+pkgver=0.16
+pkgrel=0
+pkgdesc="Persistent XSettings storage daemon for GPE"
+url="https://wiki.postmarketos.org/wiki/GPE"
+arch="all"
+license="GPL-2.0 LGPL-2.0"
+depends="glib sqlite2 libx11 libxsettings"
+makedepends="glib-dev sqlite2-dev libx11-dev libxsettings-dev confd"
+source="http://http.debian.net/debian/pool/main/g/${pkgname}/${pkgname}_${pkgver}.orig.tar.gz"
+builddir="$srcdir/$pkgname-$pkgver"
+options="!check"
+subpackages="$pkgname"
+build() {
+	cd "$builddir"
+	make LDFLAGS="-lX11"
+}
+confd() {
+	cd "$builddir"
+}
+package() {
+	cd "$builddir"
+	make PREFIX=/usr DESTDIR="$pkgdir" install
+}
+sha512sums="6d86416d403b9166610666c6223b1f855ba3ea114555cf9a777027421d4ce24146a72468af4f25659d5ca5c68cee55e658edaf15476e7f0db60ae2b4dbead6ab  gpe-confd_0.16.orig.tar.gz"
