@@ -1,0 +1,23 @@
+# Contributor: Duncan Guthrie <dguthrie@posteo.net>
+# Maintainer: Duncan Guthrie <dguthrie@posteo.net>
+pkgname=xst
+pkgver=0.15
+pkgrel=0
+pkgdesc="Tool for interfacing with XSettings"
+url="https://wiki.postmarketos.org/wiki/GPE"
+arch="all"
+license="GPL-2.0-or-later"
+depends="libx11 glib libxsettings libxsettings-client"
+makedepends="libx11-dev glib-dev libxsettings-dev libxsettings-client-dev"
+source="$pkgname-$pkgver.tar::https://palmtop.org/gpe-archive/$pkgname-$pkgver.tar.gz"
+builddir="$srcdir/$pkgname-$pkgver"
+options="!check"
+build() {
+	cd "$builddir"
+	make
+}
+package() {
+	cd "$builddir"
+	make PREFIX=/usr DESTDIR=$pkgdir install
+}
+sha512sums="970c139a1fdda7b17930eacd59b42d8f212da7de262524641454570c9885b9e2fea863475d2201ae64bb0010d188b1a610d24b62d47d9bb1ce280e75c511b24a  xst-0.15.tar"
