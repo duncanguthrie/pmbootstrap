@@ -23,6 +23,7 @@ prepare() {
 build() {
 	cd "$builddir"
 	./configure \
+		LDFLAGS=-lobstack \
 		--build=$CBUILD \
 		--host=$CHOST \
 		--prefix=/usr \
