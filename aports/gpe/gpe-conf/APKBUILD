@@ -8,7 +8,7 @@ url="https://wiki.postmarketos.org/wiki/GPE"
 arch="all"
 license="GPL-2.0 LGPL-2.0"
 depends="atk freetype fontconfig gdk-pixbuf glib gtk+2.0 pango libxrandr libx11
-	libxsettings-client libgpewidget esound audiofile"
+	libxsettings-client libgpewidget esound audiofile xst"
 makedepends="intltool gtk+2.0-dev glib-dev libx11-dev libxrandr-dev linux-headers
 	esound-dev libgpewidget-dev libxsettings-dev libxsettings-client-dev"
 source="http://http.debian.net/debian/pool/main/g/${pkgname}/${pkgname}_${pkgver}.orig.tar.gz
