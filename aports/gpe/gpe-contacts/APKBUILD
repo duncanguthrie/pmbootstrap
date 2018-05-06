@@ -11,8 +11,7 @@ depends="atk cairo dbus fontconfig freetype gdk-pixbuf gtk+2.0 musl-obstack pang
 	gpe-icons libcontactsdb libeventdb libgpepimc libgpevtype libgpewidget libmimedir sqlite2"
 makedepends="intltool gtk+2.0-dev libxml2-dev dbus-glib-dev musl-obstack-dev
 	libgpewidget-dev libdisplaymigration-dev libgpepimc-dev libgpevtype-dev libmimedir-dev libcontactsdb-dev sqlite2-dev"
-source="http://http.debian.net/debian/pool/main/g/${pkgname}/${pkgname}_${pkgver}.orig.tar.bz2
-	01-obstack.patch"
+source="http://http.debian.net/debian/pool/main/g/${pkgname}/${pkgname}_${pkgver}.orig.tar.bz2"
 builddir="$srcdir/$pkgname-$pkgver"
 options="!check"
 subpackages="$pkgname-lang"
@@ -24,12 +23,13 @@ build() {
 		--prefix=/usr \
 		--sysconfdir=/etc \
 		--mandir=/usr/share/man \
-		--localstatedir=/var
+		--localstatedir=/var \
+		LIBS="-lobstack" \
+		LDFLAGS="-lobstack"
 	make
 }
 package() {
 	cd "$builddir"
 	make DESTDIR="$pkgdir" install
 }
-sha512sums="8c5969d40ba3d741abf2713027442a08c1d7903976002d3f481ffb1e7ee21174617f0a3522c100d60f595e184b0ede5be8e4b6ace789404bfa1806abafa8b1ed  gpe-contacts_0.49.orig.tar.bz2
-2fa27420ac3ca49811d932f10fe22cfdf8b5416ff91e8541d7b2ba4dbf6094ee3da3303507b566dd94b0d9432d2748ac5c9290b7e2ecdde224fc05ed88249d1e  01-obstack.patch"
+sha512sums="8c5969d40ba3d741abf2713027442a08c1d7903976002d3f481ffb1e7ee21174617f0a3522c100d60f595e184b0ede5be8e4b6ace789404bfa1806abafa8b1ed  gpe-contacts_0.49.orig.tar.bz2"

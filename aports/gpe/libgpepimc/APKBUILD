@@ -11,7 +11,7 @@ depends="atk cairo fontconfig freetype gdk-pixbuf glib gtk+2.0 pango sqlite2
 	libgpewidget"
 makedepends="glib-dev intltool sqlite2-dev
 	libgpewidget-dev"
-subpackages="$pkgname-dev"
+subpackages="$pkgname-dev $pkgname-lang"
 source="http://http.debian.net/debian/pool/main/libg/${pkgname}/${pkgname}_${pkgver}.orig.tar.gz"
 builddir="${srcdir}/${pkgname}-${pkgver}.orig"
 options="!check"
