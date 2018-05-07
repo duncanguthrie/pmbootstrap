@@ -16,6 +16,7 @@ source="http://http.debian.net/debian/pool/main/g/${pkgname}/${pkgname}_${pkgver
 	02-link-libx11.patch
 	03-no-render-h.patch"
 builddir="$srcdir/$pkgname-$pkgver"
+options="!check"
 build() {
 	cd "$builddir"
 	make
