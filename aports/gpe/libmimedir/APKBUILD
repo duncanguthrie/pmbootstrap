@@ -10,7 +10,7 @@ arch="all"
 license="LGPL 2.0-or-later"
 depends="glib"
 makedepends="glib-dev gtk-doc gnome-common musl-dev"
-subpackages="$pkgname-dev"
+subpackages="$pkgname-dev $pkgname-doc $pkgname-lang"
 source="http://http.debian.net/debian/pool/main/libm/${pn}/${pn}_${pkgver}.orig.tar.gz
 	01-format-strings.patch
 	02-ssize_t.patch"
