@@ -16,6 +16,7 @@ source="http://http.debian.net/debian/pool/main/libg/${pkgname}/${pkgname}_${pkg
 	03-pkgconfig.patch
 	04-rename-library.patch"
 builddir="${srcdir}/libschedule-${pkgver}"
+options="!check"
 prepare() {
 	default_prepare
 	update_config_sub
