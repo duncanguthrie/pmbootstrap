@@ -1,0 +1,32 @@
+# Contributor:
+# Maintainer:
+pkgname=pimlico-tasks
+_pkgname=tasks
+pkgver=3.3.90_git20150314
+_commit=44610510a9d6d0066f9c510128fa3ffbedf94475
+pkgrel=0
+pkgdesc="Lightweight to-do list application"
+url="https://git.gnome.org/browse/tasks"
+arch="all"
+license="GPL-2.0"
+depends="gnome-common gtk+3.0 evolution-data-server"
+makedepends="gtk+3.0-dev evolution-data-server-dev"
+subpackages="$pkgname-lang"
+source="https://git.gnome.org/browse/$_pkgname/snapshot/$_pkgname-$_commit.tar.xz
+	01-modern-evolution-data-server.patch"
+builddir="$srcdir/$_pkgname-$_commit"
+build() {
+	cd "$builddir"
+	./autogen.sh
+	./configure \
+		--enable-compile-warnings=no
+	make -j1
+}
+
+package() {
+	cd "$builddir"
+	make PREFIX="/usr" DESTDIR=$pkgdir install
+}
+
+sha512sums="cda14a04fb390d9b6b1ad99fd7061fd50a64d0361c5112eb6783243af22cb2e64dadca911222015fc8704bb3abb08d5b4d0399060160efeecf18b42bacae0ce4  tasks-44610510a9d6d0066f9c510128fa3ffbedf94475.tar.xz
+63eb001747682783f9c3f3ee41d9860cc50f75a71a56054950feef4c12b01ebae08d41a4c3f522a05b0e3b858219d94f73e8f15c62d7bed473a92730255a7823  01-modern-evolution-data-server.patch"

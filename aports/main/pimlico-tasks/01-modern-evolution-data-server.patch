@@ -1,0 +1,138 @@
+diff -Naur a/libkoto/koto-actions.c b/libkoto/koto-actions.c
+--- a/libkoto/koto-actions.c	2018-05-07 15:56:46.108327014 +0100
++++ b/libkoto/koto-actions.c	2018-05-07 16:23:57.974396940 +0100
+@@ -19,7 +19,7 @@
+ #include <config.h>
+ #include <string.h>
+ #include <glib/gi18n.h>
+-#include <libecal/e-cal.h>
++#include <libecal/libecal.h>
+ 
+ #include "koto-task.h"
+ #include "koto-actions.h"
+diff -Naur a/libkoto/koto-actions.h b/libkoto/koto-actions.h
+--- a/libkoto/koto-actions.h	2018-05-07 15:56:46.108327014 +0100
++++ b/libkoto/koto-actions.h	2018-05-07 16:23:57.975396943 +0100
+@@ -19,7 +19,7 @@
+ #ifndef _KOTO_ACTIONS
+ #define _KOTO_ACTIONS
+ 
+-#include <libecal/e-cal.h>
++#include <libecal/libecal.h>
+ #include "koto-task.h"
+ #include "koto-undo-manager.h"
+ 
+diff -Naur a/libkoto/koto-group-store.c b/libkoto/koto-group-store.c
+--- a/libkoto/koto-group-store.c	2018-05-07 15:56:46.110327020 +0100
++++ b/libkoto/koto-group-store.c	2018-05-07 16:25:28.136677059 +0100
+@@ -18,8 +18,8 @@
+ 
+ #include <config.h>
+ #include <glib/gi18n.h>
+-#include <libecal/e-cal-view.h>
+-#include <libedataserver/e-data-server-util.h>
++#include <libecal/libecal.h>
++#include <libedataserver/libedataserver.h>
+ 
+ #include "ical-util.h"
+ #include "koto-group-store.h"
+diff -Naur a/libkoto/koto-group-store.h b/libkoto/koto-group-store.h
+--- a/libkoto/koto-group-store.h	2018-05-07 15:56:46.110327020 +0100
++++ b/libkoto/koto-group-store.h	2018-05-07 16:23:57.976396946 +0100
+@@ -19,7 +19,7 @@
+ #ifndef _KOTO_GROUP_STORE
+ #define _KOTO_GROUP_STORE
+ 
+-#include <libecal/e-cal-view.h>
++#include <libecal/libecal.h>
+ #include <gtk/gtk.h>
+ #include "koto-group.h"
+ 
+diff -Naur a/libkoto/koto-task-editor-dialog.h b/libkoto/koto-task-editor-dialog.h
+--- a/libkoto/koto-task-editor-dialog.h	2018-05-07 15:56:46.111327023 +0100
++++ b/libkoto/koto-task-editor-dialog.h	2018-05-07 16:23:57.976396946 +0100
+@@ -20,7 +20,7 @@
+ #define _KOTO_TASK_EDITOR_DIALOG
+ 
+ #include <gtk/gtk.h>
+-#include <libecal/e-cal.h>
++#include <libecal/libecal.h>
+ #include "koto-task.h"
+ #include "koto-group-store.h"
+ #include "koto-undo-manager.h"
+diff -Naur a/libkoto/koto-task-store.c b/libkoto/koto-task-store.c
+--- a/libkoto/koto-task-store.c	2018-05-07 15:56:46.112327026 +0100
++++ b/libkoto/koto-task-store.c	2018-05-07 16:23:57.977396949 +0100
+@@ -18,7 +18,7 @@
+ 
+ #include <config.h>
+ #include <string.h>
+-#include <libecal/e-cal.h>
++#include <libecal/libecal.h>
+ #include "koto-task.h"
+ #include "koto-task-store.h"
+ #include "koto-actions.h"
+diff -Naur a/libkoto/koto-task-store.h b/libkoto/koto-task-store.h
+--- a/libkoto/koto-task-store.h	2018-05-07 15:56:46.112327026 +0100
++++ b/libkoto/koto-task-store.h	2018-05-07 16:23:57.977396949 +0100
+@@ -20,7 +20,7 @@
+ #define _KOTO_TASK_STORE
+ 
+ #include <gtk/gtk.h>
+-#include <libecal/e-cal-view.h>
++#include <libecal/libecal.h>
+ #include "koto-task.h"
+ #include "koto-undo-manager.h"
+ 
+diff -Naur a/libkoto/koto-task-view.c b/libkoto/koto-task-view.c
+--- a/libkoto/koto-task-view.c	2018-05-07 15:56:46.112327026 +0100
++++ b/libkoto/koto-task-view.c	2018-05-07 16:25:28.138677066 +0100
+@@ -19,7 +19,7 @@
+ #include <config.h>
+ #include <glib/gi18n.h>
+ #include <gtk/gtk.h>
+-#include <libedataserver/e-data-server-util.h>
++#include <libedataserver/libedataserver.h>
+ #include "ical-util.h"
+ #include "koto-cell-renderer-pixbuf.h"
+ #include "koto-platform.h"
+diff -Naur a/src/gtk/main.c b/src/gtk/main.c
+--- a/src/gtk/main.c	2018-05-07 15:56:46.116327039 +0100
++++ b/src/gtk/main.c	2018-05-07 17:44:27.827859330 +0100
+@@ -18,7 +18,7 @@
+ 
+ #include <config.h>
+ #include <string.h>
+-#include <libecal/e-cal.h>
++#include <libecal/libecal.h>
+ #include <glib/gi18n.h>
+ #include <gtk/gtk.h>
+ 
+@@ -44,6 +44,27 @@
+ #include "ui.h"
+ #include "window-util.h"
+ 
++ECal *
++ e_cal_new_system_tasks (void)
++ {
++	ECal *ecal;
++	const gchar *user_data_dir;
++	gchar *filename;
++	gchar *uri;
++
++	user_data_dir = e_get_user_data_dir ();
++	filename = g_build_filename (
++		user_data_dir, "tasks", "local", "system", NULL);
++
++	uri = g_filename_to_uri (filename, NULL, NULL);
++	ecal = e_cal_new_from_uri (uri, E_CAL_SOURCE_TYPE_TODO);
++
++	g_free (filename);
++	g_free (uri);
++
++	return ecal;
++}
++
+ static GtkWidget *window, *combo, *treeview, *new_entry;
+ static ECal *cal;
+ static GtkTreeModel *task_store, *filter, *group_filter_store, *group_selector_store;
