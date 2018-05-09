@@ -1,0 +1,26 @@
+# Contributor: Duncan Guthrie <dguthrie@posteo.net>
+# Maintainer: Duncan Guthrie <dguthrie@posteo.net>
+pkgname=gpe-su
+pkgver=0.20
+pkgrel=0
+pkgdesc="Program for GPE which executes applications with root privileges"
+url="https://wiki.postmarketos.org/wiki/GPE"
+arch="all"
+license="GPL-2.0-or-later"
+depends="atk cairo fontconfig gdk-pixbuf glib gtk+2.0 libgpewidget pango"
+makedepends="intltool libgpewidget-dev gtk+2.0-dev glib-dev"
+source="http://http.debian.net/debian/pool/main/g/${pkgname}/${pkgname}_${pkgver}.orig.tar.gz"
+builddir="$srcdir/$pkgname-$pkgver"
+subpackages="$pkgname-lang"
+options="!check"
+build() {
+	cd "$builddir"
+	make PREFIX="/usr"
+}
+
+package() {
+	cd "$builddir"
+	make PREFIX="/usr" DESTDIR=$pkgdir install
+}
+
+sha512sums="1202543a8de9a7c783c4b243bc40bb945685d3c355897dccd06a4eb759a3957d395f084b7c353522f0d184b51525c4c59f296bcf22e9a3f0e42c13d5c0befbf8  gpe-su_0.20.orig.tar.gz"
