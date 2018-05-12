@@ -1,0 +1,21 @@
+Author: Ralf Treinen <treinen@debian.org>
+Description: fixes a bug in the end of the game: no winning situation is
+   detected in case the last uncovered case was holding a mine.
+Closes-bug: #136372
+
+--- /home/rt/debian/own/xdemineur/xdemineur-2.1.1/demineur.c
++++ xdemineur-2.1.1/demineur.c
+@@ -402,6 +402,13 @@
+ {
+    int row , column ;
+ 
++   if (state == LOST) return ;
++   /* This may happen in case no hidden or questioned cases are left
++      but the last uncovered case was holding a mine. This means that
++      one of the flagged cases was in fact not holding a mine.
++      [Ralf Treinen <treinen@debian.org>]
++   */
++
+    for ( row = 1 ; row <= board.rows ; row ++ )
+    {
+       for ( column = 1 ; column <= board.columns ; column ++ )

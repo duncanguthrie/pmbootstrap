@@ -1,0 +1,11 @@
+Author: Ralf Treinen <treinen@debian.org>
+Description: fix section of manpage
+
+--- /home/rt/debian/own/xdemineur/xdemineur-2.1.1/xdemineur.man
++++ xdemineur-2.1.1/xdemineur.man
+@@ -1,4 +1,4 @@
+-.TH XDEMINEUR 6
++.TH XDEMINEUR 6x
+ .SH NAME
+ xdemineur \- X11 minesweeper game
+ .SH SYNOPSIS

@@ -1,0 +1,79 @@
+Author: Ralf Treinen <treinen@debian.org>
+Description: allow smaller boards 
+Debian-bug: #603112
+
+Index: xdemineur-2.1.1/xdemineur.h
+===================================================================
+--- xdemineur-2.1.1.orig/xdemineur.h	2012-06-19 22:13:28.000000000 +0200
++++ xdemineur-2.1.1/xdemineur.h	2012-06-19 22:14:48.000000000 +0200
+@@ -17,8 +17,11 @@
+ #ifndef _XDEMINEUR_H_
+ #define _XDEMINEUR_H_
+ 
+-#define ROWS_MIN      16
+-#define COLUMNS_MIN   30
++#define ROWS_MIN      1
++#define COLUMNS_MIN   12
++
++#define ROWS_DEFAULT    16
++#define COLUMNS_DEFAULT 30
+ 
+ #define EDGE              15   /* edge around the game board */
+ #define RELIEF_WIDTH       3   /* width of the relief */
+Index: xdemineur-2.1.1/xdemineur.man
+===================================================================
+--- xdemineur-2.1.1.orig/xdemineur.man	2012-06-19 22:13:28.000000000 +0200
++++ xdemineur-2.1.1/xdemineur.man	2012-06-19 22:14:48.000000000 +0200
+@@ -43,8 +43,9 @@
+ This option specifies the name of the X server to use.  See X(1).
+ .TP 8
+ .B \-geometry \fIgeom\fP
+-This option specifies the initial size and location of the
+-window.  See X(1).
++This option specifies the initial size and location of the window.
++See X(1). The size is expressed in number of columns times number of
++rows. The default is 30x16. The minimum number of columns is 12.
+ .TP 8
+ .B \-m \fImines \fP
+ This option specifies the number of mines in the minefield.  If
+Index: xdemineur-2.1.1/xdemineur.c
+===================================================================
+--- xdemineur-2.1.1.orig/xdemineur.c	2012-06-19 22:13:28.000000000 +0200
++++ xdemineur-2.1.1/xdemineur.c	2012-06-19 22:32:02.000000000 +0200
+@@ -181,8 +181,8 @@
+ 
+    screen = DefaultScreen ( display ) ;
+ 
+-   board.columns = COLUMNS_MIN ;
+-   board.rows    = ROWS_MIN ;
++   board.columns = COLUMNS_DEFAULT ;
++   board.rows    = ROWS_DEFAULT ;
+ 
+    size_hints.flags = 0 ;
+    if ( geometry != NULL )
+@@ -204,7 +204,6 @@
+          else
+          {
+             board.columns = w ;
+-            width  = BASE_WIDTH + board.columns * WIDTH_INC ;
+          }
+       }
+ 
+@@ -220,7 +219,6 @@
+          else
+          {
+             board.rows = h ;
+-            height = BASE_HEIGHT + board.rows * HEIGHT_INC ;
+          }
+       }
+ 
+@@ -251,6 +249,9 @@
+       }
+    }
+ 
++   width  = BASE_WIDTH + board.columns * WIDTH_INC ;
++   height = BASE_HEIGHT + board.rows * HEIGHT_INC ;
++
+    window = XCreateSimpleWindow ( display , RootWindow ( display , screen ) ,
+                                   x_pos , y_pos , width , height , 1 ,
+                                   BlackPixel ( display , screen ) ,

@@ -1,0 +1,35 @@
+Integrator: Ralf Treinen <treinen@debian.org>
+Author: Per von Zweigbergk
+Description: Keep number of mines when starting new game
+Closes-bug:  #238751
+
+--- orig/main.c 2004-03-18 19:24:55.000000000 +0100
++++ main.c      2004-03-18 19:25:47.000000000 +0100
+@@ -33,12 +33,13 @@
+
+ extern volatile time_t   elapsed ;
+ extern state_t           state ;
++int                      option_mines = 0 ;
+
+ /* ------------------------------------------------------------------------- */
+
+ int main ( int argc , char **argv )
+ {
+-   int                i , option_mines = 0 ;
++   int                i ;
+    char               *display_name = NULL , *geometry = NULL ;
+    struct sigaction   act ;
+
+--- orig/xdemineur.c    2004-03-18 19:26:15.000000000 +0100
++++ xdemineur.c 2004-03-18 19:27:30.000000000 +0100
+@@ -544,8 +544,9 @@
+          case STATE_FACE :
+             if ( item == ITEM_FACE )   /* new game */
+             {
++               extern int option_mines;
+                demineur_end ( ) ;
+-               demineur_initialize ( 0 ) ;
++               demineur_initialize ( option_mines ) ;
+                xdemineur_display ( ) ;
+                demineur_start_timer ( ) ;
+             }

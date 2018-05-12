@@ -1,0 +1,45 @@
+Author: Ralf Treinen <treinen@debian.org>
+Description: convert README to UTF8 encoding
+Debian-bug: #603103
+
+Index: xdemineur-2.1.1/README
+===================================================================
+--- xdemineur-2.1.1.orig/README	1999-08-10 21:10:19.000000000 +0200
++++ xdemineur-2.1.1/README	2012-06-19 19:58:32.000000000 +0200
+@@ -1,7 +1,7 @@
+-README file for xdémineur
++README file for xdÃ©mineur
+ =========================
+ 
+-Xdémineur is a minesweeper game for the X Window System.
++XdÃ©mineur is a minesweeper game for the X Window System.
+ 
+ The object of this game is to find the location of the mines
+ hidden in the minefield and to mark their location by placing a
+@@ -34,7 +34,7 @@
+ FTP sites
+ ---------
+ 
+-You can get the latest version of xdémineur by anonymous FTP
++You can get the latest version of xdÃ©mineur by anonymous FTP
+ from:
+ 
+ <URL:ftp://ftp.babafou.eu.org/pub/babafou/>   (primary site)
+@@ -48,7 +48,7 @@
+ Bugs
+ ----
+ 
+-Please report any bug you could find in xdémineur to
++Please report any bug you could find in xdÃ©mineur to
+ <babafou@babafou.eu.org>.  Also, you should tell me the
+ customizations you may have done, such as adding new functions to
+ the game or making modifications to allow the game to run on your
+@@ -57,7 +57,7 @@
+ Copyright
+ ---------
+ 
+-Copyright © 1993-1999 Marc Baudoin <babafou@babafou.eu.org>
++Copyright Â© 1993-1999 Marc Baudoin <babafou@babafou.eu.org>
+ 
+ Permission to use, copy, modify, and distribute this software and
+ its documentation for any purpose and without fee is hereby

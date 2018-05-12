@@ -1,0 +1,45 @@
+# Contributor: Duncan Guthrie <dguthrie@posteo.net>
+# Maintainer: Duncan Guthrie <dguthrie@posteo.net>
+pkgname=xdemineur
+pkgdesc="Yet another minesweeper clone for X"
+pkgver=2.1.1
+pkgrel=0
+url="https://packages.debian.org/sid/xdemineur"
+arch="all"
+license="custom"
+depends="libx11 libxext libxpm"
+makedepends="libx11-dev libxpm-dev libxext-dev imake xorg-cf-files"
+install=""
+subpackages="$pkgname-doc"
+source="http://http.debian.net/debian/pool/main/x/${pkgname}/${pkgname}_${pkgver}.orig.tar.gz
+	COPYING
+	endgame.patch
+	minimal-size.patch
+	optionmines.patch
+	manpage_section.patch
+	observe_ldflags.patch
+	readme-utf8.patch"
+builddir="$srcdir/$pkgname-$pkgver"
+options="!check"
+
+build() {
+	cd "$builddir"
+	xmkmf
+	make
+}
+
+package() {
+	cd "$builddir"
+	make DESTDIR=$pkgdir install
+	make DESTDIR=$pkgdir install.man
+	install -Dm644 "$srcdir"/COPYING "$pkgdir"/usr/share/licenses/$pkgname/COPYING
+}
+
+sha512sums="0298f0529f20f70372812771218568df3fe3e6a1b4003d7c23fe6f17a3b37512b97b9546c9f7e5755421e923ab0cf3bdbf0094dba99310d133439396a12ad684  xdemineur_2.1.1.orig.tar.gz
+007fa24837309f9f67da3e1f135a602f43af7a7dd4ae5a0197d03a4c563356926946ac12255b61b3d887ee27db649014245d50f1e8c96453d9dadf91cd3a8e4e  COPYING
+110048fe34646631aafa756fdb5a58fd4d4c81379a12e36de78192ada401df918175e611db461216a8f60c51e75c3316761441077aaa2e9cc5980458907c5997  endgame.patch
+0c34dac361f86a9577f2548cb28e19704cfd9824154c5bcd09ff08f19df3c4ea90fce9b27e26d1a3beb1d9ba3cf76a9d799fb9134652f33a1c7f81a6cbc03c69  minimal-size.patch
+03882fbbe782ccac19d14c5c1c79beac76b940d2bd6736a06e01b610f046d24e4da0446439a1fac100dddfc9b2d2a0cfcbded25a5560d9b4a6b07c12ad7af9ac  optionmines.patch
+8f3f8ed2683d5f7f1eb217d03043b1399696c0412e38f5780f4522b54ab2655d974d49ea2c93cc7ef6e2a66e1845d05b1e0c807fd203b6d191777a10c21e8db0  manpage_section.patch
+161f6c714b68794466981e09b50fdc89bd6d5a080f809db098fac519836236c68a2c1abe0765dd9967e843557984c40ebbd1f78cd780ee26798fe29bf3c2b6e8  observe_ldflags.patch
+0cb14ff4e82b8282f06e4aab7f4d6733101c822cc19d3ad061685cc29ffe27bd3b9e426fcda634a52b5692206f3850534bd4635cb9b1f93964b3ae2a5ad17b5b  readme-utf8.patch"

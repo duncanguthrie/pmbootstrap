@@ -1,0 +1,14 @@
+Author: Ralf Treinen <treinen@debian.org>
+Description: respect the value of $LDFLAGS in the Makefile
+
+Index: xdemineur/Imakefile
+===================================================================
+--- xdemineur.orig/Imakefile	2013-05-23 22:02:19.000000000 +0200
++++ xdemineur/Imakefile	2013-05-23 22:03:40.000000000 +0200
+@@ -14,5 +14,6 @@
+         DEPLIBS = $(DEPXLIB)
+            SRCS = demineur.c main.c util.c xdemineur.c
+            OBJS = demineur.o main.o util.o xdemineur.o
++EXTRA_LDOPTIONS = $(LDFLAGS)
+ 
+ ComplexProgramTarget(xdemineur)
