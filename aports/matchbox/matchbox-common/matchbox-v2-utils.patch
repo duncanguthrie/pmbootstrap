@@ -1,6 +1,26 @@
+diff -Naur a/configure.ac b/configure.ac
+--- a/configure.ac	2018-05-12 13:33:32.018726299 +0100
++++ b/configure.ac	2018-05-19 02:33:34.505324133 +0100
+@@ -30,13 +30,13 @@
+ 
+ dnl ---- Check for libmb so we can figure out PNG / XPM support ------------
+ 
+-PKG_CHECK_MODULES(LIBMB, libmb >= 1.1,, AC_MSG_ERROR([*** libmb required and not found ***]))
++PKG_CHECK_MODULES(LIBMATCHBOX,libmatchbox2,, AC_MSG_ERROR([*** libmbatchbox required and not found ***]))
+ 
+ # below is quite bad ...
+-if $PKG_CONFIG --libs libmb | grep png ; then
++if $PKG_CONFIG --libs libmatchbox2 | grep png ; then
+    found_png="yes"
+ else
+-   found_png="no"	
++   found_png="no"
+ fi
+ 
+ AM_CONDITIONAL(WANT_PNG, test x$found_png = xyes)  
 diff -Naur a/matchbox-session b/matchbox-session
 --- a/matchbox-session	2018-05-12 13:33:32.019726303 +0100
-+++ b/matchbox-session	2018-05-12 13:34:06.633851723 +0100
++++ b/matchbox-session	2018-05-13 00:37:32.986304277 +0100
 @@ -4,21 +4,25 @@
  #
  
@@ -33,7 +53,7 @@ diff -Naur a/matchbox-session b/matchbox-session
 -# dont exist. 
 +# dont exist.
 +
-+START_APPLETS=showdesktop,windowselector
++START_APPLETS=showdesktop
 +END_APPLETS=clock,keyboard,systray,startup-notify,notify
  
  matchbox-desktop &
