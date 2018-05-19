@@ -9,7 +9,7 @@ url="http://matchbox-project.org"
 arch="noarch"
 license="GPL-2.0-only"
 depends=""
-makedepends="autoconf automake libtool"
+makedepends="autoconf automake libtool libmatchbox-dev"
 source="https://git.yoctoproject.org/cgit/cgit.cgi/$pkgname/snapshot/$pkgname-$_commit.tar.gz
 	matchbox-v2-utils.patch"
 builddir="$srcdir/$pkgname-$_commit"
