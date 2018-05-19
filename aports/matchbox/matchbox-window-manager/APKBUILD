@@ -3,16 +3,17 @@
 pkgname=matchbox-window-manager
 _pkgname=$pkgname-2
 pkgver=2.0_git20171119
-pkgrel=0
+pkgrel=1
 _commit=5f44595c66be118b1a74f489de7f8492035cbdf0
 pkgdesc="Window manager intended for non-desktop embedded platforms such as handhelds and set-top boxes" 
 url="http://matchbox-project.org"
 arch="all"
 license="GPL-2.0-only"
 source="https://git.yoctoproject.org/cgit/cgit.cgi/${_pkgname}/snapshot/${_pkgname}-${_commit}.tar.gz
+	enable-png-theme.patch
 	libpng.pc.patch"
-depends="libmatchbox libpng expat gtk+2.0 pango"
-makedepends="expat-dev autoconf automake libtool libmatchbox-dev libpng-dev expat-dev gtk+2.0-dev pango-dev"
+depends="libpng expat gtk+2.0 pango"
+makedepends="expat-dev autoconf automake libtool libpng-dev expat-dev gtk+2.0-dev pango-dev"
 builddir="$srcdir/$_pkgname-$_commit"
 options="!check"
 
@@ -27,14 +28,16 @@ build() {
 		--mandir=/usr/share/ \
 		--with-gtk \
 		--with-pango \
-		LIBS="-lexpat"
+		--enable-png-theme \
+		LIBS="-lexpat -lXrender"
 	make
 }
 
 package() {
 	cd "$builddir"
-	make DESTDIR="$pkgdir" install
+	make PREFIX="/usr" DESTDIR=$pkgdir install
 }
 
 sha512sums="5972c9304de064501f657e3fc7920b4fd25dec24db609442e340dbe1850dd48b5cc9abaca1ad175cbb52fdede180f12b522ab0e8c028f12a1bd691710f15d5f3  matchbox-window-manager-2-5f44595c66be118b1a74f489de7f8492035cbdf0.tar.gz
+5f9021ba9c568a2ead1e745ae0c094284fee9774873f545f7183ae019bd556d541bbac0337bd15cded20888d74cd71df5f9b491e194fa0d1d3da1a4e33ce3ba1  enable-png-theme.patch
 76e0af420f81ce6af545e3f42cb3deb73378dc10db21e6f4eb0e4baddb9c617366d3409bccf3c9b5a14e76e54401a90270ec6a720e16175452736a4ce497b818  libpng.pc.patch"
