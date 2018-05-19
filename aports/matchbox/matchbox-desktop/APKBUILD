@@ -2,13 +2,13 @@
 # Maintainer: Duncan Guthrie <dguthrie@posteo.net>
 pkgname=matchbox-desktop
 pkgver=2.0
-pkgrel=0
+pkgrel=1
 pkgdesc="Desktop system for handhelds using the GTK+2 stack"
 url="https://matchbox-project.org"
 arch="all"
 license="GPL-2.0-only"
-depends="gdk-pixbuf glib gtk+2.0 pango startup-notification libx11 matchbox-common libmatchbox libjpeg-turbo"
-makedepends="startup-notification-dev gtk+2.0-dev autoconf automake libtool libmatchbox-dev libjpeg-turbo-dev"
+depends="gdk-pixbuf glib gtk+2.0 pango startup-notification libx11 matchbox-common libjpeg-turbo"
+makedepends="startup-notification-dev gtk+2.0-dev autoconf automake libtool libjpeg-turbo-dev"
 source="http://http.debian.net/debian/pool/main/m/${pkgname}/${pkgname}_${pkgver}.orig.tar.gz"
 builddir="$srcdir/$pkgname-$pkgver"
 options="!check"
