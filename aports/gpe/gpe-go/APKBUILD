@@ -1,0 +1,27 @@
+# Contributor: Duncan Guthrie <dguthrie@posteo.net>
+# Maintainer: Duncan Guthrie <dguthrie@posteo.net>
+pkgname=gpe-go
+pkgver=0.05
+pkgrel=0
+pkgdesc="Configuration toolset for the GPE Palmtop Environment"
+url="https://wiki.postmarketos.org/wiki/GPE"
+arch="all"
+license="GPL-2.0 LGPL-2.0"
+depends="atk cairo fontconfig freetype gdk-pixbuf glib libgpewidget gtk+2.0 pango"
+makedepends="gtk+2.0-dev glib-dev libgpewidget-dev intltool"
+source="http://http.debian.net/debian/pool/main/g/${pkgname}/${pkgname}_${pkgver}.orig.tar.gz"
+builddir="$srcdir/$pkgname-$pkgver"
+options="!check"
+subpackages="$pkgname-lang"
+
+build() {
+	cd "$builddir"
+        make PREFIX="/usr"
+}
+
+package() {
+	cd "$builddir"
+        make PREFIX="/usr" DESTDIR="$pkgdir" install
+}
+
+sha512sums="54941ad04d93c7062df2af0fa878d0362aee5cd6b4cfd82ade828e9f738aeaf8e5f0efb43e88405c7c4bc83c2372763ece1a6581fc3a1ea76b001f658c6edf61  gpe-go_0.05.orig.tar.gz"
