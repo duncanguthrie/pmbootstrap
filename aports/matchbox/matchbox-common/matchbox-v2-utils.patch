@@ -53,7 +53,7 @@ diff -Naur a/matchbox-session b/matchbox-session
 -# dont exist. 
 +# dont exist.
 +
-+START_APPLETS=showdesktop
++START_APPLETS=showdesktop,windowselector
 +END_APPLETS=clock,keyboard,systray,startup-notify,notify
  
  matchbox-desktop &
