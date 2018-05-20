@@ -12,7 +12,7 @@ makedepends="libgpewidget-dev glib-dev gtk+2.0-dev libgpeschedule-dev libgpelaun
 source="http://http.debian.net/debian/pool/main/g/${pkgname}/${pkgname}_${pkgver}.orig.tar.gz
 	desktop-validity.patch"
 builddir="$srcdir/$pkgname-$pkgver"
-options="!check suid"
+options="!check"
 subpackages="$pkgname-lang"
 
 build() {
