@@ -1,0 +1,9 @@
+diff -Naur a/Makefile b/Makefile
+--- a/Makefile	2005-01-04 22:09:26.000000000 +0000
++++ b/Makefile	2018-05-20 13:04:30.238334251 +0100
+@@ -49,5 +49,4 @@
+ clean:
+ 	rm -f $(PACKAGE) $(OBJS) $(DEPS)
+ 
+-include ../../base/build/Makefile.dpkg_ipkg
+ -include $(DEPS)

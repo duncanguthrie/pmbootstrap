@@ -1,0 +1,28 @@
+# Contributor: Duncan Guthrie <dguthrie@posteo.net>
+# Maintainer: Duncan Guthrie <dguthrie@posteo.net>
+pkgname=gpe-lights
+pkgver=0.13
+pkgrel=0
+pkgdesc="Configuration toolset for the GPE Palmtop Environment"
+url="https://wiki.postmarketos.org/wiki/GPE"
+arch="all"
+license="GPL-2.0 LGPL-2.0"
+depends="atk cairo fontconfig freetype gdk-pixbuf glib libgpewidget gtk+2.0 pango"
+makedepends="gtk+2.0-dev glib-dev libgpewidget-dev intltool"
+source="http://http.debian.net/debian/pool/main/g/${pkgname}/${pkgname}_${pkgver}.orig.tar.gz
+	remove-Makefile.dpkg_ipkg.patch"
+builddir="$srcdir/$pkgname-$pkgver"
+options="!check"
+
+build() {
+	cd "$builddir"
+        make PREFIX="/usr"
+}
+
+package() {
+	cd "$builddir"
+        make PREFIX="/usr" DESTDIR="$pkgdir" install-program
+}
+
+sha512sums="60779400b723cf22311a8b7837f54475dd00418ed682d02344f3274928e908e1fde8144925712235d16986e9ab94063ca02cf6bba7a31a1f5f48ad40aa08ea77  gpe-lights_0.13.orig.tar.gz
+0a753964566edaba44776180ea73b5ec712a4f90feb04f7fa3ddfea62fb707f8c7e51b00c1fa2039a4b0ba084f9e2965b4de4b7f6181b4fae56c1fa5048a64b7  remove-Makefile.dpkg_ipkg.patch"
