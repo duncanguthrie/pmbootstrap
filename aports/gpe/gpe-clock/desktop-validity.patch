@@ -1,0 +1,18 @@
+diff -Nur -x '*.orig' -x '*~' gpe-clock-0.26/gpe-clock.desktop gpe-clock-0.26.new/gpe-clock.desktop
+--- gpe-clock-0.26/gpe-clock.desktop	2009-02-24 18:06:49.000000000 +0000
++++ gpe-clock-0.26.new/gpe-clock.desktop	2009-02-24 18:08:08.000000000 +0000
+@@ -1,12 +1,10 @@
+ [Desktop Entry]
+-Encoding=UTF-8
+ Name=Alarm clock
+-Comment=Panel clock with alarm facility
++Comment=System tray clock with alarm facility
+ Exec=gpe-clock
+-Type=PanelApp
+ Terminal=false
+ Type=Application
+ Icon=gpe-clock.png
+-Categories=Panel;Utility;GPE;
++Categories=Application;Utility;Clock;
+ StartupNotify=false
+ X-SingleInstance=true

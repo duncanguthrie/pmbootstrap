@@ -1,0 +1,27 @@
+# Contributor: Duncan Guthrie <dguthrie@posteo.net>
+# Maintainer: Duncan Guthrie <dguthrie@posteo.net>
+pkgname=gpe-clock
+pkgver=0.27
+pkgrel=0
+pkgdesc="Configuration toolset for the GPE Palmtop Environment"
+url="https://wiki.postmarketos.org/wiki/GPE"
+arch="all"
+license="GPL-2.0 LGPL-2.0"
+depends="gpe-announce gpe-icons atk cairo fontconfig freetype gdk-pixbuf glib libgpelaunch libgpeschedule libgpewidget gtk+2.0 pango libx11"
+makedepends="libgpewidget-dev glib-dev gtk+2.0-dev libgpeschedule-dev libgpelaunch-dev"
+source="http://http.debian.net/debian/pool/main/g/${pkgname}/${pkgname}_${pkgver}.orig.tar.gz
+	desktop-validity.patch"
+builddir="$srcdir/$pkgname-$pkgver"
+options="!check suid"
+subpackages="$pkgname-lang"
+
+build() {
+	cd "$builddir"
+	make LDFLAGS="-lX11" PREFIX="/usr"
+}
+package() {
+	cd "$builddir"
+	make PREFIX="/usr" DESTDIR="$pkgdir" install
+}
+sha512sums="f7a4b907157aa140b98f64deb30cf970f475fd3df9dde601b65f3e7df6c74e1217237bd47c89b799a268ac4053c9e48edd39e9cf97b237cd27350c6ee64cd469  gpe-clock_0.27.orig.tar.gz
+c9017c8b6e06901ff8d6f40e16d129d30293e60cad81d84e4d0e8e88b4b616120eea35aa8e817c6d6a0741901c71ac2f020660e96e384ca1bd8fbb285421860c  desktop-validity.patch"
