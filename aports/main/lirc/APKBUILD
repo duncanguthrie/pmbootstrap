@@ -1,0 +1,35 @@
+# Contributor:
+# Maintainer:
+pkgname=lirc
+pkgver=0.10.0
+pkgrel=0
+pkgdesc="Linux Infrared Remote Control"
+url="http://lirc.org/"
+arch="all"
+license="GPL-2.0-or-later MIT"
+depends=""
+makedepends="doxygen expect alsa-lib-dev libftdi1-dev eudev-dev libusb-dev libx11-dev cgit pkgconf portaudio-dev py3-yaml socat libxslt-dev linux-headers bash automake autoconf libtool python3-dev"
+install=""
+subpackages="$pkgname-dev $pkgname-doc"
+source="https://downloads.sourceforge.net/$pkgname/$pkgname-$pkgver.tar.gz"
+builddir="$srcdir/$pkgname-$pkgver"
+
+build() {
+	cd "$builddir"
+	./autogen.sh
+	./configure \
+		--build=$CBUILD \
+		--host=$CHOST \
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--mandir=/usr/share/man \
+		--localstatedir=/var
+	make
+}
+
+package() {
+	cd "$builddir"
+	make DESTDIR=$pkgdir install
+}
+
+sha512sums="65e7389e12d619f4c8728dc9f188dfd382567b297e3c65a116965e3ca9faa0010e3805fc96a863f3c0fe813bc7ba56dfa71588e29c1894e355b535fd57819a38  lirc-0.10.0.tar.gz"
