@@ -9,8 +9,9 @@ url="http://matchbox-project.org"
 arch="noarch"
 license="GPL-2.0-only"
 depends=""
-makedepends="autoconf automake libtool libmatchbox-dev"
+makedepends="autoconf automake libtool"
 source="https://git.yoctoproject.org/cgit/cgit.cgi/$pkgname/snapshot/$pkgname-$_commit.tar.gz
+	enable-png-conditional.patch
 	matchbox-v2-utils.patch"
 builddir="$srcdir/$pkgname-$_commit"
 options="!check"
@@ -25,7 +26,8 @@ build() {
 		--sysconfdir=/etc \
 		--mandir=/usr/share/man \
 		--localstatedir=/var \
-		--enable-pda-folders
+		--enable-pda-folders \
+		--enable-png-icons
 	make
 }
 
@@ -35,4 +37,5 @@ package() {
 }
 
 sha512sums="742c38c60efa99de6a7d9bf510045eaf8ea1038722c9e45d614b66a3112f2b48f715d53bf9d44f173ca35e858aee135d0fbc3ed4fe0937b74c40ac515c5320f4  matchbox-common-3055fb158054d059e9a50141e7ded2a41ecfbd47.tar.gz
-aaa1c7f9fdbef6a17ee02b03228eabced6f95ea25aca82a5b9eec83b89d97930023c00fa6291649806040a2efa312e5760b186d089e5581aae4a3c0e54880e99  matchbox-v2-utils.patch"
+6a46ad93b5a6640e361d6c3a50a16b130e890a0ce2d3b8e7aba471914cf39d88fcf319653127fe413825aeebec3882314227a04f6f0efc9b7a633ef1e7d65522  enable-png-conditional.patch
+3f95bcbb6fd367281f3db666ec4e34d2ad34434aada756705533c51d378f667404897f5211155e4f394c2eee7e24c36d4683a5dfd2bf3374a130d2ed8c837014  matchbox-v2-utils.patch"
