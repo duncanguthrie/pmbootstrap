@@ -1,0 +1,38 @@
+# Contributor: Duncan Guthrie <dguthrie@posteo.net>
+# Maintainer: Duncan Guthrie <dguthrie@posteo.net>
+pkgname=v4l-utils
+pkgver=1.14.2
+pkgrel=0
+pkgdesc="Collection of command line video4linux utilities"
+url="http://freshmeat.sourceforge.net/projects/libv4l"
+arch="all"
+license="GPL-2.0"
+depends="libstdc++ eudev-libs argp-standalone"
+makedepends="doxygen gettext graphviz alsa-lib-dev libtool jpeg-dev eudev-dev libx11-dev eudev-libs argp-standalone"
+subpackages="$pkgname-dev $pkgname-lang $pkgname-libs $pkgname-doc"
+source="https://linuxtv.org/downloads/$pkgname/$pkgname-$pkgver.tar.bz2"
+builddir="$srcdir/$pkgname-$pkgver"
+options="!check"
+
+build() {
+	cd "$builddir"
+	./configure \
+		--build=$CBUILD \
+		--host=$CHOST \
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--mandir=/usr/share/ \
+		--disable-libdvbv5 \
+		--disable-qv4l2 \
+		LDFLAGS="-largp"
+	make
+}
+
+package() {
+	cd "$builddir"
+	make PREFIX="/usr" DESTDIR="$pkgdir" install
+	mkdir -p "$pkgdir"/usr/share/man
+	mv "$pkgdir"/usr/share/man1 "$pkgdir"/usr/share/man/man1
+}
+
+sha512sums="5c469479deb7065768e0254d1c80d9096caf05e445ceeabc7649f7158f02fb2d11ff2ad8c82debc1dbe6bbd7776cc5aa2febb52d5da0328d2b60b54af67c7a27  v4l-utils-1.14.2.tar.bz2"
