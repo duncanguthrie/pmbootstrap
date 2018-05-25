@@ -1,0 +1,36 @@
+# Contributor: Duncan Guthrie <dguthrie@posteo.net>
+# Maintainer: Duncan Guthrie <dguthrie@posteo.net>
+pkgname=gnome-media-profiles
+_pkgname=lib${pkgname}-master
+pkgver=3.0
+pkgrel=0
+pkgdesc="GNOME media profiles library"
+url="https://gitlab.gnome.org/GNOME/libgnome-media-profiles"
+arch="all"
+license="LGPL-2.0-only"
+depends="gconf atk cairo-gobject cairo fontconfig freetype gdk-pixbuf glib gstreamer0.10 gtk+3.0 pango libxml2 gnome-common"
+makedepends="autoconf automake libtool gtk+3.0-dev glib-dev gstreamer0.10-dev gst-plugins-base0.10-dev gconf-dev gnome-doc-utils rarian rarian-dev intltool gnome-common"
+subpackages="$pkgname-dev $pkgname-lang $pkgname-libs"
+source="${url}/-/archive/master/${_pkgname}.tar.gz"
+builddir="${srcdir}/${_pkgname}"
+options="!check"
+
+build() {
+	cd "$builddir"
+	cp /usr/share/gnome-doc-utils/gnome-doc-utils.make .
+	./autogen.sh
+	make PREFIX="/usr" prefix="/usr"
+}
+
+package() {
+	cd "$builddir"
+	make PREFIX="/usr" prefix="/usr" DESTDIR="$pkgdir" install
+}
+
+dev() {
+	default_dev
+	mv "$subpkgdir"/usr/include/libgnome-media-profiles-3.0/libgnome-media-profiles "$subpkgdir"/usr/include/libgnome-media-profiles
+	rmdir "$subpkgdir"/usr/include/libgnome-media-profiles-3.0
+}
+
+sha512sums="87cd3017e28c76397eb6912da257a3b41a652a60a00c455b92ac247c283aa2ef68b3bb5f80c4cef770d12df4cab728973fcaf8e9f555e9520467a78afb59a386  libgnome-media-profiles-master.tar.gz"
