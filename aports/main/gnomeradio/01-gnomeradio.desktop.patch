@@ -1,0 +1,12 @@
+diff -Nur trunk/data/gnomeradio.desktop.in trunk.new/data/gnomeradio.desktop.in
+--- trunk/data/gnomeradio.desktop.in	2006-11-25 13:06:06.000000000 +0100
++++ trunk.new/data/gnomeradio.desktop.in	2007-10-07 19:14:06.000000000 +0200
+@@ -3,7 +3,7 @@
+ _Comment=Listen to FM-radio
+ Exec=gnomeradio
+ Icon=gnomeradio
+-Categories=Application;AudioVideo;
++Categories=AudioVideo;Audio;Tuner
+ StartupNotify=true
+ Terminal=false
+ Type=Application

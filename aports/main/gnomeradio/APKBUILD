@@ -1,0 +1,57 @@
+# Contributor: Duncan Guthrie <dguthrie@posteo.net>
+# Maintainer: Duncan Guthrie <dguthrie@posteo.net>
+pkgname=gnomeradio
+pkgver=1.8
+pkgrel=0
+pkgdesc="FM-radio tuner for the GNOME desktop"
+url="https://projects-old.gnome.org/gnomeradio/"
+arch="all"
+license="GPL-2.0 GPL-2.0-or-later"
+depends="gconf atk cairo-gobject cairo dbus dbus-glib fontconfig freetype gdk-pixbuf glib gnome-media-profiles-libs gstreamer0.10 gtk+3.0 lirc pango libxml2"
+makedepends="autoconf automake libtool gst-plugins-base0.10-dev lirc-dev rarian gnome-media-profiles-libs gnome-media-profiles-dev gstreamer0.10-dev gnome-doc-utils imagemagick v4l-utils-dev gtk+3.0-dev dbus-glib-dev gconf-dev intltool"
+subpackages="$pkgname-lang"
+source="https://launchpad.net/gnomeradio/stable/1.8/+download/gnomeradio-1.8.tar.gz
+	01-gnomeradio.desktop.patch
+	02-hardening-format-security.patch
+	03-videodev.patch
+	04-gnomeradio-crash.patch
+	05-gnomeradio-gnome-3.0.patch
+	06-gnomeradio-gtk.patch
+	07-gnomeradio-1.9-no-gtk2.patch
+	08-fix-gnomeradio-gui.patch
+"
+builddir=${srcdir}/${pkgname}-${pkgver}
+options="!check"
+
+prepare() {
+	default_prepare
+	update_config_sub
+}
+
+build() {
+	cd "$builddir"
+	autoreconf -iv
+	./configure \
+		--build=$CBUILD \
+		--host=$CHOST \
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--mandir=/usr/share \
+		--disable-scrollkeeper
+	make
+}
+
+package() {
+	cd "$builddir"
+	make PREFIX="/usr" DESTDIR="$pkgdir" install
+}
+
+sha512sums="299bf51011300cdfc5dd290eb12204afddb52562d550794eafe4a5ec66e03a976dc8480d4cfd1dffe757140098a4900f7f3499b1b21d757a5aa37656a18d80e4  gnomeradio-1.8.tar.gz
+811e638ecd04f91553ed9b47b3844e9030c194dbe686a56d350762fed1073d7dc19bd67e54284a308214ae8b959df3f5dc6df3eb9f475644aa5f7d05c94c0c36  01-gnomeradio.desktop.patch
+3f49e48e1f1168eedd0f8ea9414a5a03494123bf9f98d9fb2db010970bc0b0b2f221bd10f47c1d6bbe7a183fb30d94a7c71b7ef2b48b427c91e1aa96dbad2ee5  02-hardening-format-security.patch
+2c774d06cb870d39d75ffae28d4b935364dc51ef10b0703e222bbf8c6c45975e24335ded37402332ae26f56fafeaea3c4e2fc4a4d098a733a19730feb5777543  03-videodev.patch
+dd438d67867784822d7c692ecbf41e0f0fdf829597ac7f293adced04733b42b710cbd628e3635f5af83ca83af532dc377c5e833052ce74402b549ffd25367cda  04-gnomeradio-crash.patch
+f798e20a3e461cf0ccca5c17f06645ed5b28592e5f5e00a3f7be329aa93a0419336d448fc7ce535d953122dcc30da9f95fbd69b861726adbb6fb860ca958bff3  05-gnomeradio-gnome-3.0.patch
+c0b041e87daec30eadba9f2b6a860c35a48ce316b0614953b7f30e20c9650e304110cd8405692d2eb59efc6eefdcea419a842fd731bc17bfa181604118f4dd64  06-gnomeradio-gtk.patch
+7128dab31d8cb4ab7b0bc6a3af27e4be96861273b16eaad0c96997a256cef9be50cb7156c3cd846bfe4a648b5de175a7d771c1d5db93dbcbb9f16b84667c20fe  07-gnomeradio-1.9-no-gtk2.patch
+a61a70da7fdd58ac360eec74cfa92a7290f228ab252e36bf56aa96e44d42e1f707c55926c99093c6396b939e7c2aa8cf21ff5574f2818990797a97b6585067ba  08-fix-gnomeradio-gui.patch"

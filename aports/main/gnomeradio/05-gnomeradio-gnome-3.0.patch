@@ -1,0 +1,39 @@
+Index: gnomeradio-1.8/src/prefs.c
+===================================================================
+--- gnomeradio-1.8.orig/src/prefs.c	2011-10-28 17:59:02.136135852 +0200
++++ gnomeradio-1.8/src/prefs.c	2011-10-28 17:59:04.928100751 +0200
+@@ -15,7 +15,7 @@
+  */
+ 
+ #include <gconf/gconf-client.h>
+-#include <profiles/audio-profile-choose.h>
++#include <libgnome-media-profiles/audio-profile-choose.h>
+ #include <string.h>
+ #include "config.h"
+ #include "prefs.h"
+Index: gnomeradio-1.8/src/rec_tech.c
+===================================================================
+--- gnomeradio-1.8.orig/src/rec_tech.c	2011-10-28 17:58:54.352233707 +0200
++++ gnomeradio-1.8/src/rec_tech.c	2011-10-28 17:59:04.928100751 +0200
+@@ -17,7 +17,7 @@
+ 
+ #include "rec_tech.h"
+ #include <gnome.h>
+-#include <profiles/audio-profile.h>
++#include <libgnome-media-profiles/audio-profile.h>
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <unistd.h>
+Index: gnomeradio-1.8/configure.in
+===================================================================
+--- gnomeradio-1.8.orig/configure.in	2011-10-28 17:58:54.368233507 +0200
++++ gnomeradio-1.8/configure.in	2011-10-28 17:59:24.003860934 +0200
+@@ -23,7 +23,7 @@
+ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", GETTEXT_PACKAGE)
+ 
+ 
+-PKG_CHECK_MODULES(GNOME, libgnomeui-2.0 >= 2.12 gconf-2.0 >= 2.12 gnome-vfs-2.0 >= 2.12 gnome-media-profiles >= 2.12)
++PKG_CHECK_MODULES(GNOME, libgnomeui-2.0 >= 2.12 gconf-2.0 >= 2.12 gnome-vfs-2.0 >= 2.12 libgnome-media-profiles-3.0 >= 3.0)
+ PKG_CHECK_MODULES(GNOME14, libgnomeui-2.0 >= 2.14, GNOME_14="1";echo "yes", GNOME_14="0";echo "no")
+ AC_SUBST(GNOME_CFLAGS)
+ AC_SUBST(GNOME_LIBS)

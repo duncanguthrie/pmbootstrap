@@ -1,0 +1,12 @@
+Index: gnomeradio-1.8/src/gui.c
+===================================================================
+--- gnomeradio-1.8.orig/src/gui.c	2011-11-13 16:45:54.829031323 +0100
++++ gnomeradio-1.8/src/gui.c	2011-11-13 16:46:24.405032055 +0100
+@@ -1051,6 +1051,7 @@
+ 	gtk_widget_set_tooltip_text(vol_scale, text);
+ 	g_free(text);*/
+ 
++	gtk_container_add (GTK_CONTAINER (app), vbox);
+ 	gtk_widget_show_all (vbox);
+ 
+ 	return app;
