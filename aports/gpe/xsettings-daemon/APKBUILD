@@ -1,0 +1,31 @@
+# Contributor: Duncan Guthrie <dguthrie@posteo.net>
+# Maintainer: Duncan Guthrie <dguthrie@posteo.net>
+pkgname=xsettings-daemon
+pkgver=0.0.2
+pkgrel=0
+pkgdesc="Small gconf to xsettings bridge"
+url="https://git.yoctoproject.org/cgit/cgit.cgi/xsettings-daemon/"
+arch="all"
+license="GPL-2.0-only"
+depends="gconf gsettings-desktop-schemas libxsettings libxsettings-client"
+makedepends="autoconf automake libtool gconf-dev gsettings-desktop-schemas-dev libxsettings-dev libxsettings-client-dev"
+install=""
+subpackages=""
+source="https://git.yoctoproject.org/cgit/cgit.cgi/${pkgname}/snapshot/${pkgname}-${pkgver}.tar.gz
+	external-xsettings.patch"
+builddir="$srcdir/$pkgname-$pkgver"
+options="!check"
+
+build() {
+	cd "$builddir"
+	./autogen.sh
+	make prefix="/usr"
+}
+
+package() {
+	cd "$builddir"
+	make prefix="/usr" DESTDIR="$pkgdir" install
+}
+
+sha512sums="b837ebac39fc3718a0612182cd2fb872b21f9a18c9128a192e9472ebe5a70b4ce5bef3653d9f6daaca14d3a45b7c70f4eb58a3525d65336f9bc536a3b8424721  xsettings-daemon-0.0.2.tar.gz
+a596dd9e2e07051ba6e0c2b1dbe8c20f5d3e8558981e6df2a946f70f4b6fcaf33ade6a0b6af5a5b0ec53ae0d386a3985d74e6c564839f26f91ec10be1363c272  external-xsettings.patch"
