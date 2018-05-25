@@ -1,0 +1,19 @@
+diff -Naur a/lib/libdvbv5/dvb-dev-local.c b/lib/libdvbv5/dvb-dev-local.c
+--- a/lib/libdvbv5/dvb-dev-local.c	2017-12-27 13:51:17.000000000 +0000
++++ b/lib/libdvbv5/dvb-dev-local.c	2018-05-25 12:16:32.883736774 +0100
+@@ -33,6 +33,15 @@
+ #  include <pthread.h>
+ #endif
+ 
++#ifndef TEMP_FAILURE_RETRY
++#define TEMP_FAILURE_RETRY(expression) \
++  (__extension__                                                              \
++    ({ long int __result;                                                     \
++       do __result = (long int) (expression);                                 \
++       while (__result == -1L && errno == EINTR);                             \
++       __result; }))
++#endif
++
+ #include "dvb-fe-priv.h"
+ #include "dvb-dev-priv.h"
+ 
