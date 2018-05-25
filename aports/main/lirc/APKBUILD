@@ -1,5 +1,5 @@
-# Contributor:
-# Maintainer:
+# Contributor: Duncan Guthrie <dguthrie@posteo.net>
+# Maintainer: Duncan Guthrie <dguthrie@posteo.net>
 pkgname=lirc
 pkgver=0.10.0
 pkgrel=0
@@ -10,7 +10,7 @@ license="GPL-2.0-or-later MIT"
 depends=""
 makedepends="doxygen expect alsa-lib-dev libftdi1-dev eudev-dev libusb-dev libx11-dev cgit pkgconf portaudio-dev py3-yaml socat libxslt-dev linux-headers bash automake autoconf libtool python3-dev"
 install=""
-subpackages="$pkgname-dev $pkgname-doc"
+subpackages="$pkgname-dev $pkgname-doc $pkgname-libs"
 source="https://downloads.sourceforge.net/$pkgname/$pkgname-$pkgver.tar.gz"
 builddir="$srcdir/$pkgname-$pkgver"
 
