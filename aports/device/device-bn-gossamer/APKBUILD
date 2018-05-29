@@ -7,7 +7,7 @@ url="https://postmarketos.org"
 license="MIT"
 arch="noarch"
 options="!check"
-depends="postmarketos-base linux-bn-gossamer mesa-dri-swrast"
+depends="postmarketos-base linux-bn-gossamer mesa-dri-swrast uboot-tools"
 makedepends="devicepkg-dev"
 source="deviceinfo"
 build() {
@@ -17,4 +17,4 @@ build() {
 package() {
 	devicepkg_package $startdir $pkgname
 }
-sha512sums="d7565c6c7c49e6a2cfb1082be2a4de3f52eef77a54dc213df2d0534f1f9b96d460168bce1afdeb8474306017aa2c6cca6bfef05c3166d2db18b4527850de053b  deviceinfo"
+sha512sums="5d965bd8d50715e23f275496da35716b816b037e8649b5d5b7ea54fd9fd27a72bab1faac8bd35ea0db4a5b3a14ffe70f24ce64cf5b62b3a6660378b78396c41a  deviceinfo"
