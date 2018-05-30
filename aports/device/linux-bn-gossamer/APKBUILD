@@ -10,6 +10,7 @@ url="https://kernel.org"
 license="GPL2"
 options="!strip !check !tracedeps"
 makedepends="perl sed installkernel bash gmp-dev bc linux-headers elfutils-dev uboot-tools"
+
 HOSTCC="${CC:-gcc}"
 HOSTCC="${HOSTCC#${CROSS_COMPILE}}"
 
@@ -25,7 +26,7 @@ source="
 	proc-v7.S.patch
 	fix-gcc6-compile.patch
 	fix-breakage-android-paranoid-network.patch
-	wl127x-rfkill.patch"
+	fiq_debugger.patch"
 builddir="$srcdir/${_repository}-${_commit}"
 prepare() {
 	default_prepare
@@ -78,9 +79,9 @@ package() {
 	fi
 }
 sha512sums="df2396be054d9eb0cc20e6eed78de7026ef32530c1d0aef80461ad4bef1bd1bfef78741af2fcbc431d0d76b3bbb7187c555b67a38dfae5c3e7f629e41df7ecfc  linux-bn-gossamer-38bcc855a76f955f189b765aa0ffe02fef95dc50.tar.gz
-b19e9dd960e101bd0560d3569674b5d0a58247d20833a940e2369f6bb994b8e9a4715e57b0493c2c3f0c71b0604b33a92fb7cdcd1fcff901c9b72dee05fa0439  config-bn-gossamer.armhf
+0156a8423c8a9e1cb6545ead58246ad58a35823a70915362dc3ae34f7670162c1bb6cb19b4c5027295837eb97db3a717dc41980f55b49636e38d00fadab234d5  config-bn-gossamer.armhf
 d80980e9474c82ba0ef1a6903b434d8bd1b092c40367ba543e72d2c119301c8b2d05265740e4104ca1ac5d15f6c4aa49e8776cb44264a9a28dc551e0d1850dcc  compiler-gcc6.h
 fcae2c14f38790ae0487cac36db1e8723d55d64da982238330391886b89a26d665db1c9e72d9428c3423d8a229e1b3cc87a744646aaa051eb5ff8247a8154a2a  proc-v7.S.patch
 b92754565c5bb3264f619f1645887d6d112ae8eb055b1cef5f1aac8b659dfbbb3c28eb66089ad019a15121a21a2bc12dc58a9b12b84e35c01ff5f393d8d42003  fix-gcc6-compile.patch
 798602fe505ef1973e84e12a5780ecc4486f887c47d52569da6f37f05c9a8bc4c608803b74896a8435e4ba8fb054ea953c32e5a41eba560306bb47fb8bc5b220  fix-breakage-android-paranoid-network.patch
-f6dc519981fcf7fec91c623806f0e0ca5289c01513b17d06978b002657498c819f70a68d8ce8c54165a9738c70ebc2a9e476576984dd1a2fbbcc8875c2755bbe  wl127x-rfkill.patch"
+5fcefb143a3e13429c80e6d643edf104c51f03475165732e2e48ba07e1b709426d68bab0f51e166ec2c57a375f2b8caf836e97cc382c000f1577cacbc737f007  fiq_debugger.patch"
