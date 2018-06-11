@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Exec=tracks
+Icon=tracks
+Type=Application
+Categories=Game;LogicGame;
+Name=Tracks
+Comment=Fill in the railway track according to the clues
+Comment[de]=Einfüllen der Eisenbahngleise gemäß der Hinweise

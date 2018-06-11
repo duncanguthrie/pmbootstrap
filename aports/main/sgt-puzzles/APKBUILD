@@ -1,0 +1,40 @@
+# Contributor: Duncan Guthrie <dguthrie@posteo.net>
+# Maintainer: Duncan Guthrie <dguthrie@posteo.net>
+_pkgname=puzzles
+pkgname=sgt-puzzles
+pkgver=0_git20180601
+_pkgver=20170606.272beef
+pkgrel=0
+_commit=5a697b3df94cec314fba99a3bf1e0de69fe88c09
+_shortcommit=5a697b3
+pkgdesc="Collection of miscellaneous puzzles suitable for many platforms"
+url="https://www.chiark.greenend.org.uk/~sgtatham/puzzles/"
+arch="all"
+license="custom"
+depends="atk cairo cairo-gobject gdk-pixbuf glib gtk+3.0 pango"
+makedepends="gtk+3.0-dev perl autoconf automake"
+install=""
+subpackages="$pkgname-doc"
+source="${_pkgname}-${_shortcommit}.tar.gz::https://git.tartarus.org/?p=simon/puzzles.git;a=snapshot;h=5a697b3df94cec314fba99a3bf1e0de69fe88c09;sf=tgz"
+builddir="${srcdir}"/${_pkgname}-${_shortcommit}
+_debiandir="${srcdir}"/debian
+options="!check" # No unit tests
+
+build() {
+	cd "$builddir"
+	./mkfiles.pl
+	./mkauto.sh
+	./configure
+	make
+}
+
+package() {	
+	cd "$builddir"
+	make prefix="/usr" DESTDIR="$pkgdir" install
+	install -Ddm644 LICENSE "$pkgdir"/usr/share/licenses/$pkgname/LICENSE
+	mkdir -p "$pkgdir"/usr/share/applications
+	mkdir -p "$pkgdir"/usr/share/icons/hicolor/48x48/apps
+        install -Dm644 "$srcdir"/../applications/* "$pkgdir"/usr/share/applications
+        install -Dm644 "$srcdir"/../icons/* "$pkgdir"/usr/share/icons/hicolor/48x48/apps
+}
+sha512sums="ed22e6483ad7a244bc91612b0ab4a684ca82bec17299e7c82bf6763f3a52ae7e66be628cfcb4a4155faf8f02afd55f8bb111cec369e95e92ed8c1268f681b14a  puzzles-5a697b3.tar.gz"

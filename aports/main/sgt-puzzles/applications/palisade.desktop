@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Exec=palisade
+Icon=palisade
+Type=Application
+Categories=Game;LogicGame;
+Name=Palisade
+Comment=Divide the grid into equal-sized areas in accordance with the clues
+Comment[de]=Unterteile das Gitter in gleich-große Bereiche entsprechend der Hinweise

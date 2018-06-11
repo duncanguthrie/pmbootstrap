@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Exec=flood
+Icon=flood
+Type=Application
+Categories=Game;LogicGame;
+Name=Flood
+Comment=Turn the grid the same colour in as few flood fills as possible
+Comment[de]=Das Gitter in eine Farbe mit so wenigen Flutungen wie möglich umwandeln
