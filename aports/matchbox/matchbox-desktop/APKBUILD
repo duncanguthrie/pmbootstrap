@@ -1,20 +1,23 @@
 # Contributor: Duncan Guthrie <dguthrie@posteo.net>
 # Maintainer: Duncan Guthrie <dguthrie@posteo.net>
 pkgname=matchbox-desktop
-pkgver=2.0
-pkgrel=1
-pkgdesc="Desktop system for handhelds using the GTK+2 stack"
+_pkgname=${pkgname}-2
+pkgver=2.2_git20180328
+_commit=3ab0378a56ac306353bc661df5cdaaaee59f3df3
+pkgrel=0
+pkgdesc="Desktop system for handhelds using the GTK+3 stack"
 url="https://matchbox-project.org"
 arch="all"
 license="GPL-2.0-only"
 depends="gdk-pixbuf glib gtk+2.0 pango startup-notification libx11 matchbox-common libjpeg-turbo"
-makedepends="startup-notification-dev gtk+2.0-dev autoconf automake libtool libjpeg-turbo-dev"
-source="http://http.debian.net/debian/pool/main/m/${pkgname}/${pkgname}_${pkgver}.orig.tar.gz"
-builddir="$srcdir/$pkgname-$pkgver"
+makedepends="startup-notification-dev gtk+3.0-dev autoconf automake libtool libjpeg-turbo-dev autoconf automake"
+source="https://git.yoctoproject.org/cgit/cgit.cgi/${_pkgname}/snapshot/${_pkgname}-${_commit}.tar.gz"
+builddir="$srcdir/$_pkgname-$_commit"
 options="!check"
 
 build() {
 	cd "$builddir"
+	autoreconf -i
 	./configure \
 		--enable-startup-notification \
 		--enable-dnotify \
@@ -33,4 +36,5 @@ package() {
 	make DESTDIR=$pkgdir install
 }
 
-sha512sums="c1e4b4312a21691b9fe6f956e788d6064835bf062d69944b0124f7c274464b13320d8b8641315fe0c355eb5e35f8f42c9b817232f4aedf443a7bf34cb047f725  matchbox-desktop_2.0.orig.tar.gz"
+sha512sums="9833dc9e614e9583f10d41f47ca896b06d8a92f54c65b3b7350534a4794735d45e107f452ce8cce9165a003ccbf2bfa00d5e99ae3ed245d751adbf145218de3f  matchbox-desktop-2-3ab0378a56ac306353bc661df5cdaaaee59f3df3.tar.gz
+67773506fde58e12517d58e14924110911a1feff571c7b991f38c7f1ea36f4c6b7b6a18ea9b58e98adfba115dc41d4a380bfef37345a2accb77440222152a42a  terminal.patch"
