@@ -1,0 +1,36 @@
+# Contributor: Duncan Guthrie <dguthrie@posteo.net>
+# Maintainer: Duncan Guthrie <dguthrie@posteo.net>
+pkgname=xvkbd
+pkgver=3.9
+pkgrel=0
+pkgdesc="Virtual keyboard for the X window system"
+url="http://t-sato.in.coocan.jp/xvkbd/"
+arch="all"
+license="GPL-2.0-only"
+depends="libice libsm libx11 libxext libxmu libxpm libxt libxtst xaw3d"
+makedepends="libx11-dev libxaw-dev libxmu-dev libxt-dev libxtst-dev imake xorg-cf-files xaw3d-dev"
+source="${url}/${pkgname}-${pkgver}.tar.gz
+	xvkbd.desktop
+	xvkbd.png"
+builddir="${srcdir}/${pkgname}-${pkgver}"
+options="!check" # No check functionality in build system
+
+build() {
+	cd "$builddir"
+	xmkmf
+	make
+}
+
+package() {
+	cd "$builddir"
+	make PREFIX="/usr" DESTDIR="${pkgdir}" install
+	install -m755 -d "${pkgdir}/usr/share/applications"
+	install -m755 -d "${pkgdir}/usr/share/pixmaps"
+	install -m644 ../xvkbd.desktop "${pkgdir}/usr/share/applications/"
+	install -m644 ../xvkbd.png "${pkgdir}/usr/share/pixmaps/"  # Same file as for Matchbox-keyboard, compatible license
+	rm "${pkgdir}"/usr/lib/X11/app-defaults # this causes errors and should not be created
+}
+
+sha512sums="f85d94f9b8012023eb4e901c1962ea39a491df2af67b617efb0817023eb93c460446ab9414fb20dcaee02e270cb9cb7b058a83ae96ffae73291b799f15a04b98  xvkbd-3.9.tar.gz
+4a47dc654b23985585e745bf7abf6ba49e72e7d641ed43d5134dbd5a1835c2b81039fe48efdd5389f64ab71494504ee44e0b4b6eaf43f5b0a9b42a3ddb5b4dfe  xvkbd.desktop
+32e88f185ef4211e543d57643e2635a349ba60321bb6e124ae823ff619dcda892f7e981d42fb87ffabbd96e5405a2e70dcce7d7c478988defc892e1e76361fca  xvkbd.png"

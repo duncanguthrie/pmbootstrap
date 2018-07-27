@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=X Virtual Keyboard
+Comment=Virtual Keyboard
+Exec=xvkbd
+Type=Application
+Icon=xvkbd.png
+Categories=Panel;Utility

@@ -1,0 +1,36 @@
+# Contributor:
+# Maintainer:
+pkgname=xaw3d
+_pkgname=libXaw3d
+pkgver=1.6.3
+pkgrel=0
+pkgdesc="Set of 3-D widgets based on the Athena Widget set"
+url="https://packages.debian.org/sid/xaw3dg"
+arch="all"
+license="X11"
+depends="libice libsm libx11 libxext libxmu libxpm libxt"
+makedepends="libx11-dev libxmu-dev libxpm-dev libxt-dev xorgproto bison flex-dev imake xorg-cf-files"
+install=""
+subpackages="$pkgname-dev"
+source="https://xorg.freedesktop.org/archive/individual/lib/${_pkgname}-${pkgver}.tar.bz2"
+builddir="${srcdir}/${_pkgname}-${pkgver}"
+
+build() {
+	cd "$builddir"
+	./configure --prefix=/usr --disable-static
+	make
+}
+
+check() {
+	cd "$builddir"
+	make check
+}
+
+package() {
+	cd "$builddir"
+	make PREFIX="/usr" DESTDIR="$pkgdir" install
+	install -m755 -d "${pkgdir}/usr/share/licenses/${pkgname}"
+	install -m644 COPYING "${pkgdir}/usr/share/licenses/${pkgname}/"
+}
+
+sha512sums="f79f997ff8442563c74f38c7d76fab2c9253691743ca3143047ce698adb4c126d02dc968be7bdc79ab3052b785fd705375d2f01171e3a3266736beb531c91424  libXaw3d-1.6.3.tar.bz2"
