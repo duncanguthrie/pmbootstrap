@@ -3,7 +3,7 @@
 pkgname=matchbox-window-manager
 _pkgname=$pkgname-2
 pkgver=2.0_git20171119
-pkgrel=1
+pkgrel=2
 _commit=5f44595c66be118b1a74f489de7f8492035cbdf0
 pkgdesc="Window manager intended for non-desktop embedded platforms such as handhelds and set-top boxes" 
 url="http://matchbox-project.org"
@@ -13,8 +13,9 @@ source="https://git.yoctoproject.org/cgit/cgit.cgi/${_pkgname}/snapshot/${_pkgna
 	enable-png-theme.patch
 	libpng.pc.patch"
 depends="libpng expat gtk+2.0 pango"
-makedepends="expat-dev autoconf automake libtool libpng-dev expat-dev gtk+2.0-dev pango-dev"
+makedepends="expat-dev autoconf automake libtool libpng-dev expat-dev gtk+2.0-dev pango-dev libexecinfo-dev libunwind-dev"
 builddir="$srcdir/$_pkgname-$_commit"
+subpackages="$pkgname-dbg"
 options="!check"
 
 build() {
@@ -29,7 +30,8 @@ build() {
 		--with-gtk \
 		--with-pango \
 		--enable-png-theme \
-		LIBS="-lexpat -lXrender"
+		--enable-debug \
+		LIBS="-lexpat -lXrender -lexecinfo"
 	make
 }
 
