@@ -1,0 +1,12 @@
+diff -Naur a/libtaku/taku-menu-desktop.c b/libtaku/taku-menu-desktop.c
+--- a/libtaku/taku-menu-desktop.c	2018-03-28 16:14:31.000000000 +0100
++++ b/libtaku/taku-menu-desktop.c	2018-07-28 12:48:07.002540267 +0100
+@@ -235,7 +235,7 @@
+     /* Find a fallback category */
+     if (priv->fallback_category == NULL)
+       for (l = matches; *l; l++)
+-        if (strcmp (*l, "meta-fallback") == 0)
++        if (strcmp (*l, "fallback") == 0)
+           priv->fallback_category = category;
+ 
+   done:

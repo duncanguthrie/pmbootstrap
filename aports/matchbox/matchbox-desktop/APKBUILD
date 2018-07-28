@@ -4,14 +4,16 @@ pkgname=matchbox-desktop
 _pkgname=${pkgname}-2
 pkgver=2.2_git20180328
 _commit=3ab0378a56ac306353bc661df5cdaaaee59f3df3
-pkgrel=0
+pkgrel=1
 pkgdesc="Desktop system for handhelds using the GTK+3 stack"
 url="https://matchbox-project.org"
 arch="all"
 license="GPL-2.0-only"
 depends="gdk-pixbuf glib gtk+2.0 pango startup-notification libx11 matchbox-common libjpeg-turbo"
 makedepends="startup-notification-dev gtk+3.0-dev autoconf automake libtool libjpeg-turbo-dev autoconf automake"
-source="https://git.yoctoproject.org/cgit/cgit.cgi/${_pkgname}/snapshot/${_pkgname}-${_commit}.tar.gz"
+source="https://git.yoctoproject.org/cgit/cgit.cgi/${_pkgname}/snapshot/${_pkgname}-${_commit}.tar.gz
+	fallback-category.patch
+	add-needed-libraries.patch"
 builddir="$srcdir/$_pkgname-$_commit"
 options="!check"
 
@@ -26,8 +28,7 @@ build() {
 		--prefix=/usr \
 		--sysconfdir=/etc \
 		--mandir=/usr/share/man \
-		--localstatedir=/var \
-		LIBS="-lX11"
+		--localstatedir=/var
 	make
 }
 
@@ -36,4 +37,6 @@ package() {
 	make DESTDIR=$pkgdir install
 }
 
-sha512sums="9833dc9e614e9583f10d41f47ca896b06d8a92f54c65b3b7350534a4794735d45e107f452ce8cce9165a003ccbf2bfa00d5e99ae3ed245d751adbf145218de3f  matchbox-desktop-2-3ab0378a56ac306353bc661df5cdaaaee59f3df3.tar.gz"
+sha512sums="9833dc9e614e9583f10d41f47ca896b06d8a92f54c65b3b7350534a4794735d45e107f452ce8cce9165a003ccbf2bfa00d5e99ae3ed245d751adbf145218de3f  matchbox-desktop-2-3ab0378a56ac306353bc661df5cdaaaee59f3df3.tar.gz
+9f25ac26aed64c287f209e7849ca1c252abda9cd16ad3852bff28bdafc907cf9532cb4c15c75c49c640a1eeae59a42cd1c3fb0038ed8eb407c7b9722aa13c65b  fallback-category.patch
+4ac0bbeb448c16c67f59a8164015c1fa0f2fbcd577b2f324ea74b8c7d9b052d456b4431bfd8321e9bf86b3faa0593934b3f8f20c000650f7d32234b9412d0759  add-needed-libraries.patch"
